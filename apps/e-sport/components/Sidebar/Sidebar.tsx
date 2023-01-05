@@ -6,7 +6,11 @@ import Tournament from '../Tournament/Tournament'
 import {FiHome} from "react-icons/fi"
 import {IoNewspaperOutline} from "react-icons/io5"
 import {AiOutlineTeam} from "react-icons/ai"
+import {BsTrophy} from "react-icons/bs"
 import IconItem from './IconItem'
+import {FaStreetView} from "react-icons/fa"
+import Portals from '../Portals/Portals'
+import Image from 'next/image'
 const SideBarItem=[
   {
     id:1,
@@ -22,19 +26,47 @@ const SideBarItem=[
   },{
     id:3,
     name:"Tournament",
-    icon:FiHome
+    icon:BsTrophy
 
-  },{
+  },
+  {
     id:4,
+    name:"Portals",
+    icon:FaStreetView
+
+  },
+  {
+    id:5,
     name:"News",
     icon:IoNewspaperOutline
 
-  },{
-    id:5,
-    name:"Home",
-    icon:FiHome
+  },
+]
+const GameList=[
+  {
+    id:1,
+    img:"https://steamuserimages-a.akamaihd.net/ugc/1289667502762077035/0BBD690EF2F84B522A6E1D34EBE5F1513685C089/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
+    name:"Valorant"
 
   },
+  {
+    id:2,
+    img:"https://i.pinimg.com/736x/e6/99/fb/e699fb7cd6ce72d00445fac66fdfc997--old-friends-dota--logo.jpg",
+    name:"Valorant"
+
+  },
+  {
+    id:3,
+    img:"https://steamuserimages-a.akamaihd.net/ugc/1289667502762077035/0BBD690EF2F84B522A6E1D34EBE5F1513685C089/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
+    name:"Valorant"
+
+  },
+  {
+    id:4,
+    img:"https://steamuserimages-a.akamaihd.net/ugc/1289667502762077035/0BBD690EF2F84B522A6E1D34EBE5F1513685C089/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
+    name:"Valorant"
+
+  }
 ]
 const Sidebar = () => {
   const [activeIndex,setActiveIndex]=useState<number>(0)
@@ -57,17 +89,26 @@ const Sidebar = () => {
      <Tournament/>
       )
      }
-     else{
+     else if(activeIndex===3){
+      return(
+        <Portals/>
+      )
+     }
+     else if(activeIndex===4){
       return(
         <News/>
       )
      }
+     return null
+     
+   
+ 
      
   }
   return (
-    <div className='flex'>
+    <div className='flex h-full'>
     <div
-    className='w-60 h-screen border-r  dark:border-gray-400'
+    className='w-60   border-r  dark:border-gray-400'
     >
       <div className=' bg-[#15141B] h-full'>
       {
@@ -80,12 +121,31 @@ const Sidebar = () => {
           )
         })
       }
+      <div className='mt-3 ml-3 '>
+        <p className='text-white cursor-pointer font-bold font-serif '>My Games</p>
       </div>
+      <div className='flex items-center flex-wrap  ml-3 '>
+        {
+        GameList.map((item,index)=>{
+          return(
+            <div key={index}>
+              <Image
+              src={item.img}
+              alt={item?.name.charAt(0)}
+              height={50}
+              width={50}
+              className="rounded-lg cursor-pointer mr-4 mt-2"
+              />
+            </div>
+          )
+        })
+        }
+      </div>
+      </div>
+      
     </div>
-    <div className='bg-[#222225]'>
     <MenueItem/>
-    </div>
-    </div>
+     </div>
   )
 }
 

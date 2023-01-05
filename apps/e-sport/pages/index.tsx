@@ -6,9 +6,9 @@ import Sidebar from '../components/Sidebar/Sidebar'
 
 const Home: NextPage = () => {
   return (
-    <div >
+    <div className='bg-[#222225] '>
       <Header/>
-      <div>
+      <div className=''>
         <Sidebar/>
       </div>
     </div>

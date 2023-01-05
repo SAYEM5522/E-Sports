@@ -8,7 +8,7 @@ function IconItem({Icon}:Props) {
   return (
     <div   
     >
-        <Icon className='cursor-pointer text-white dark:text-white ' size={28}  />
+        <Icon className='cursor-pointer text-white dark:text-white ' size={26}  />
     </div>
   )
 }
