@@ -108,7 +108,7 @@ const Sidebar = () => {
   return (
     <div className='flex h-full'>
     <div
-    className='w-60   border-r  dark:border-gray-400'
+    className='w-60  dark:border-gray-400'
     >
       <div className=' bg-[#15141B] h-full'>
       {
@@ -132,8 +132,8 @@ const Sidebar = () => {
               <Image
               src={item.img}
               alt={item?.name.charAt(0)}
-              height={50}
-              width={50}
+              height={47}
+              width={47}
               className="rounded-lg cursor-pointer mr-4 mt-2"
               />
             </div>
