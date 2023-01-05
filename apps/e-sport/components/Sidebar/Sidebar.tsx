@@ -65,24 +65,26 @@ const Sidebar = () => {
      
   }
   return (
-    <div className='flex items-center'>
+    <div className='flex'>
     <div
-    className='w-60 h-screen border-r dark:border-gray-400'
+    className='w-60 h-screen border-r  dark:border-gray-400'
     >
-      <div className='mt-2 '>
+      <div className=' bg-[#15141B] h-full'>
       {
         SideBarItem.map((item,index)=>{
           return(
-            <div className={`${index===activeIndex?' bg-orange-400 rounded-md':''} flex items-center p-3 mt-3 hover:bg-[whitesmoke] rounded-md`} key={index} onClick={()=>IndexProvier(index)}>
+            <div className={`${index===activeIndex?' bg-[#98BC62] rounded-md':''} flex items-center p-3 mb-3 hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md`} key={index} onClick={()=>IndexProvier(index)}>
               <IconItem Icon={item.icon}/>
-              <p className='cursor-pointer ml-2 text-black font-medium dark:text-white'>{item.name}</p>
+              <p className='cursor-pointer ml-2 text-white font-medium dark:text-white'>{item.name}</p>
             </div>
           )
         })
       }
       </div>
     </div>
-     <MenueItem/>
+    <div className='bg-[#222225]'>
+    <MenueItem/>
+    </div>
     </div>
   )
 }

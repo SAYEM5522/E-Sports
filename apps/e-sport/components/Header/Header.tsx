@@ -11,17 +11,17 @@ const Header = () => {
   },[mode,theme])
   return (
     <div
-    className='flex-1 w-full border-b h-14'
+    className='flex-1 w-full border-b h-14 bg-[#1C1B22]'
     >
       
-      <div onClick={ModeChange}>
+      {/* <div onClick={ModeChange}>
       {
         mode?
         <HiOutlineMoon size={25} className="mr-9 cursor-pointer"/>:
         <BsSun  size={25} className="mr-9 cursor-pointer"/>
 
       }
-      </div>
+      </div> */}
     </div>
     
   )
