@@ -11,6 +11,7 @@ import IconItem from './IconItem'
 import {FaStreetView} from "react-icons/fa"
 import Portals from '../Portals/Portals'
 import Image from 'next/image'
+import {IoIosArrowForward} from "react-icons/io"
 const SideBarItem=[
   {
     id:1,
@@ -70,6 +71,7 @@ const GameList=[
 ]
 const Sidebar = () => {
   const [activeIndex,setActiveIndex]=useState<number>(0)
+  const CurrencyFormat="Taka"
   const IndexProvier=useCallback((index:number)=>{
    setActiveIndex(index)
   },[activeIndex])
@@ -108,13 +110,21 @@ const Sidebar = () => {
   return (
     <div className='flex h-full'>
     <div
-    className='w-60  dark:border-gray-400'
+    className='w-60  dark:border-gray-400 '
     >
+      
       <div className=' bg-[#15141B] h-full'>
+      <div className='h-16 bg-[#23222A] flex items-center justify-between  '>
+        <div className='ml-3'>
+        <p className='text-white font-serif font-bold'>Your Balance </p>
+        <p className='text-white font-serif font-medium'>10 {CurrencyFormat}</p>
+        </div>
+        <IoIosArrowForward className='cursor-pointer mr-3' size={28} color='white'/>
+       </div>
       {
         SideBarItem.map((item,index)=>{
           return(
-            <div className={`${index===activeIndex?' bg-[#98BC62] rounded-md':''} flex items-center p-3 mb-3 hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md`} key={index} onClick={()=>IndexProvier(index)}>
+            <div className={`${index===activeIndex?' w-56 bg-[#98BC62] rounded-md':''} flex items-center p-3 mt-2 mb-3 hover: w-56 hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md`} key={index} onClick={()=>IndexProvier(index)}>
               <IconItem Icon={item.icon}/>
               <p className='cursor-pointer ml-2 text-white font-medium dark:text-white'>{item.name}</p>
             </div>
