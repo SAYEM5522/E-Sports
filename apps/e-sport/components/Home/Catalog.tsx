@@ -18,11 +18,11 @@ const catalog=[
 
 const Catalog = () => {
   return (
-    <div className='flex items-center mt-3'>
+    <div className='flex items-center mt-3 '>
       {
         catalog.map((item,index)=>{
           return(
-            <div key={index} className=" pr-5 pt-4 cursor-pointer">
+            <div key={index} className=" pr-5 pt-4 cursor-pointer ">
                <Image
                src={item.img}
                alt={""}

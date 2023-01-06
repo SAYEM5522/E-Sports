@@ -36,8 +36,8 @@ const Header = () => {
             }
           </div>
       <p  className='text-white pl-9 font-serif font-medium cursor-pointer'>Play</p>
-      <div className='flex items-center cursor-pointer relative'>
-          <p className='text-white pl-9 font-serif font-medium' onClick={OpenMoreBox}>More</p>
+      <div className='flex items-center cursor-pointer relative' onClick={OpenMoreBox}>
+          <p className='text-white pl-9 font-serif font-medium' >More</p>
             <BsChevronDown color='white' className='pl-2 h-6 w-6'/>
             {
               openInfo?<InfoBox/>:null
