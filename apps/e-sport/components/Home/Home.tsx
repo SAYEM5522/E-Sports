@@ -13,8 +13,7 @@ const Home = () => {
       <Banner/>
       </div>
       <div >
-      <Event/>
-
+      <Event show={true} filter={false} type="Recommended Events"/>
       </div>
     </div>
   )

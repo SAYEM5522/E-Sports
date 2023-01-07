@@ -1,18 +1,12 @@
-import React, { useCallback, useState } from 'react'
-import Home from '../Home/Home'
-import News from '../News/News'
-import Team from '../Team/Team'
-import Tournament from '../Tournament/Tournament'
-import {FiHome} from "react-icons/fi"
-import {IoNewspaperOutline} from "react-icons/io5"
-import {AiOutlineTeam} from "react-icons/ai"
-import {BsTrophy} from "react-icons/bs"
-import IconItem from './IconItem'
-import {FaStreetView} from "react-icons/fa"
-import Portals from '../Portals/Portals'
 import Image from 'next/image'
-import {IoIosArrowForward} from "react-icons/io"
-import MenueItem from './MenueItem'
+import React, { useCallback, useState } from 'react'
+import { AiOutlineTeam } from 'react-icons/ai'
+import { BsTrophy } from 'react-icons/bs'
+import { FaStreetView } from 'react-icons/fa'
+import { FiHome } from 'react-icons/fi'
+import { IoIosArrowForward } from 'react-icons/io'
+import { IoNewspaperOutline } from 'react-icons/io5'
+import IconItem from './IconItem'
 const SideBarItem=[
   {
     id:1,
@@ -44,7 +38,7 @@ const SideBarItem=[
 
   },
 ]
-export const GameList=[
+const GameList=[
   {
     id:1,
     img:"https://steamuserimages-a.akamaihd.net/ugc/1289667502762077035/0BBD690EF2F84B522A6E1D34EBE5F1513685C089/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
@@ -54,13 +48,13 @@ export const GameList=[
   {
     id:2,
     img:"https://i.pinimg.com/736x/e6/99/fb/e699fb7cd6ce72d00445fac66fdfc997--old-friends-dota--logo.jpg",
-    name:"CS:GO"
+    name:"Valorant"
 
   },
   {
     id:3,
     img:"https://steamuserimages-a.akamaihd.net/ugc/1289667502762077035/0BBD690EF2F84B522A6E1D34EBE5F1513685C089/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
-    name:"Dota 2"
+    name:"Valorant"
 
   },
   {
@@ -70,20 +64,15 @@ export const GameList=[
 
   }
 ]
-const Sidebar = () => {
+  
+const SidebarValue = () => {
   const [activeIndex,setActiveIndex]=useState<number>(0)
   const CurrencyFormat="Taka"
   const IndexProvier=useCallback((index:number)=>{
    setActiveIndex(index)
   },[activeIndex])
-
   return (
-    <div className='flex h-full'>
-    <div
-    className='w-60  dark:border-gray-400 '
-    >
-      
-      <div className=' bg-[#15141B] h-full'>
+    <div className=' bg-[#15141B] h-full'>
       <div className='h-16 bg-[#23222A] flex items-center justify-between  '>
         <div className='ml-3'>
         <p className='text-white font-serif font-bold'>Your Balance </p>
@@ -122,11 +111,7 @@ const Sidebar = () => {
         }
       </div>
       </div>
-      
-    </div>
-    <MenueItem activeIndex={activeIndex}/>
-     </div>
   )
 }
 
-export default Sidebar
+export default SidebarValue
