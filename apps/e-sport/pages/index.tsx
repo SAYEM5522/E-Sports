@@ -12,16 +12,18 @@ const Home: NextPage = () => {
   const user=false
   return (
     <Layout>
-        <div className={`flex flex-col ml-7 h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
-      <Catalog/>
+      {/* <div className=' ml-auto mr-auto'> */}
+        <div className={`flex flex-col ${user?'ml-7':'ml-36'} h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
+          <Catalog/>
       <div>
       <Banner/>
       </div>
-      <div >
+      {/* <div > */}
       <Event show={true} filter={false} type="Recommended Events"/>
-      </div>
+      {/* </div> */}
      
     </div>
+    {/* </div> */}
     </Layout>
   )
 }

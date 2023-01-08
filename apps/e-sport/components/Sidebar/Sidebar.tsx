@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import Home from '../Home/Home'
 import News from '../News/News'
 import Team from '../Team/Team'
-import Tournament from '../Tournament/Tournament'
+import Tournament from '../Tournament/TournamentList'
 import {FiHome} from "react-icons/fi"
 import {IoNewspaperOutline} from "react-icons/io5"
 import {AiOutlineTeam} from "react-icons/ai"
@@ -16,6 +16,7 @@ import MenueItem from './MenueItem'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
+import {MdOutlineLeaderboard} from "react-icons/md"
 const SideBarItem=[
   {
     id:1,
@@ -54,7 +55,7 @@ const SideBarItem=[
   {
     id:6,
     name:"Leader Board",
-    icon:IoNewspaperOutline,
+    icon:MdOutlineLeaderboard,
     link:"/Leader_Board"
 
   },

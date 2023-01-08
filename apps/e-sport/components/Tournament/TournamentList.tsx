@@ -23,7 +23,7 @@ const Mode=[
     mode:"5v5"
   },
 ]
-const Tournament = () => {
+const TournamentList = () => {
   return (
     <div className={`flex flex-col ml-5 h-[35.55rem] w-full  overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
      <div className='flex items-center pl-1 pt-6'>
@@ -72,4 +72,4 @@ const Tournament = () => {
   )
 }
 
-export default Tournament
+export default TournamentList

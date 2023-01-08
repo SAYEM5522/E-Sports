@@ -3,7 +3,7 @@ import Home from '../Home/Home'
 import News from '../News/News'
 import Portals from '../Portals/Portals'
 import Team from '../Team/Team'
-import Tournament from '../Tournament/Tournament'
+import Tournament from '../Tournament/TournamentList'
 interface Iindex{
   activeIndex?:any
 }
