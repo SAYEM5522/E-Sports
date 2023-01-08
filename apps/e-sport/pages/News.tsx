@@ -1,10 +1,10 @@
 import React from 'react'
 import Layout from '../components/Layout'
 
-const About = () => {
+const News = () => {
   return (
-    <Layout>About</Layout>
+    <Layout>News</Layout>
   )
 }
 
-export default About
+export default News

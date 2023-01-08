@@ -1,5 +1,6 @@
 import React from 'react'
 import { useWindowSize } from '../Hooks/useWindowSize'
+import Layout from '../Layout'
 import Event from '../Tournament/Event'
 import Banner from './Banner'
 import Catalog from './Catalog'
@@ -15,6 +16,7 @@ const Home = () => {
       <div >
       <Event show={true} filter={false} type="Recommended Events"/>
       </div>
+     
     </div>
   )
 }

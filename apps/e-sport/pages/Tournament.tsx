@@ -1,10 +1,10 @@
 import React from 'react'
 import Layout from '../components/Layout'
 
-const About = () => {
+const Tournament = () => {
   return (
-    <Layout>About</Layout>
+    <Layout>Tournament</Layout>
   )
 }
 
-export default About
+export default Tournament

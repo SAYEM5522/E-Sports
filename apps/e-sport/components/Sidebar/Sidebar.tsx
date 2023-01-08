@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import Home from '../Home/Home'
 import News from '../News/News'
 import Team from '../Team/Team'
@@ -13,34 +13,49 @@ import Portals from '../Portals/Portals'
 import Image from 'next/image'
 import {IoIosArrowForward} from "react-icons/io"
 import MenueItem from './MenueItem'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import classNames from 'classnames'
 const SideBarItem=[
   {
     id:1,
     name:"Home",
-    icon:FiHome
+    icon:FiHome,
+    link:"/"
 
   },
   {
     id:2,
     name:"Team",
-    icon:AiOutlineTeam
+    icon:AiOutlineTeam,
+    link:"/Team"
 
   },{
     id:3,
     name:"Tournament",
-    icon:BsTrophy
+    icon:BsTrophy,
+    link:"/Tournament"
 
   },
   {
     id:4,
     name:"Portals",
-    icon:FaStreetView
+    icon:FaStreetView,
+    link:"/Portals"
 
   },
   {
     id:5,
     name:"News",
-    icon:IoNewspaperOutline
+    icon:IoNewspaperOutline,
+    link:"/News"
+
+  },
+  {
+    id:6,
+    name:"Leader Board",
+    icon:IoNewspaperOutline,
+    link:"/Leader_Board"
 
   },
 ]
@@ -73,9 +88,20 @@ export const GameList=[
 const Sidebar = () => {
   const [activeIndex,setActiveIndex]=useState<number>(0)
   const CurrencyFormat="Taka"
+  const router=useRouter()
   const IndexProvier=useCallback((index:number)=>{
    setActiveIndex(index)
   },[activeIndex])
+  const activeItem=useMemo(()=>
+    SideBarItem.find((menu)=>
+      menu.link===router.pathname
+    )
+  ,[router.pathname])
+  const getSidebarClasses=(menu:any)=>{
+    return classNames("flex items-center p-3 mt-2 mb-3 hover: w-56  hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md",{
+      ['bg-[#98BC62]']:activeItem?.id===menu.id
+    })
+  }
 
   return (
     <div className='flex h-full'>
@@ -93,11 +119,21 @@ const Sidebar = () => {
        </div>
       {
         SideBarItem.map((item,index)=>{
+          const classes=getSidebarClasses(item)
           return(
-            <div className={`${index===activeIndex?' w-56 bg-[#98BC62] rounded-md':''} flex items-center p-3 mt-2 mb-3 hover: w-56 hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md`} key={index} onClick={()=>IndexProvier(index)}>
+            <Link href={item.link}>
+            <div 
+            className={classes}
+            // className={`${index===activeIndex?' w-56 bg-[#98BC62] rounded-md':''} flex items-center p-3 mt-2 mb-3 hover: w-56 hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md`} 
+            key={index} 
+            // onClick={()=>IndexProvier(index)}
+            >
+              
               <IconItem Icon={item.icon}/>
               <p className='cursor-pointer ml-2 text-white font-medium dark:text-white'>{item.name}</p>
+              
             </div>
+            </Link>
           )
         })
       }
@@ -124,7 +160,7 @@ const Sidebar = () => {
       </div>
       
     </div>
-    <MenueItem activeIndex={activeIndex}/>
+    {/* <MenueItem activeIndex={activeIndex}/> */}
      </div>
   )
 }

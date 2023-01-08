@@ -31,8 +31,8 @@ const Tournament = () => {
       <p className='text-white font-serif font-medium text-3xl ml-4 cursor-pointer'>Tournaments</p>
      </div>
     <div className='mt-4 flex items-start  w-full'>
-      <div className='w-52 h-2/3 mt-2 bg-[#101820FF] relative rounded-sm cursor-pointer '>
-      {/* <BsFilterLeft color='white' size={30} className="cursor-pointer absolute"/> */}
+      <div className='w-52 h-2/3 mt-2 bg-[#101820FF] relative rounded-md cursor-pointer '>
+      <BsFilterLeft color='white' size={30} className="cursor-pointer absolute"/>
         <div  className='mb-1 ml-2'>
           <p className='text-white font-serif font-bold text-xl p-3' >Games</p>
           {
