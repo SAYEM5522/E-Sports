@@ -7,9 +7,45 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Input from './Input'
 import Input2 from './Input2'
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '52%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 350,
+  bgcolor: '#1C1B22',
+  boxShadow: 24,
+  p: 2,
+  outline: 0,
+  height:550,
+};
+const style2 = {
+  position: 'absolute' as 'absolute',
+  top: '52%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 350,
+  bgcolor: '#1C1B22',
+  boxShadow: 24,
+  p: 2,
+  outline: 0,
+  height:310,
+  
+};
+const SignupSchema=yup.object({
+  Username:yup.string().required("Username is a required field"),
+  Email:yup.string().required("Email is a required field").email("Email is not valid!"),
+  Passward:yup.string().min(6,"Passward must be at least 6 charecters"),
+  ConfirmPassward:yup.string().oneOf([yup.ref("Passward")],"Passward must be match"),
+  Country:yup.string().required("Country is a required field")
+
+})
 const Header = () => {
  
-  
+
   const [openGame,setGame]=useState<boolean>(false)
   const [openInfo,setOpenInfo]=useState<boolean>(false)
   const [openLogIn,setOpenLogIn]=useState<boolean>(false)
@@ -36,31 +72,7 @@ const Header = () => {
     const NewsPage=()=>{
       router.push("/News")
     }
-    const style = {
-      position: 'absolute' as 'absolute',
-      top: '52%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 350,
-      bgcolor: '#1C1B22',
-      boxShadow: 24,
-      p: 2,
-      outline: 0,
-      height:530,
-    };
-    const style2 = {
-      position: 'absolute' as 'absolute',
-      top: '52%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 350,
-      bgcolor: '#1C1B22',
-      boxShadow: 24,
-      p: 2,
-      outline: 0,
-      height:310,
-      
-    };
+   
     const ModelMonitor=useCallback(()=>{
       setOpenSignUp(false)
       setOpenLogIn(true)
@@ -69,8 +81,16 @@ const Header = () => {
       setOpenLogIn(false)
       setOpenSignUp(true)
     },[openSignUp,openLogIn])
-    
-    
+    const {
+      register,
+      handleSubmit,
+      formState: { errors }
+    } = useForm({
+      resolver: yupResolver(SignupSchema)
+    });
+    const formData=(data:any)=>{
+       console.log(data)
+    }
   return (
     <div
     className=' flex  items-center justify-between   h-14 bg-[#1C1B22]'
@@ -106,8 +126,6 @@ const Header = () => {
       <div onClick={Signup} className='h-10 w-20 flex items-center justify-center rounded-md cursor-pointer bg-[#B6FF40]'>
         <p className=' font-serif font-xl'>Signup</p>
       </div>
-      {/* {
-        openLogIn? */}
         <Modal
         open={openLogIn}
         onClose={()=>{setOpenLogIn(false)}}
@@ -117,8 +135,16 @@ const Header = () => {
         <Box sx={{...style2,borderRadius:3,zIndex:1}}>
           
           <form className='mt-7'>
-          <Input2 label={"Email"} type={"email"} placeholder={"Enter Email.."}/>
-        <Input2 label={"Passward"} type={"Passward"} placeholder={"Enter Passward.."}/>
+          <Input  register={{...register("Email")}}
+        label={"Email"} type={"email"} placeholder={"Enter Email.."}
+        errorMessage={errors.Email?.message}
+        id={"email"}
+       />
+          <Input   register={{...register("Passward")}}
+        label={"Passward"} type={"passward"} placeholder={"Enter Passward.."}
+        errorMessage={errors.Passward?.message}
+        id={"passward"}
+       />
         <div className='flex items-center justify-between'>
         <button className='h-7 mt-3 font-serif font-[600] w-20 bg-[#B6FF40] rounded-md '>Login</button>
         <p className='underline ml-1 mt-2 font-medium cursor-pointer text-white'>Forgot Passward</p>
@@ -135,10 +161,7 @@ const Header = () => {
         </Box>
 
 </Modal>
-{/* // :null
-//       }
-//       {
-//         openSignUp? */}
+
         <Modal
         open={openSignUp}
         onClose={()=>{setOpenSignUp(false)}}
@@ -147,12 +170,42 @@ const Header = () => {
 >
         <Box sx={{...style,borderRadius:3}}>
         <div className='pt-8'>
-      <form>
-      <Input label={"Username"} type={"text"} placeholder={"Enter Username.."}/>
-      <Input label={"Email"} type={"email"} placeholder={"Enter Email.."}/>
-      <Input label={"Passward"} type={"passward"} placeholder={"Enter Passward.."}/>
-      <Input label={"Confirm Passward"} type={"passward"} placeholder={"Enter Confirm Passward.."}/>
-      <Input label={"Country"} type={"passward"} placeholder={"Enter Country.."}/>
+      <form onSubmit={handleSubmit(formData)}>
+      <Input
+       label={"Username"} 
+       register={{...register("Username")}}
+       type={"text"} placeholder={"Enter Username.."}
+       errorMessage={errors.Username?.message}
+       id={'userName'}
+       />
+      <Input
+       register={{...register("Email")}}
+       label={"Email"} type={"email"} placeholder={"Enter Email.."}
+       errorMessage={errors.Email?.message}
+       id={"email"}
+
+       />
+      <Input
+       register={{...register("Passward")}}
+       label={"Passward"} type={"passward"} placeholder={"Enter Passward.."}
+       errorMessage={errors.Passward?.message}
+       id={"passward"}
+       
+       />
+      <Input
+       register={{...register("ConfirmPassward")}}
+       label={"Confirm Passward"} type={"passward"} placeholder={"Enter Confirm Passward.."}
+       errorMessage={errors.ConfirmPassward?.message}
+       id={"confirmPassward"}
+       
+       />
+      <Input 
+       register={{...register("Country")}}
+      label={"Country"} type={"text"} placeholder={"Enter Country.."}
+      errorMessage={errors.Country?.message}
+      id={"country"}
+      
+      />
       <button className='h-9 mt-3 font-serif font-[600] w-full bg-[#B6FF40] rounded-md ' >
       Signup
       </button>
@@ -164,10 +217,8 @@ const Header = () => {
     </div>
         </Box>
 
-</Modal>
-{/* :null
+     </Modal>
 
-      }  */}
       
     </div>
     </div>

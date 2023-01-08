@@ -1,11 +1,7 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Header from '../components/Header/Header'
 import Banner from '../components/Home/Banner'
 import Catalog from '../components/Home/Catalog'
 import Layout from '../components/Layout'
-import Sidebar from '../components/Sidebar/Sidebar'
 import Event from '../components/Tournament/Event'
 
 const Home: NextPage = () => {
