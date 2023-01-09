@@ -4,7 +4,7 @@ import Sidebar from './Sidebar/Sidebar'
 
 const Layout = ({children}:any) => {
   const user=false
-  return (
+    return (
     <div className='bg-[#222225] '>
       <Header/>
       <div className='flex flex-row justify-start '>

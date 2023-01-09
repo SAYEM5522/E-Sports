@@ -1,5 +1,8 @@
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectOpenSignup, setopenSignup } from '../../feature/userSlice'
 import { data } from '../../TournamentInfo'
 interface IEvent{
   show:boolean,
@@ -7,6 +10,25 @@ interface IEvent{
   filter?:boolean
 }
 const Event = ({show,type,filter}:IEvent) => {
+  const router=useRouter()
+  const dispatch=useDispatch()
+  const OsignUp=useSelector(selectOpenSignup)
+  const user=false
+  const GotoDetails=useCallback((id:number)=>{
+     if(
+      user
+     ){
+      router.push(`/TournamentDetails?id=${id}`,)
+     }else{
+      dispatch(
+        setopenSignup({
+          openSignup:true
+        })
+      )
+     }
+    
+  },[])
+  
   return (
     <div className=''>
       {
@@ -21,7 +43,7 @@ const Event = ({show,type,filter}:IEvent) => {
         data.map((item,index)=>{
           return(
             // width length should change
-            <div key={index} className={`${filter?'w-[31.5%]':'w-[30%]'}  h-[22rem] bg-white ${filter?'mr-4':'mr-9'} mt-3 mb-4 cursor-pointer rounded-lg   `}>
+            <div onClick={()=>GotoDetails(item.Id)}  key={index} className={`${filter?'w-[31.5%]':'w-[30%]'}  h-[22rem] bg-white ${filter?'mr-4':'mr-9'} mt-3 mb-4 cursor-pointer rounded-lg   `}>
               <div className='w-full h-[210px] relative'>
               <Image
               src={item.Banner}

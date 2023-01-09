@@ -26,7 +26,7 @@ export const data=[
   {
     Id:3,
     Logo:"https://steamuserimages-a.akamaihd.net/ugc/1289667502762077035/0BBD690EF2F84B522A6E1D34EBE5F1513685C089/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
-    GName:"Valorant",
+    GName:"Dota 2",
     Server:"Asia",
     EntryFee:0,
     Date:"01/06/2022",

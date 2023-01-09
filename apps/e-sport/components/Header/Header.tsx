@@ -10,6 +10,8 @@ import Input2 from './Input2'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useDispatch, useSelector } from 'react-redux'
+import { selectOpenSignup, setopenSignup } from '../../feature/userSlice'
 const style = {
   position: 'absolute' as 'absolute',
   top: '52%',
@@ -49,7 +51,9 @@ const Header = () => {
   const [openGame,setGame]=useState<boolean>(false)
   const [openInfo,setOpenInfo]=useState<boolean>(false)
   const [openLogIn,setOpenLogIn]=useState<boolean>(false)
-  const [openSignUp,setOpenSignUp]=useState<boolean>(false)
+  // const [openSignUp,setOpenSignUp]=useState<boolean>(false)
+  const dispatch=useDispatch()
+  const OsignUp=useSelector(selectOpenSignup)
 
   const router=useRouter()
 
@@ -63,8 +67,11 @@ const Header = () => {
       setOpenLogIn(true)
     },[openLogIn])
     const Signup=useCallback(()=>{
-      setOpenSignUp(true)
-    },[openSignUp])
+      // setOpenSignUp(true)
+      dispatch(setopenSignup({
+        openSignup:true
+      }))
+    },[OsignUp])
     
     const HonePage=()=>{
       router.push("/")
@@ -74,13 +81,17 @@ const Header = () => {
     }
    
     const ModelMonitor=useCallback(()=>{
-      setOpenSignUp(false)
+      dispatch(setopenSignup({
+        openSignup:false
+      }))
       setOpenLogIn(true)
-    },[openSignUp,openLogIn])
+    },[OsignUp,openLogIn])
     const LoginMonitor=useCallback(()=>{
       setOpenLogIn(false)
-      setOpenSignUp(true)
-    },[openSignUp,openLogIn])
+      dispatch(setopenSignup({
+        openSignup:true
+      }))
+    },[OsignUp,openLogIn])
     const {
       register,
       handleSubmit,
@@ -163,8 +174,10 @@ const Header = () => {
 </Modal>
 
         <Modal
-        open={openSignUp}
-        onClose={()=>{setOpenSignUp(false)}}
+        open={OsignUp}
+        onClose={()=>{dispatch(setopenSignup({
+          openSignup:false
+        }))}}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
 >
