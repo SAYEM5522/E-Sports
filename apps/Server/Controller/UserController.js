@@ -1,5 +1,4 @@
 import { User } from "../Database/User/User.js";
-import { router } from "../Route/auth.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import cookieParser from "cookie-parser";
@@ -14,7 +13,7 @@ const signup=async(req,res,next)=>{
      console.log(err)
    }
    if(existingUser){
-     return res.status(401).send({message:"User with the given email already exist."})
+     return res.status(401).send("User with the given email already exist.")
    }
    const user=new User({
     Username:req.body.Username,
@@ -40,22 +39,64 @@ const login=async(req,res,next)=>{
      return new Error(err)
    }
    if(!existingUser){
-     return res.status(401).send({message:"User not found please signup"})
+     return res.status(401).send("User not found please signup")
    }
    const isCorrectPassward=bcrypt.compareSync(Passward,existingUser.Passward)
    if(!isCorrectPassward){
-     return res.status(401).send({message:"Passward not correct "})
+     return res.status(401).send("Passward not correct ")
    }
   //  1296000000
-  const token=jwt.sign({Email:existingUser.Email},secreat_key,{
-    expiresIn:"30s"
+  const token=jwt.sign({id:existingUser._id},secreat_key,{
+    expiresIn:"15d"
    })
-   res.cookie(existingUser.Email,token,{
-    expires:new Date(Date.now()+1000*30),
-    httpOnly:true,
-    sameSite:'lax'
-   })
+  //  res.cookie(existingUser.Email,token,{
+  //   expires:new Date(Date.now()+1296000000),
+  //   httpOnly:true,
+  //   sameSite:'lax'
+  //  })
   
    res.status(200).send({message:"Successfully Loged In",user:existingUser.Email,token})
 }
-export {signup,login}
+const verifyToken=async(req,res,next)=>{
+  let token
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      // Get token from header
+      token = req.headers.authorization.split(' ')[1]
+      // Verify token
+      const decoded = jwt.verify(token, secreat_key)
+      // Get user from the token
+      req.user = await User.findById(decoded.id).select('-Passward -ConfirmPassward:')
+      next()
+    } catch (error) {
+      console.log(error)
+      res.status(401)
+      throw new Error('Not authorized')
+    }
+  }
+
+  if (!token) {
+    res.status(401)
+    throw new Error('Not authorized, no token')
+  }
+
+}
+const getUser=async(req,res,next)=>{
+    //  const Userid=req.id
+    const id=req.user._id
+     let user;
+     try {
+      user= await User.findById(id,"-Passward -ConfirmPassward")
+     } catch (error) {
+      return new Error(error)
+     }
+     if(!user){
+      return res.status(404).json({message:"User not found"})
+     }
+     return res.status(200).json({user})
+}
+
+export {signup,login,verifyToken,getUser}
