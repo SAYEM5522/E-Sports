@@ -39,11 +39,8 @@ useEffect(()=>{
 
        {/* <div> */}
        <Banner/>
-       {/* </div> */}
-       {/* <div className='grid h-screen place-items-center '> */}
        <Event show={true} filter={false} type="Recommended Events"/>
 
-       {/* </div> */}
 
      
      </div>
