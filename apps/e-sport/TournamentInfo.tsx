@@ -8,7 +8,9 @@ export const data=[
     Date:"01/06/2022",
     Mode:"1v1",
     Slot:"19/20",
-    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg"
+    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
+    Price_Pool:10,
+    Extra_Price:5
 
   },
   {
@@ -20,8 +22,9 @@ export const data=[
     Date:"01/06/2022",
     Mode:"1v1",
     Slot:"19/20",
-    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg"
-
+    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
+    Price_Pool:10,
+    Extra_Price:5
   },
   {
     Id:3,
@@ -30,9 +33,11 @@ export const data=[
     Server:"Asia",
     EntryFee:0,
     Date:"01/06/2022",
-    Mode:"1v1",
+    Mode:"5v5",
     Slot:"19/20",
-    Banner:"https://cdn.epulze.com/cms/8b6cc1ad-5a7e-46d4-bcb3-ef544533895e-csgo_tournament_1v1awpbeta04_background-webp"
+    Banner:"https://cdn.epulze.com/cms/8b6cc1ad-5a7e-46d4-bcb3-ef544533895e-csgo_tournament_1v1awpbeta04_background-webp",
+    Price_Pool:20,
+    Extra_Price:10
 
   },
   {
@@ -44,7 +49,9 @@ export const data=[
     Date:"01/06/2022",
     Mode:"1v1",
     Slot:"19/20",
-    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg"
+    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
+    Price_Pool:15,
+    Extra_Price:10
 
   },
   {
@@ -56,7 +63,9 @@ export const data=[
     Date:"01/06/2022",
     Mode:"1v1",
     Slot:"19/20",
-    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg"
+    Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
+    Price_Pool:10,
+    Extra_Price:5
 
   },
 ]

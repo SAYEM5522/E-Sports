@@ -1,13 +1,15 @@
 import { Avatar } from '@mui/material'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../feature/userSlice'
+import MenuList from './MenuList'
 const MainPageHeader = () => {
      const email=useSelector(selectUser)
-     const OpenMenu=()=>{
-      
-     }
+     const [openProfile,setOpenProfile]=useState(false)
+     const OpenMenu=useCallback(()=>{
+        setOpenProfile(!openProfile)
+     },[openProfile])
   return (
     <div className=' flex  items-center justify-between   h-14 bg-[#1C1B22]'>
       <div>
@@ -35,13 +37,16 @@ const MainPageHeader = () => {
 
     </div>
       <div>
-        <div onClick={OpenMenu} className='flex items-center mr-16 cursor-pointer'>
+        <div onClick={OpenMenu} className='flex items-center mr-16 relative cursor-pointer'>
           <Avatar
           src='https://epulze.com/static/build/unassigned.png'
           
           className='w-2 h-2 '
           />
-          <p className='text-white font-serif capitalize text-sm ml-3'>{email}</p>
+          <p className='text-white font-serif text-sm ml-3'>{email}</p>
+          {
+            openProfile?<MenuList/>:null
+          }
         </div>
         
       </div>

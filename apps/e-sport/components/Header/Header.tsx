@@ -139,7 +139,7 @@ const Header = () => {
       }
         await axios.post("http://localhost:8081/login",loginItem).then((res)=>{ 
           Cookies.set('token', res.data.token, { expires: 15 });          
-          router.push(`/MainPage`)
+          router.push(`/`)
           
           // setOpenLogIn(false)
       }).catch((err)=>{
