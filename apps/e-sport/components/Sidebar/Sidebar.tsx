@@ -1,18 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import Home from '../Home/Home'
-import News from '../News/News'
-import Team from '../Team/Team'
-import Tournament from '../Tournament/TournamentList'
 import {FiHome} from "react-icons/fi"
 import {IoNewspaperOutline} from "react-icons/io5"
 import {AiOutlineTeam} from "react-icons/ai"
 import {BsTrophy} from "react-icons/bs"
 import IconItem from './IconItem'
 import {FaStreetView} from "react-icons/fa"
-import Portals from '../Portals/Portals'
 import Image from 'next/image'
 import {IoIosArrowForward} from "react-icons/io"
-import MenueItem from './MenueItem'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
@@ -122,12 +116,10 @@ const Sidebar = () => {
         SideBarItem.map((item,index)=>{
           const classes=getSidebarClasses(item)
           return(
-            <Link href={item.link}>
+            <Link href={item.link} key={index}>
             <div 
             className={classes}
-            // className={`${index===activeIndex?' w-56 bg-[#98BC62] rounded-md':''} flex items-center p-3 mt-2 mb-3 hover: w-56 hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md`} 
-            key={index} 
-            // onClick={()=>IndexProvier(index)}
+          
             >
               
               <IconItem Icon={item.icon}/>

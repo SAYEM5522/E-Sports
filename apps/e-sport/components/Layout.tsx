@@ -1,20 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../feature/userSlice'
 import Header from './Header/Header'
+import MainPageHeader from './Header/MainPageHeader'
 import Sidebar from './Sidebar/Sidebar'
 
 const Layout = ({children}:any) => {
-  const user=false
+ 
     return (
     <div className='bg-[#222225] '>
-      <Header/>
+      <MainPageHeader/>
       <div className='flex flex-row justify-start '>
-        {
-           user?
            <Sidebar/>
-           :
-           null
-
-        }
       <div >
         {
           children

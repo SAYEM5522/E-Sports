@@ -1,11 +1,14 @@
 import React from 'react'
 import LandingLayout from '../components/LandingLayout'
 import Layout from '../components/Layout'
+import FAQ from '../components/MoreInfo/FAQ'
 
-const About = () => {
+const MainFaq = () => {
   return (
-    <LandingLayout>About</LandingLayout>
+    <Layout>
+      <FAQ/>
+    </Layout>
   )
 }
 
-export default About
+export default MainFaq

@@ -32,7 +32,7 @@ export const data=[
     Date:"01/06/2022",
     Mode:"1v1",
     Slot:"19/20",
-    Banner:"https://static1.dualshockersimages.com/wordpress/wp-content/uploads/2022/02/dota-2-update-7.31.jpg"
+    Banner:"https://cdn.epulze.com/cms/8b6cc1ad-5a7e-46d4-bcb3-ef544533895e-csgo_tournament_1v1awpbeta04_background-webp"
 
   },
   {

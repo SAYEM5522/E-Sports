@@ -1,9 +1,9 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import LandingLayout from '../components/LandingLayout'
 
 const Terms_Condition = () => {
   return (
-    <Layout>Terms_Condition</Layout>
+    <LandingLayout>Terms_Condition</LandingLayout>
   )
 }
 

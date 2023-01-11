@@ -1,26 +1,26 @@
+import axios from 'axios'
 import type { NextPage } from 'next'
-import Banner from '../components/Home/Banner'
-import Catalog from '../components/Home/Catalog'
-import Layout from '../components/Layout'
-import Event from '../components/Tournament/Event'
-
+import { useSelector } from 'react-redux'
+import { selectUser } from '../feature/userSlice'
+import LandingPage from './LandingPage'
+import MainPage from './MainPage'
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react'
 const Home: NextPage = () => {
-  const user=false
+  const [user,setUser]=useState<string>()
+    
+    useEffect(()=>{
+    setUser(Cookies.get("email"))
+    },[])
   return (
-    <Layout>
-      {/* <div className=' ml-auto mr-auto'> */}
-        <div className={`flex flex-col ${user?'ml-7':'ml-36'} h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
-          <Catalog/>
-      <div>
-      <Banner/>
-      </div>
-      {/* <div > */}
-      <Event show={true} filter={false} type="Recommended Events"/>
-      {/* </div> */}
-     
+    <div>
+        {
+          user?
+          <MainPage/>:
+          <LandingPage/>
+
+        }
     </div>
-    {/* </div> */}
-    </Layout>
   )
 }
 

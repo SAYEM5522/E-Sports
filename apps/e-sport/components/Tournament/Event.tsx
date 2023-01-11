@@ -13,7 +13,7 @@ const Event = ({show,type,filter}:IEvent) => {
   const router=useRouter()
   const dispatch=useDispatch()
   const OsignUp=useSelector(selectOpenSignup)
-  const user=false
+  const user=true
   const GotoDetails=useCallback((id:number)=>{
      if(
       user
@@ -48,7 +48,7 @@ const Event = ({show,type,filter}:IEvent) => {
               <Image
               src={item.Banner}
               alt={item.GName.charAt(0)}
-              className="rounded-t-lg hover:scale-[1.04]"
+              className="rounded-t-lg hover:scale-[1.04] object-cover"
               fill
               />
               </div>

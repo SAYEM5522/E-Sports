@@ -8,10 +8,10 @@ const Banner = () => {
   return (
     <div className={`relative h-80 w-11/12 ml-auto mr-auto mb-12`}>
       <Image
-      src={"https://cdn.cloudflare.steamstatic.com/steam/apps/730/ss_60b4f959497899515f46012df805b0006ef21af6.1920x1080.jpg?t=1668125812"}
+      src={"https://cdn.epulze.com/cms/aa174eef-006b-4a1d-b301-07de99c33251-csgo_tournament_2v2beta07_background-webp"}
       alt="B"
       fill
-      className="self-center  mt-8 rounded-3xl"
+      className="self-center  mt-8 rounded-3xl object-cover"
       
       />
     </div>

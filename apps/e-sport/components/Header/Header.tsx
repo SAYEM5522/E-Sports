@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { memo, useCallback, useRef, useState } from 'react'
 import {BsChevronDown} from "react-icons/bs"
 import GameBox from './GameBox'
 import InfoBox from './InfoBox'
@@ -6,12 +6,13 @@ import { useRouter } from 'next/router'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Input from './Input'
-import Input2 from './Input2'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from 'react-redux'
-import { selectOpenSignup, setopenSignup } from '../../feature/userSlice'
+import { selectOpenSignup, selectUser, setopenSignup, setUser } from '../../feature/userSlice'
+import axios from 'axios'
+import Cookies from 'js-cookie';
 const style = {
   position: 'absolute' as 'absolute',
   top: '52%',
@@ -51,10 +52,17 @@ const Header = () => {
   const [openGame,setGame]=useState<boolean>(false)
   const [openInfo,setOpenInfo]=useState<boolean>(false)
   const [openLogIn,setOpenLogIn]=useState<boolean>(false)
+  const [signUpError,setSignUpError]=useState("")
+  const [loginError,setLogInError]=useState("")
+  const [loginPass,setLoginPass]=useState("")
+  const [loginEmail,setLoginEmail]=useState("")
+ 
+
+
+  // const [signupLoading,setSignupLoading]=useState<boolean>(false)
   // const [openSignUp,setOpenSignUp]=useState<boolean>(false)
   const dispatch=useDispatch()
   const OsignUp=useSelector(selectOpenSignup)
-
   const router=useRouter()
 
   const OpenGameBox=useCallback(()=>{
@@ -95,18 +103,56 @@ const Header = () => {
     const {
       register,
       handleSubmit,
-      formState: { errors }
+      formState: { errors } 
     } = useForm({
       resolver: yupResolver(SignupSchema)
     });
-    const formData=(data:any)=>{
-       console.log(data)
+    const setEmail=(e:any)=>{
+      setLoginEmail(e.target.value)
     }
+    const setPass=(e:any)=>{
+      setLoginPass(e.target.value)
+    }
+    const formData=async(data:any)=>{
+      // setSignupLoading(true)
+      const signupItem={
+        Username:data.Username,
+        Email:data.Email,
+        Passward:data.Passward,
+        ConfirmPassward:data.ConfirmPassward,
+        Country:data.Country
+      }
+      await axios.post("http://localhost:8081/signup",signupItem).then((res)=>{
+          // setOpenLogIn(false)
+          dispatch(setopenSignup({
+            openSignup:false
+          }))
+          setOpenLogIn(true)
+      }).catch((err)=>{
+            setSignUpError(err.request.responseText)
+      })
+    } 
+    const onSubmit=async()=>{
+      const loginItem={
+        Email:loginEmail,
+        Passward:loginPass
+      }
+        await axios.post("http://localhost:8081/login",loginItem).then((res)=>{ 
+          Cookies.set('token', res.data.token, { expires: 15 });          
+          router.push(`/MainPage`)
+          
+          // setOpenLogIn(false)
+      }).catch((err)=>{
+            setLogInError(err.request.responseText)
+      })
+    }
+    
   return (
     <div
     className=' flex  items-center justify-between   h-14 bg-[#1C1B22]'
     >
     <div>
+
     </div>
     <div className='flex items-center justify-center ml-10' >
   
@@ -119,7 +165,7 @@ const Header = () => {
             }
           </div>
       <p  className='text-white pl-9 font-serif font-medium cursor-pointer'>Play</p>
-      <p onClick={NewsPage} className='text-white pl-9 font-serif font-medium cursor-pointer'>News</p>
+      {/* <p onClick={NewsPage} className='text-white pl-9 font-serif font-medium cursor-pointer'>News</p> */}
       <div className='flex items-center cursor-pointer relative' onClick={OpenMoreBox}>
           <p className='text-white pl-9 font-serif font-medium' >More</p>
             <BsChevronDown color='white' className='pl-2 h-6 w-6'/>
@@ -144,29 +190,40 @@ const Header = () => {
         aria-describedby="modal-modal-description"
 >
         <Box sx={{...style2,borderRadius:3,zIndex:1}}>
-          
-          <form className='mt-7'>
-          <Input  register={{...register("Email")}}
-        label={"Email"} type={"email"} placeholder={"Enter Email.."}
-        errorMessage={errors.Email?.message}
-        id={"email"}
-       />
-          <Input   register={{...register("Passward")}}
-        label={"Passward"} type={"passward"} placeholder={"Enter Passward.."}
-        errorMessage={errors.Passward?.message}
-        id={"passward"}
-       />
-        <div className='flex items-center justify-between'>
-        <button className='h-7 mt-3 font-serif font-[600] w-20 bg-[#B6FF40] rounded-md '>Login</button>
+          <div className='mt-7'>
+         <p className='text-[red] text-center font-serif font-medium'>{loginError}</p>
+            <div className={`flex flex-col ${errors?'mb-[2px]':'mb-2'}`}>
+            <label className='text-white font-medium font-serif pl-1'>
+            {"Email"}
+            </label>
+            <input required={true}  onChange={setEmail} className={`outline-none h-8 p-2 rounded-md placeholder-shown:p-2 text-black`} type={"email"} placeholder={"Enter Email.."} />
+            {/* <span className='font-serif text-[#FF0000] font-medium pl-1 pt-1'>{errors.Email?.message}</span> */}
+          </div>
+          <div className={`flex flex-col ${errors?'mb-[2px]':'mb-2'}`}>
+            <label className='text-white font-medium font-serif pl-1'>
+            {"Passward"}
+            </label>
+            <input  onChange={setPass} className={`outline-none h-8 p-2 rounded-md placeholder-shown:p-2 text-black`} type={"text"} placeholder={"Enter Passward.."} />
+            {/* <span className='font-serif text-[#FF0000] font-medium pl-1 pt-1'>{errors.Passward?.message}</span> */}
+          </div>
+           
+    
+       <div className='flex items-center justify-between'>
+        <button onClick={onSubmit} type='submit'  className='h-7 mt-3 font-serif font-[600] w-20 bg-[#B6FF40] rounded-md '>Login</button>
         <p className='underline ml-1 mt-2 font-medium cursor-pointer text-white'>Forgot Passward</p>
       
         </div>
         <p className=' ml-1 text-white font-serif font-medium mt-4' >Don't have any account 
+        {
+         
           <span onClick={LoginMonitor} className='underline ml-1 font-bold cursor-pointer'>
-            Signup
+          Signup
           </span>
+        }
+          
         </p>
-          </form>
+          </div>
+
        
 
         </Box>
@@ -182,7 +239,8 @@ const Header = () => {
         aria-describedby="modal-modal-description"
 >
         <Box sx={{...style,borderRadius:3}}>
-        <div className='pt-8'>
+        <div className='pt-8'> 
+         <p className='text-[red] text-center font-serif font-medium'>{signUpError}</p>
       <form onSubmit={handleSubmit(formData)}>
       <Input
        label={"Username"} 
@@ -239,4 +297,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)

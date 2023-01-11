@@ -4,6 +4,7 @@ module.exports = {
   images:{domains:[
     "cdn.arstechnica.net","static1.dualshockersimages.com",
     "cdn.cloudflare.steamstatic.com",
-    "steamuserimages-a.akamaihd.net","i.pinimg.com"
+    "steamuserimages-a.akamaihd.net","i.pinimg.com",
+    "cdn.epulze.com"
   ]}
 }

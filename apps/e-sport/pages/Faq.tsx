@@ -1,12 +1,12 @@
 import React from 'react'
-import Layout from '../components/Layout'
+import LandingLayout from '../components/LandingLayout'
 
 
 const Faq = () => {
   return (
-    <Layout>
+    <LandingLayout>
     <p>faq</p>
-    </Layout>
+    </LandingLayout>
   )
 }
 

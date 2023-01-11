@@ -30,16 +30,16 @@ const Tournament_Details = () => {
          if(Number(id)===item.Id){
           return(
             <div key={index}>
-             <div className={` relative`} style={{height:height/1.9,width:width-257,}} >
+             <div className={` relative  `} style={{height:height/1.9,width:width-257,}} >
+              <div className='bg-gradient-to-t from-black to-[#222225] w-full   h-[23rem] absolute'></div>
               <Image
               src={item.Banner}
               alt={item.GName.charAt(0)}
               fill
-              // className='-z-10'
+              className='object-cover mix-blend-overlay'
               />
-             <div style={{backgroundImage:" linear-gradient( 180deg,transparent,rgba(37, 37, 37, 0.61),#111)",height:"7.8rem",display:"block",zIndex:1000,}}>
-
-             </div>
+             {/* <div className='h-[6rem] absolute bottom-0 left-0 right-0 bg-gradient-to-t from-#222225 to-[#222225] '/> */}
+        
              </div>
              
             </div>
