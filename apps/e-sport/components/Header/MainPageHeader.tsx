@@ -11,7 +11,7 @@ const MainPageHeader = () => {
         setOpenProfile(!openProfile)
      },[openProfile])
   return (
-    <div className=' flex  items-center justify-between   h-14 bg-[#1C1B22]'>
+    <div className=' flex  items-center justify-between    h-14 bg-[#1C1B22]'>
       <div>
 
       </div>

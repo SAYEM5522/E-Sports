@@ -8,14 +8,14 @@ import Catalog from './Catalog'
 const Home = () => {
   const {height,width}=useWindowSize()
   return (
-    <div className={`flex flex-col w-full ml-auto mr-auto h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
-      <Catalog/>
+    <div className={`flex flex-col flex-1  h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
+      {/* <Catalog/>
       <div>
       <Banner/>
       </div>
       <div >
       <Event show={true} filter={false} type="Recommended Events"/>
-      </div>
+      </div> */}
      
     </div>
   )

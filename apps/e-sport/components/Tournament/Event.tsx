@@ -36,17 +36,17 @@ const Event = ({show,type,filter}:IEvent) => {
     <div className=''>
       {
         show?
-        <p className='font-serif font-bold text-white text-2xl mb-1'>{type}</p>
+        <p className='font-serif font-bold text-white text-2xl ml-4 mb-1'>{type}</p>
         :null
       }
       
-     <div className=' flex items-center flex-wrap '>
+     <div className='flex  flex-wrap '>
 
       {
         data.map((item,index)=>{
           return(
             // width length should change
-            <div onClick={()=>GotoDetails(item.Id)}  key={index} className={`${filter?'w-[31.5%]':'w-[31%]'}  h-[22rem] bg-[#15141B] mr-4 mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
+            <div onClick={()=>GotoDetails(item.Id)}  key={index} className={`${filter?'w-[31.5%]':'w-[31%]'}  h-[22rem] bg-[#15141B] ml-4 mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
               <div className='w-full h-[210px] relative'>
               <Image
               src={item.Banner}

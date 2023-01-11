@@ -30,7 +30,7 @@ const Tournament_Details = () => {
          if(Number(id)===item.Id){
           return(
             <div key={index}>
-             <div className={` relative  `} style={{height:height/1.9,width:width-257,}} >
+             <div className={` relative w-full  `} style={{height:height/1.9,width:width-257,}} >
               <div className='bg-gradient-to-t from-black to-[#222225] w-full   h-[23rem] absolute'></div>
               <Image
               src={item.Banner}

@@ -13,7 +13,7 @@ const Home: NextPage = () => {
     setUser(Cookies.get("email"))
     },[])
   return (
-    <div>
+    <div className=''>
         {
           user?
           <MainPage/>:
