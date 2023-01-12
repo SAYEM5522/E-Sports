@@ -46,7 +46,7 @@ const Event = ({show,type,filter}:IEvent) => {
         data.map((item,index)=>{
           return(
             // width length should change
-            <div onClick={()=>GotoDetails(item.Id)}  key={index} className={`${filter?'w-[31.5%]':'w-[31%]'}  h-[22rem] bg-[#15141B] ml-4 mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
+            <div onClick={()=>GotoDetails(item.Id)}  key={index} className={`${filter?'w-[31.5%]':'w-[31%]'}  h-[22rem] bg-[#15141B] ${filter?'mr-4':'ml-4'} mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
               <div className='w-full h-[210px] relative'>
               <Image
               src={item.Banner}

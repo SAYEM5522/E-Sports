@@ -6,14 +6,16 @@ import LandingPage from './LandingPage'
 import MainPage from './MainPage'
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react'
+import { useWindowSize } from '../components/Hooks/useWindowSize'
 const Home: NextPage = () => {
+
   // token logic should change 
   const [user,setUser]=useState<string>()
     useEffect(()=>{
     setUser(Cookies.get("token"))
     },[])
   return (
-    <div className=''>
+    <div className='' >
         {
           user?
           <MainPage/>:

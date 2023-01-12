@@ -11,6 +11,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import {MdOutlineLeaderboard} from "react-icons/md"
+import {BsWallet2} from "react-icons/bs"
+import { useWindowSize } from '../Hooks/useWindowSize'
 const SideBarItem=[
   {
     id:1,
@@ -53,6 +55,7 @@ const SideBarItem=[
     link:"/Leader_Board"
 
   },
+
 ]
 export const GameList=[
   {
@@ -81,12 +84,10 @@ export const GameList=[
   }
 ]
 const Sidebar = () => {
-  const [activeIndex,setActiveIndex]=useState<number>(0)
   const CurrencyFormat="Taka"
   const router=useRouter()
-  // const IndexProvier=useCallback((index:number)=>{
-  //  setActiveIndex(index)
-  // },[activeIndex])
+  const {width,height}=useWindowSize()
+
   const activeItem=useMemo(()=>
     SideBarItem.find((menu)=>
       menu.link===router.pathname
@@ -99,18 +100,22 @@ const Sidebar = () => {
   }
 
   return (
-    <div className='flex h-full'>
-    <div
-    className='w-60  dark:border-gray-400 '
-    >
+    <div className='flex '>
+    {/* <div
+    className='w-60  '
+    
+    > */}
       
-      <div className=' bg-[#15141B] h-full'>
+      <div className=' bg-[#15141B] h-screen    overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden '>
       <div className='h-16 bg-[#23222A] flex items-center justify-between  '>
         <div className='ml-3'>
         <p className='text-white font-serif font-bold'>Your Balance </p>
         <p className='text-white font-serif font-medium'>10 {CurrencyFormat}</p>
         </div>
-        <IoIosArrowForward className='cursor-pointer mr-3' size={28} color='white'/>
+        <Link href={"/Wallet/Wallet"}>
+        <IoIosArrowForward  className='cursor-pointer mr-3' size={28} color='white'/>
+
+        </Link>
        </div>
       {
         SideBarItem.map((item,index)=>{
@@ -133,7 +138,7 @@ const Sidebar = () => {
       <div className='mt-3 ml-3 '>
         <p className='text-white cursor-pointer font-bold font-serif '>My Games</p>
       </div>
-      <div className='flex items-center flex-wrap  ml-3 '>
+      <div className='flex items-center flex-wrap  ml-3 mb-2 '>
         {
         GameList.map((item,index)=>{
           return(
@@ -152,8 +157,7 @@ const Sidebar = () => {
       </div>
       </div>
       
-    </div>
-    {/* <MenueItem activeIndex={activeIndex}/> */}
+    {/* </div> */}
      </div>
   )
 }
