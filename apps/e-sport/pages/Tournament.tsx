@@ -5,7 +5,6 @@ const Tournament = () => {
   return (
     <Layout>
       <TournamentList/>
-
     </Layout>
   )
 }

@@ -84,9 +84,9 @@ const Sidebar = () => {
   const [activeIndex,setActiveIndex]=useState<number>(0)
   const CurrencyFormat="Taka"
   const router=useRouter()
-  const IndexProvier=useCallback((index:number)=>{
-   setActiveIndex(index)
-  },[activeIndex])
+  // const IndexProvier=useCallback((index:number)=>{
+  //  setActiveIndex(index)
+  // },[activeIndex])
   const activeItem=useMemo(()=>
     SideBarItem.find((menu)=>
       menu.link===router.pathname

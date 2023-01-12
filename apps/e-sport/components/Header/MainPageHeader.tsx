@@ -41,7 +41,7 @@ const MainPageHeader = () => {
           <Avatar
           src='https://epulze.com/static/build/unassigned.png'
           
-          className='w-2 h-2 '
+          className='w-7 h-7 '
           />
           <p className='text-white font-serif text-sm ml-3'>{email}</p>
           {
