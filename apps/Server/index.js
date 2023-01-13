@@ -3,8 +3,10 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import { router } from "./Route/auth.js"
 import { Homerouter } from "./Route/Home.js"
+import { Teamrouter } from "./Route/Team.js"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
+import Grid   from "gridfs-stream" 
 
 const PORT=process.env.PORT||8081
 
@@ -12,8 +14,11 @@ const app=express()
 app.use(cors())
 
 app.use(bodyParser.json())
+// Route
 app.use("/",router)
 app.use("/",Homerouter)
+app.use("/",Teamrouter)
+
 
 // app.use(cookieParser())
 const Connection_Url="mongodb+srv://e-sports:zzgWyKRSASNQOkzY@cluster0.sxukpxt.mongodb.net/?retryWrites=true&w=majority"
@@ -22,11 +27,17 @@ mongoose.connect(Connection_Url,{
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
+const db = mongoose.connection;
+let gfs;
 mongoose.connection.once('open',()=>{
   console.log("Connected Successfully")
+  gfs = Grid(db.db, mongoose.mongo);
+  gfs.collection('uploads');
+  // console.log(gfs)
 })
 
 
 app.listen(PORT,()=>{
   console.log(`Server Started At PORT ${PORT}`)
 })
+export {gfs}

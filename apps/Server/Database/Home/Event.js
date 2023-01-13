@@ -23,7 +23,24 @@ const EventRuleSchema=new mongoose.Schema({
   ]
 
 })
+const OneVOneSchema=new mongoose.Schema({
+  EventId:{
+   type:String
+ },
+  TeamId:{
+    type:String
+   },
+  Teamname:{
+    type:String
+  },
+  Profile:{
+    type:String
+  }
+
+})
 const Event=mongoose.model("EventSchema",EventSchema)
 const EventRuleList=mongoose.model("EventRuleSchema",EventRuleSchema)
+const OneVOne=mongoose.model("OneVOneSchema",OneVOneSchema)
 
-export {Event,EventRuleList}
+
+export {Event,EventRuleList,OneVOne}

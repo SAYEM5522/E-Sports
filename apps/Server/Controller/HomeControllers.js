@@ -1,4 +1,4 @@
-import { Event, EventRuleList } from "../Database/Home/Event.js";
+import { Event, EventRuleList, OneVOne } from "../Database/Home/Event.js";
 import { Banner } from "../Database/Home/Banner.js";
 
 const EventRoute=async(req,res)=>{
@@ -66,5 +66,36 @@ const getEventRule=async(req,res)=>{
 return res.status(200).send(eventrulelist)
 
 }
+const OneVOneRoute=async(req,res)=>{
+   const {EventId,TeamId,Teamname,Profile}=req.body
+   const data={
+      EventId,
+      TeamId,
+      Teamname,
+      Profile
+   }
+   const OneTeam=new OneVOne(data)
+   try {
+      await OneTeam.save()
+   } catch (error) {
+       return res.status(404).send("Internal problem")
+   }
+ return res.status(201).send(OneTeam)
 
-export {EventRoute,getEvent,EventRule,getEventRule}
+}
+const getOneVOne=async(req,res)=>{
+   const Eventid=req.params.id
+   let eventrulelist
+   try {
+     eventrulelist=await OneVOne.find({EventId:Eventid})
+   } catch (error) {
+     res.status(500).send({message:"Internal Server error"})
+   }
+   if(!eventrulelist){
+     return res.status(401).send("Event id dosent match")
+   }
+  return res.status(200).send(eventrulelist)
+  
+  }
+
+export {EventRoute,getEvent,EventRule,getEventRule,OneVOneRoute,getOneVOne}
