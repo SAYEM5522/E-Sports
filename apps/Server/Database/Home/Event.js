@@ -10,5 +10,20 @@ const EventSchema=new mongoose.Schema({
   Slot: {type:String},
   Banner: {type:String},
 })
+const EventRuleSchema=new mongoose.Schema({
+   EventId:{
+    type:String
+  },
+  Rules:[
+    {
+      caption:{type:String},
+      details:{type:String}
+
+    }
+  ]
+
+})
 const Event=mongoose.model("EventSchema",EventSchema)
-export {Event}
+const EventRuleList=mongoose.model("EventRuleSchema",EventRuleSchema)
+
+export {Event,EventRuleList}

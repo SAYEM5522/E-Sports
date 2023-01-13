@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
 import { router } from "./Route/auth.js"
+import { Homerouter } from "./Route/Home.js"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 
@@ -12,6 +13,8 @@ app.use(cors())
 
 app.use(bodyParser.json())
 app.use("/",router)
+app.use("/",Homerouter)
+
 // app.use(cookieParser())
 const Connection_Url="mongodb+srv://e-sports:zzgWyKRSASNQOkzY@cluster0.sxukpxt.mongodb.net/?retryWrites=true&w=majority"
 

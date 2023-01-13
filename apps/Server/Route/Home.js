@@ -1,5 +1,10 @@
 import express from "express"
-import { EventRoute, getEvent } from "../Controller/HomeControllers.js"
-const router=express.Router()
-router.post("/Event",EventRoute)
-router.post("/getEvent",getEvent)
+import { EventRoute, EventRule, getEvent, getEventRule } from "../Controller/HomeControllers.js"
+const Homerouter=express.Router()
+Homerouter.post("/Event",EventRoute)
+Homerouter.get("/getEvent",getEvent)
+Homerouter.post("/EventRule/:id",EventRule)
+Homerouter.get("/getEventRule/:id",getEventRule)
+
+export {Homerouter}
+
