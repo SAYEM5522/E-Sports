@@ -1,4 +1,4 @@
-import { Event, EventRuleList, OneVOne } from "../Database/Home/Event.js";
+import { Event, EventRuleList, ManyVMany, OneVOne } from "../Database/Home/Event.js";
 import { Banner } from "../Database/Home/Banner.js";
 
 const EventRoute=async(req,res)=>{
@@ -83,6 +83,30 @@ const OneVOneRoute=async(req,res)=>{
  return res.status(201).send(OneTeam)
 
 }
+const ManyVManyRoute=async(req,res)=>{
+   const array=[]
+  req.body.TeamName.map((item)=>{
+      array.push(item)
+      
+   })
+   
+   const data={
+      EventId:req.body.EventId,
+      MainTeam:req.body.MainTeam,
+      TeamName:array,
+      Profile:req.body.Profile,
+      Date:req.body.Date
+
+   }
+   const ManyTeam=new ManyVMany(data)
+   try {
+      await ManyTeam.save()
+   } catch (error) {
+      return res.status(404).send("Internal problem")
+   }
+   return res.status(201).send(ManyTeam)
+
+}
 const getOneVOne=async(req,res)=>{
    const Eventid=req.params.id
    let eventrulelist
@@ -97,5 +121,20 @@ const getOneVOne=async(req,res)=>{
   return res.status(200).send(eventrulelist)
   
   }
+  const getManyVMany=async(req,res)=>{
+   const Eventid=req.params.id
+   let eventrulelist
+   try {
+     eventrulelist=await ManyVMany.find({EventId:Eventid})
+   } catch (error) {
+     res.status(500).send({message:"Internal Server error"})
+   }
+   if(!eventrulelist){
+     return res.status(401).send("Event id dosent match")
+   }
+  return res.status(200).send(eventrulelist)
+  
+  }
 
-export {EventRoute,getEvent,EventRule,getEventRule,OneVOneRoute,getOneVOne}
+export {EventRoute,getEvent,EventRule,
+   getEventRule,OneVOneRoute,getOneVOne,ManyVManyRoute,getManyVMany}
