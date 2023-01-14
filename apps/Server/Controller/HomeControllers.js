@@ -11,6 +11,9 @@ const EventRoute=async(req,res)=>{
     Mode: req.body.Mode,
     Slot: req.body.Slot,
     Banner: req.body.Banner,
+    Tournament_Info:req.body.Tournament_Info
+
+
    }
 
    const event=new Event(
@@ -18,10 +21,11 @@ const EventRoute=async(req,res)=>{
    )
    try {
       await event.save()
+      return res.status(201).send(event)
+
    } catch (error) {
        res.status(401).send({message:"Internal server problem"})
    }
-  return res.status(201).send(event)
    
 }
 const getEvent=async(req,res)=>{

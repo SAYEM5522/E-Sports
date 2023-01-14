@@ -4,11 +4,14 @@ const EventSchema=new mongoose.Schema({
   Logo: {type:String},
   GName: {type:String,trim:true},
   Server: {type:String},
-  EntryFee: {type:String},
-  Date: {type:String},
+  EntryFee: {type:Number},
+  Date: {type: Date},
   Mode: {type:String},
-  Slot: {type:String},
+  Slot:{type:Number},
   Banner: {type:String},
+  Createtime:{ type: Date, default: Date.now },
+  Tournament_Info:{type:String}
+
 })
 const EventRuleSchema=new mongoose.Schema({
    EventId:{
