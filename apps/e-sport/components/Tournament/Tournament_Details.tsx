@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import Cookies from 'js-cookie'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -19,9 +20,9 @@ interface EProps{
 }
 const Tournament_Details = () => {
   const router=useRouter()
-  const {id}=router.query
+  const id=router.query.id
+  Cookies.set("_t_id",id as any,{expires:1})
   const {width,height}=useWindowSize()
-  const BannerClass=classNames(`[h-${height/2}] w-[200px] bg-[red]`)
   return (
     <div>
       {

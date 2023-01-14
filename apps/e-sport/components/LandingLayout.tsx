@@ -5,7 +5,7 @@ const LandingLayout = ({children}:any) => {
   return (
     <div className='bg-[#222225] '>
       <Header/>
-      <div className='flex flex-row justify-start '>
+      <div className='flex flex-row  '>
       <div >
         {
           children

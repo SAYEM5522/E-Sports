@@ -84,9 +84,7 @@ const Header = () => {
     const HonePage=()=>{
       router.push("/")
     }
-    const NewsPage=()=>{
-      router.push("/News")
-    }
+
    
     const ModelMonitor=useCallback(()=>{
       dispatch(setopenSignup({
@@ -137,9 +135,10 @@ const Header = () => {
         Email:loginEmail,
         Passward:loginPass
       }
-        await axios.post("http://localhost:8081/login",loginItem).then((res)=>{ 
+        await axios.post("http://localhost:8081/login",loginItem).then((res)=>{
+          router.push("/MainPage") 
           Cookies.set('token', res.data.token, { expires: 15 });          
-          router.push(`/`)
+         
           
           // setOpenLogIn(false)
       }).catch((err)=>{

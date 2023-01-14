@@ -10,7 +10,8 @@ export const data=[
     Slot:"19/20",
     Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
     Price_Pool:10,
-    Extra_Price:5
+    Extra_Price:5,
+   
 
   },
   {
@@ -24,7 +25,8 @@ export const data=[
     Slot:"19/20",
     Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
     Price_Pool:10,
-    Extra_Price:5
+    Extra_Price:5,
+  
   },
   {
     Id:3,
@@ -37,7 +39,8 @@ export const data=[
     Slot:"19/20",
     Banner:"https://cdn.epulze.com/cms/8b6cc1ad-5a7e-46d4-bcb3-ef544533895e-csgo_tournament_1v1awpbeta04_background-webp",
     Price_Pool:20,
-    Extra_Price:10
+    Extra_Price:10,
+    
 
   },
   {
@@ -51,7 +54,8 @@ export const data=[
     Slot:"19/20",
     Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
     Price_Pool:15,
-    Extra_Price:10
+    Extra_Price:10,
+ 
 
   },
   {
@@ -65,7 +69,8 @@ export const data=[
     Slot:"19/20",
     Banner:"https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg",
     Price_Pool:10,
-    Extra_Price:5
+    Extra_Price:5,
+  
 
   },
 ]

@@ -18,7 +18,7 @@ const SideBarItem=[
     id:1,
     name:"Home",
     icon:FiHome,
-    link:"/"
+    link:"/MainPage"
 
   },
   {

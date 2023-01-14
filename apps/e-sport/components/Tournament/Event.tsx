@@ -1,36 +1,36 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectOpenSignup, setopenSignup } from '../../feature/userSlice'
-import { data } from '../../TournamentInfo'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import {BsPeople} from "react-icons/bs"
 import {IoLocationOutline} from "react-icons/io5"
 import {CiCalendarDate} from "react-icons/ci"
+import axios from 'axios'
+import Link from 'next/link'
+import Cookies from 'js-cookie'
 interface IEvent{
   show:boolean,
   type?:string,
   filter?:boolean
 }
 const Event = ({show,type,filter}:IEvent) => {
-  const router=useRouter()
-  const dispatch=useDispatch()
-  const OsignUp=useSelector(selectOpenSignup)
-  const user=true
-  const GotoDetails=useCallback((id:number)=>{
-     if(
-      user
-     ){
-      router.push(`/TournamentDetails?id=${id}`,)
-     }else{
-      dispatch(
-        setopenSignup({
-          openSignup:true
-        })
-      )
-     }
-    
+  const [eventList,setEventList]=useState([])
+  const getEvent=async()=>{
+  await axios.get("http://localhost:8081/getEvent").then((res)=>{
+      setEventList(res.data)
+   }).catch((err)=>{
+    console.log(err)
+
+   })
+  }
+  useEffect(()=>{
+    getEvent()
   },[])
+  const router=useRouter()
+  const GotoDetails=(id:number,mode:string)=>{
+    Cookies.set("_m_id",mode,{expires:1})
+    router.push(`/TournamentDetails?id=${id}`)
+  }
+ 
   
   return (
     <div className=''>
@@ -43,10 +43,10 @@ const Event = ({show,type,filter}:IEvent) => {
      <div className='flex  flex-wrap '>
 
       {
-        data.map((item,index)=>{
+        eventList.map((item:any,index)=>{
           return(
             // width length should change
-            <div onClick={()=>GotoDetails(item.Id)}  key={index} className={`${filter?'w-[31.5%]':'w-[31%]'}  h-[22rem] bg-[#15141B] ${filter?'mr-4':'ml-4'} mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
+            <div key={index} onClick={()=>GotoDetails(item._id,item.Mode)}  className={`${filter?'w-[31.5%]':'w-[100%]'}  h-[22rem] bg-[#15141B] ${filter?'mr-4':'ml-4'} mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
               <div className='w-full h-[210px] relative'>
               <Image
               src={item.Banner}
@@ -55,8 +55,8 @@ const Event = ({show,type,filter}:IEvent) => {
               fill
               />
               <div className='backdrop-blur-sm h-12 w-full bg-white/30 absolute bottom-0'>
-                <p className='text-white font-bold font-serif p-3'>${item.Price_Pool}+
-                <span className='text-[#ADF440] text-xl'>${item.Extra_Price}</span>
+                <p className='text-white font-bold font-serif p-3'>${10}+
+                <span className='text-[#ADF440] text-xl'>${5}</span>
                 </p>
               </div>
 
@@ -98,4 +98,4 @@ const Event = ({show,type,filter}:IEvent) => {
   )
 }
 
-export default Event
+export default memo(Event)

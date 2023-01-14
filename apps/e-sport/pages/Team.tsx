@@ -7,47 +7,7 @@ const Team = () => {
   return (
     <Layout>
       <TeamLayout>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
-        <p>hello</p>
+        <Team_Info/>
 
       </TeamLayout>
     </Layout>

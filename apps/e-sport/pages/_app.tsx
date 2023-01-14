@@ -7,9 +7,7 @@ import store from '../app/store'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-    <ThemeProvider attribute='class'>
-  <Component {...pageProps} />
-  </ThemeProvider>
+   <Component {...pageProps} />
   </Provider>
   )
 }

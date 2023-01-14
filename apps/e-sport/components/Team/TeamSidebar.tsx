@@ -30,9 +30,9 @@ const TeamItem=[
 ]
 const TeamSidebar = () => {
   const router=useRouter()
-  const goto=useCallback((link:any)=>{
+  const goto=(link:any)=>{
     router.push(`${link}`)
-  },[])
+  }
   const activeItem=useMemo(()=>
   TeamItem.find((menu)=>
       menu.link===router.pathname

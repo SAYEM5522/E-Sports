@@ -10,7 +10,6 @@ import { selectUser, setUser } from '../feature/userSlice'
 import Cookies from 'js-cookie';
 // axios.defaults.withCredentials=true
 const MainPage = () => {
-  const router=useRouter()
   const dispatch=useDispatch()
 const getId=async()=>{
   try {
@@ -30,7 +29,7 @@ const getId=async()=>{
 }
 useEffect(()=>{
   getId()
-},[])
+},[getId])
   return (
     <Layout>
       {/* 35.55rem  */}

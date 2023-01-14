@@ -8,7 +8,7 @@ const TournamentDetails = () => {
   return (
     <Layout>
       <TournamentLayout>
-        <p>overview</p>
+        <Tournament_Details/>
       </TournamentLayout>
     </Layout>
   )
