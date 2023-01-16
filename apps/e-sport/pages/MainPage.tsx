@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 // axios.defaults.withCredentials=true
 const MainPage = () => {
   const dispatch=useDispatch()
+  const [token,setToken]=useState<string>()
 const getId=async()=>{
   try {
     const token=Cookies.get('token')
@@ -28,8 +29,9 @@ const getId=async()=>{
   }
 }
 useEffect(()=>{
+  setToken(Cookies.get('token'))
   getId()
-},[getId])
+},[getId,token])
   return (
     <Layout>
       {/* 35.55rem  */}
