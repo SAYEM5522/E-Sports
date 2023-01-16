@@ -12,8 +12,6 @@ const EventRoute=async(req,res)=>{
     Slot: req.body.Slot,
     Banner: req.body.Banner,
     Tournament_Info:req.body.Tournament_Info
-
-
    }
 
    const event=new Event(
@@ -36,6 +34,17 @@ const getEvent=async(req,res)=>{
       res.status(500).send({message:"Internal Server error"})
     }
   return res.status(200).send(eventlist)
+}
+const getSpecificEvent=async(req,res)=>{
+  const eventId=req.params.id
+  let eventlist
+  try {
+    eventlist=await Event.find({_id:eventId})
+   return res.status(200).send(eventlist)
+
+  } catch (error) {
+    res.status(500).send({message:"Internal Server error"})
+  }
 }
 const EventRule=async(req,res)=>{
    const id=req.params.id
@@ -88,19 +97,17 @@ const OneVOneRoute=async(req,res)=>{
 
 }
 const ManyVManyRoute=async(req,res)=>{
-   const array=[]
-  req.body.TeamName.map((item)=>{
-      array.push(item)
+  //  const array=[]
+  // req.body.TeamName.map((item)=>{
+  //     array.push(item)
       
-   })
-   
+  //  })
    const data={
       EventId:req.body.EventId,
       MainTeam:req.body.MainTeam,
-      TeamName:array,
+      // TeamName:array,
       Profile:req.body.Profile,
-      Date:req.body.Date
-
+      // Date:req.body.Date
    }
    const ManyTeam=new ManyVMany(data)
    try {
@@ -109,6 +116,33 @@ const ManyVManyRoute=async(req,res)=>{
       return res.status(404).send("Internal problem")
    }
    return res.status(201).send(ManyTeam)
+
+}
+const AddManyvManyMember=async(req,res)=>{
+  const teamid=req.params.id
+  const array=[]
+  req.body.map((item)=>{
+      array.push(item)  
+   })
+  const options = { upsert: true };
+   try {
+    await ManyVMany.updateMany(
+        {
+          _id:teamid
+        },
+        {
+           
+     $push:{
+      TeamName:array
+          },
+        },
+        options,
+      )
+      return res.status(201).send("Member Added Successfully")
+   } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+   }
 
 }
 const getOneVOne=async(req,res)=>{
@@ -141,4 +175,6 @@ const getOneVOne=async(req,res)=>{
   }
 
 export {EventRoute,getEvent,EventRule,
-   getEventRule,OneVOneRoute,getOneVOne,ManyVManyRoute,getManyVMany}
+   getEventRule,OneVOneRoute,getOneVOne,
+   ManyVManyRoute,getManyVMany,getSpecificEvent,
+   AddManyvManyMember}

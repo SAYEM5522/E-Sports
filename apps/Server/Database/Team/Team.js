@@ -13,7 +13,14 @@ const TeamSchema=new mongoose.Schema({
     // type: mongoose.Schema.Types.ObjectId,
     // ref: 'Upload'
     type:String
-  }
+  },
+  Teammember:[
+     {
+      temail:{
+        type:String
+      }
+    }
+  ]
 
 })
 const Team=mongoose.model("TeamSchema",TeamSchema)

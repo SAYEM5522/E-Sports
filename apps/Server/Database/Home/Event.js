@@ -49,24 +49,16 @@ const ManyVManySchema=new mongoose.Schema({
     type:String
   },
  TeamName:[
-    {
-      TeamId:{
-        type:String
-       },
+      {
       TName:{
         type:String
       },
-      Pic:{
-        type:String
-      }
     }
   ],
   Profile:{
     type:String
   },
-  Date:{
-    type:String
-  }
+  Date:{ type: Date, default: Date.now }
 
 })
 const Event=mongoose.model("EventSchema",EventSchema)
