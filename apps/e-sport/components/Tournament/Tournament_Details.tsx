@@ -66,7 +66,6 @@ const Tournament_Details = () => {
       EventId:Cookies.get('_t_id'),
       MainTeam:teamInfo,
       Profile:""
-  
     }
     axios.post(`http://localhost:8081/ManyVManyRoute`,TeamInformation).then((res)=>{
      console.log(res.data)
@@ -78,7 +77,7 @@ const Tournament_Details = () => {
   },[nextPage])
   return (
     <div className='flex items-start mt-3'>
- <div className='bg-[#15141B] h-96 w-[65%] ml-3'>
+    <div className=' h-96 w-[65%] ml-3'>
             <div className='flex items-center justify-between px-5 pt-2'>
          <p className='text-white font-serif text-2xl font-medium'>Sign up closes in  
           <span className='text-white font-serif font-bold text-2xl pl-3'>

@@ -23,22 +23,26 @@ const TeamLayout = ({children}:any) => {
       </div> */}
       <div 
       style={{
-        width: (width-257),
-        height: height-100,
+        width: (width-256),
+        height: height-200,
         position: "relative",
         background: `linear-gradient(to bottom, rgba(34,34,37,0.4),#222225), url('https://epulze.com/public/assets/images/mlbb_header_02.png')`,
         backgroundPosition: "center bottom",
-        backgroundSize: "cover"
+        backgroundSize: "contain",
+        backgroundRepeat:"no-repeat"
       }}
          >
           <div className='absolute top-[50%] pl-8'>
       <TeamSidebar/>
       </div>
-          
-   </div>
-      {
+      <div className='absolute top-[60%] pl-3' >
+   {
         children
       }
+   </div>
+   </div>
+  
+      
     </div>
   )
 }

@@ -7,7 +7,7 @@ const Bracket = () => {
   return (
     <Layout>
     <TournamentLayout>
-      {/* <BracketDetails/> */}
+      <BracketDetails/>
     </TournamentLayout>
     </Layout>
   )
