@@ -1,17 +1,23 @@
 import { Box, Modal } from '@mui/material'
 import axios from 'axios'
-import classNames from 'classnames'
 import Cookies from 'js-cookie'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
 import { MdArrowBackIos } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { selectSelectedTeam, selectTeamInfo } from '../../feature/userSlice'
 import { data } from '../../TournamentInfo'
-import { useWindowSize } from '../Hooks/useWindowSize'
 import ListOfTeam from './ListOfTeam'
 import TeamSelection from './TeamSelection'
+import { motion } from 'framer-motion';
+import TimeCountDown from './TimeCountDown'
+const buttonVariants = {
+  idle: {
+    scale: 1
+  },
+  press: {
+    scale: 1.1
+  }
+};
 const style = {
   position: 'absolute' as 'absolute',
   top: '52%',
@@ -41,7 +47,9 @@ const Tournament_Details = () => {
   const [openJoin,setOpenJoin]=useState<boolean>(false)
   const [eventData,setEventData]=useState([])
   const [nextPage,setNextPage]=useState(false)
+  const [timeInfo,setTimeInfo]=useState(false)
   const [t_id,setT_id]=useState<string>()
+  const [info, setInfo] = useState({});
   const teamInfo=useSelector(selectTeamInfo)
   const getSpecificEvent=async()=>{
      const  d_id=Cookies.get('_t_id')
@@ -60,6 +68,9 @@ const Tournament_Details = () => {
   const openModel=()=>{
     setOpenJoin(true)
   } 
+  const handleDataFromChild =(data:any) => {
+    setTimeInfo(data.message)
+  };
  
   const OpenNextPage=useCallback(async()=>{
     const TeamInformation={
@@ -78,16 +89,30 @@ const Tournament_Details = () => {
   return (
     <div className='flex items-start mt-3'>
     <div className=' h-96 w-[65%] ml-3'>
-            <div className='flex items-center justify-between px-5 pt-2'>
-         <p className='text-white font-serif text-2xl font-medium'>Sign up closes in  
-          <span className='text-white font-serif font-bold text-2xl pl-3'>
-              2h 52m
-          </span>
-         </p>
-         <div onClick={openModel} className='w-44 rounded-md items-center justify-center flex h-9 bg-[#CEFF7F]'>
-          <p className=' font-serif  font-medium cursor-pointer text-lg'>Join</p>
-         </div>
-             </div>
+      {
+        timeInfo?
+        <p className='text-white font-serif text-2xl font-medium'>Tournament joining time has finished</p>:
+
+        <div className='flex items-center justify-between px-5 pt-2'>
+              
+                
+        <div className='flex'>
+        <p className='text-white font-serif text-2xl font-medium'>Sign up closes in </p>
+        
+             <TimeCountDown callback={handleDataFromChild} startTime={data[0].Date}/>
+         
+        
+              </div>
+        <motion.button   variants={buttonVariants}
+      onClick={openModel}
+      animate="idle"
+      whileHover="hover"
+      whileTap="press"
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+      className='w-44 rounded-md items-center justify-center flex h-9 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Join</motion.button>
+          </div>
+      }
+           
              
            {
             eventData&&
@@ -129,8 +154,8 @@ const Tournament_Details = () => {
 
 
   </div>
-     <div className='bg-black h-28 w-[35%] ml-2 mr-2'>
-     <div className='bg-red-400 h-64 w-[100%] '>
+     <div className=' h-28 w-[35%] ml-2 mr-2'>
+     <div className='bg-[#222225] h-64 w-[100%] rounded-md '>
 
      </div>
      <div className='bg-gray-600 h-52 mt-3 w-[100%] '>

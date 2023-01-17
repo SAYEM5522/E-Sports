@@ -9,18 +9,6 @@ const TeamLayout = ({children}:any) => {
  
   return (
     <div className=' w-full h-screen    overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden' >
-      {/* <div 
-      className="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-[url('https://cdn.arstechnica.net/wp-content/uploads/2020/04/valorant-listing-800x450.jpg')]"
-      style={{width:(width-257),height:height-58,position:"relative"}}
-         >
-         <div style={{width:(width-257),height:height-58,}} className="absolute bg-gradient-to-r from-violet-500 to-fuchsia-500">
-          
-          </div> 
-       
-        <div className='absolute top-[50%] pl-8'>
-      <TeamSidebar/>
-      </div>
-      </div> */}
       <div 
       style={{
         width: (width-256),
@@ -35,13 +23,15 @@ const TeamLayout = ({children}:any) => {
           <div className='absolute top-[50%] pl-8'>
       <TeamSidebar/>
       </div>
-      <div className='absolute top-[60%] pl-3' >
-   {
+     <div className='pt-72'>
+      {
         children
       }
-   </div>
+     </div>
+     
    </div>
   
+   
       
     </div>
   )
