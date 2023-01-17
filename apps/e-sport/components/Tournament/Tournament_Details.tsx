@@ -140,6 +140,13 @@ const Tournament_Details = () => {
             <div >
               <TeamSelection/>
             </div>
+            <motion.button  
+         variants={buttonVariants}
+      animate="idle"
+      whileHover="hover"
+      whileTap="press"
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+      className='w-[89%] ml-6 mt-3  rounded-sm items-center justify-center  h-8 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Create Team</motion.button>
             <div className='w-[90%] h-10 bg-black rounded-md ml-auto mr-auto mt-16'>
              <p onClick={OpenNextPage} className='text-white text-center font-serif font-medium text-md pt-2 cursor-pointer '>Next</p>
             </div>

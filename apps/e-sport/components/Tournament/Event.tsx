@@ -12,19 +12,19 @@ interface IEvent{
   type?:string,
   filter?:boolean
 }
-const Event = ({show,type,filter}:IEvent) => {
-  const [eventList,setEventList]=useState([])
-  const getEvent=async()=>{
-  await axios.get("http://localhost:8081/getEvent").then((res)=>{
-      setEventList(res.data)
-   }).catch((err)=>{
-    console.log(err)
+const Event = ({show,type,filter,eventList}:any) => {
+  // const [eventList,setEventList]=useState([])
+  // const getEvent=async()=>{
+  // await axios.get("http://localhost:8081/getEvent").then((res)=>{
+  //     setEventList(res.data)
+  //  }).catch((err)=>{
+  //   console.log(err)
 
-   })
-  }
-  useEffect(()=>{
-    getEvent()
-  },[])
+  //  })
+  // }
+  // useEffect(()=>{
+  //   getEvent()
+  // },[])
   const router=useRouter()
   const GotoDetails=(id:number,mode:string)=>{
     Cookies.set("_m_id",mode,{expires:1})
@@ -42,7 +42,7 @@ const Event = ({show,type,filter}:IEvent) => {
      <div className='flex  flex-wrap '>
 
       {
-        eventList.map((item:any,index)=>{
+        eventList.map((item:any,index:any)=>{
           return(
             // width length should change
             <div key={index} onClick={()=>GotoDetails(item._id,item.Mode)}  className={`${filter?'w-[31.5%]':'w-[100%]'}  h-[22rem] bg-[#15141B] ${filter?'mr-4':'ml-4'} mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>

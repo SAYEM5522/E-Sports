@@ -40,7 +40,7 @@ useEffect(()=>{
 
        {/* <div> */}
        <Banner/>
-       <Event show={true} filter={false} type="Recommended Events"/>
+       {/* <Event show={true} filter={false} type="Recommended Events"/> */}
 
 
      

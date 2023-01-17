@@ -40,7 +40,7 @@ const Team_Info = () => {
       <div className='h-96 w-[65%] ml-3 bg-[#222225] '>
         <RecentMatch/>
       </div>
-      <div className='bg-black h-28 w-[35%] ml-2 mr-2'>
+      <div className='bg-black h-52 w-[35%] ml-2 mr-2 rounded-md'>
        <CreateTeam/>
       </div>
     </div>
