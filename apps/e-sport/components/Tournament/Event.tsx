@@ -28,10 +28,9 @@ const Event = ({show,type,filter}:IEvent) => {
   const router=useRouter()
   const GotoDetails=(id:number,mode:string)=>{
     Cookies.set("_m_id",mode,{expires:1})
-    router.push(`/TournamentDetails?id=${id}`)
+    Cookies.set("_t_id",id as any,{expires:1})
+    router.push(`/TournamentDetails`)
   }
- 
-  
   return (
     <div className=''>
       {

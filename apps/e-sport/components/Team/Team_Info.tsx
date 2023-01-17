@@ -34,11 +34,35 @@ const Team_Info = () => {
     }
   };
   return (
-    <div className='flex '>
-       <form onSubmit={handleUpload}>
-        <input type="file" ref={fileInput}  />
-        <button type="submit">Upload</button>
-    </form>
+    <div className=''>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+      <p>kklkl</p>
+
     </div>
   )
 }

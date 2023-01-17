@@ -42,31 +42,28 @@ const Tournament_Details = () => {
   const [eventData,setEventData]=useState([])
   const [nextPage,setNextPage]=useState(false)
   const [t_id,setT_id]=useState<string>()
-  const router=useRouter()
-  const id=router.query.id
-  const {width,height}=useWindowSize()
   const teamInfo=useSelector(selectTeamInfo)
   const getSpecificEvent=async()=>{
-     await axios.get(`http://localhost:8081/getSpecificEvent/${t_id}`).then((res)=>{
+     const  d_id=Cookies.get('_t_id')
+     await axios.get(`http://localhost:8081/getSpecificEvent/${d_id}`).then((res)=>{
        setEventData(res.data)
      }).catch((err)=>{
-      console.log(err)
+      console.log(err.response.data.message)
      })
   }
   useEffect(()=>{
-    Cookies.set("_t_id",id as any,{expires:1})
-    setT_id(
-    Cookies.get("_t_id")
-    )
+    // setT_id(
+    // Cookies.get("_t_id")
+    // )
   getSpecificEvent()
-  },[t_id])
+  },[])
   const openModel=()=>{
     setOpenJoin(true)
   } 
  
   const OpenNextPage=useCallback(async()=>{
     const TeamInformation={
-      EventId:t_id,
+      EventId:Cookies.get('_t_id'),
       MainTeam:teamInfo,
       Profile:""
   
@@ -124,20 +121,6 @@ const Tournament_Details = () => {
             </div>
             </div>
            }
-            
-
-
-
-           {/* {
-              Array(Number(data[0]?.Mode.split("")[0])).fill('').map((item,index)=>{
-                return(
-                 <div key={index} className=" h-full grid place-items-center pt-6">
-                  <input type={"text"} placeholder="Enter Your Team Name.." className="h-10 w-[60%] pl-1 outline-none rounded-md placeholder:pl-2 "/>
-                 </div>
-                )
-              })
-
-            } */}
          </div>
         </Box>
 
