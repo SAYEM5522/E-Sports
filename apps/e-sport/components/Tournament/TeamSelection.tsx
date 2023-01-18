@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectTeamInfo, setSelectedTeam, setTeamInfo } from '../../feature/userSlice'
 const TeamSelection = () => {
   const [teamOpen,setTeamOpen]=useState(false)
-  const [email,setEmail]=useState<string>()
   const [team,setTeam]=useState([])
   const dispatch=useDispatch()
   const teamInfo=useSelector(selectTeamInfo)
@@ -14,6 +13,7 @@ const TeamSelection = () => {
     setTeamOpen(!teamOpen)
   },[teamOpen])
   const getTeam=async()=>{
+    const email=Cookies.get("email")
     await axios.get(`http://localhost:8081/getEachMemberTeamList/${email}`).then((res)=>{
       setTeam(res.data)
       // console.log(res.data)
@@ -24,11 +24,8 @@ const TeamSelection = () => {
    
   }
   useEffect(()=>{
-    setEmail(Cookies.get("email"))
     getTeam()
-    // ,
-    // ()=>getTeam
-  },[email])
+  },[])
   return (
     <div onClick={Open} className='w-[90%] relative h-11 bg-[#15141B] rounded-md ml-auto mr-auto mt-20 cursor-pointer '>
       <div className='flex items-center justify-between px-5 pt-2'>

@@ -27,7 +27,7 @@ const TeamMaking = () => {
       whileHover="hover"
       whileTap="press"
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className='w-[90%] ml-3 mr-3 mt-5  rounded-md items-center justify-center  h-9 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Create</motion.button>
+      className='w-[90%] ml-3 mr-3 mt-8  rounded-md items-center justify-center  h-9 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Create</motion.button>
 
      
 
