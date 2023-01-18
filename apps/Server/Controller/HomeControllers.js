@@ -40,11 +40,12 @@ const getSpecificEvent=async(req,res)=>{
   let eventlist
   try {
     eventlist=await Event.find({_id:eventId})
-   return res.status(200).send(eventlist)
 
   } catch (error) {
     res.status(500).send({message:"Internal Server error"})
   }
+  return res.status(200).send(eventlist)
+
 }
 const EventRule=async(req,res)=>{
    const id=req.params.id
@@ -173,6 +174,7 @@ const getOneVOne=async(req,res)=>{
   return res.status(200).send(eventrulelist)
   
   }
+ 
 
 export {EventRoute,getEvent,EventRule,
    getEventRule,OneVOneRoute,getOneVOne,

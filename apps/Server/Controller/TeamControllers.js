@@ -69,6 +69,33 @@ const getMemberList=async(req,res)=>{
    return res.status(200).send(teamlist)
    
    }
- 
 
-export {createTeam,AddMember,getMemberList}
+   const getEachMemberTeamList=async(req,res)=>{
+    const email=req.params.email
+    let teamlist
+    try {
+      teamlist=await Team.find({Email:email})
+    } catch (error) {
+      res.status(500).send({message:"Internal Server error"})
+    }
+    if(!teamlist){
+      return res.status(401).send("email dosent match")
+    }
+   return res.status(200).send(teamlist)
+   
+   }
+
+   const getEachTeamInfo=async(req,res)=>{
+    const teamId=req.params.id
+    let teamlinfo
+    try {
+      teamlinfo=await Team.find({_id:teamId})
+    } catch (error) {
+      res.status(500).send({message:"Internal Server error"})
+    }
+    if(!teamlinfo){
+      return res.status(401).send("id dosent match")
+    }
+   return res.status(200).send(teamlinfo)
+   }
+export {createTeam,AddMember,getMemberList,getEachMemberTeamList,getEachTeamInfo}
