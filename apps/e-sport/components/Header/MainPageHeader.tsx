@@ -1,14 +1,18 @@
 import { Avatar } from '@mui/material'
 import Cookies from 'js-cookie'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import MenuList from './MenuList'
 const MainPageHeader = () => {
-     const email=Cookies.get("email")
+    //  const email=Cookies.get("email")
+     const [email,setEmail]=useState<string>()
      const [openProfile,setOpenProfile]=useState(false)
      const OpenMenu=useCallback(()=>{
         setOpenProfile(!openProfile)
      },[openProfile])
+     useEffect(()=>{
+      setEmail(Cookies.get("email"))
+     },[email])
   return (
     <div  className=' flex  items-center justify-between    h-14 bg-[#1C1B22]'>
       <div>
@@ -37,11 +41,11 @@ const MainPageHeader = () => {
     </div>
       <div>
         <div onClick={OpenMenu} className='flex items-center mr-16 relative cursor-pointer'>
-          <Avatar
+          {/* <Avatar
           src='https://epulze.com/static/build/unassigned.png'
           
           className='w-6 h-6 '
-          />
+          /> */}
           <p className='text-white font-serif text-sm ml-3'>{email}</p>
           {
             openProfile?<MenuList/>:null

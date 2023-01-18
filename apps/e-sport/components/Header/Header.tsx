@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectOpenSignup, selectUser, setopenSignup, setUser } from '../../feature/userSlice'
 import axios from 'axios'
 import Cookies from 'js-cookie';
+import { useHydrated } from 'react-hydration-provider'
+import { useSyncExternalStore } from 'react'
 const style = {
   position: 'absolute' as 'absolute',
   top: '52%',
@@ -48,7 +50,7 @@ const SignupSchema=yup.object({
 })
 const Header = () => {
  
-
+  const hydrated = useHydrated();
   const [openGame,setGame]=useState<boolean>(false)
   const [openInfo,setOpenInfo]=useState<boolean>(false)
   const [openLogIn,setOpenLogIn]=useState<boolean>(false)
@@ -137,7 +139,9 @@ const Header = () => {
       }
         await axios.post("http://localhost:8081/login",loginItem).then((res)=>{
           router.push("/MainPage") 
-          Cookies.set('token', res.data.token, { expires: 15 });          
+          Cookies.set('token', res.data.token, { expires: 15 });
+          // Cookies.set('email', res.data.Email, { expires: 15 });          
+
          
           
           // setOpenLogIn(false)

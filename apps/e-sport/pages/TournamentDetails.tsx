@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import React, { memo } from 'react'
 import Layout from '../components/Layout'
