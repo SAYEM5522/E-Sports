@@ -6,11 +6,11 @@ const RecentMatch = () => {
       <table  className="border-collapse w-full bg-[#222225] ">
   <thead>
     <tr className='h-14 '>
-      <th className=" text-white font-serif font-medium text-md ">TEAM NAME</th>
-      <th className="  text-white font-serif font-medium text-md">JOIN AT</th>
-      <th className="  text-white font-serif font-medium text-md">COUNTRY</th>
-      <th className="  text-white font-serif font-medium text-md">COUNTRY</th>
-      <th className="  text-white font-serif font-medium text-md">COUNTRY</th>
+      <th className=" text-white font-serif font-medium text-md ">GAME</th>
+      <th className="  text-white font-serif font-medium text-md">MODE</th>
+      <th className="  text-white font-serif font-medium text-md">FEE</th>
+      <th className="  text-white font-serif font-medium text-md">SERVER REGION</th>
+      <th className="  text-white font-serif font-medium text-md">DATE</th>
 
 
     </tr>

@@ -21,7 +21,6 @@ const CreateTeam = () => {
     const email=Cookies.get("email")
     await axios.get(`http://localhost:8081/getEachMemberTeamList/${email}`).then((res)=>{
       setTeam(res.data)
-      // console.log(res.data)
    }).catch((err)=>{
     console.log(err)
 
@@ -37,9 +36,12 @@ const CreateTeam = () => {
         <div className='h-[50%] '>
         {
             team.map((item:any,index)=>{
+              const GoToTeam=()=>{
+                router.push(`/Team/${item._id}`)
+              }
               
               return(
-                <div key={index} className="pt-1">
+                <div onClick={GoToTeam} key={index} className="pt-1 cursor-pointer">
                   <p  className='font-serif text-white font-medium text-lg pl-5 hover:text-black hover:bg-[#CEFF7F]'>{item.Teamname}</p>
                 </div>
               )

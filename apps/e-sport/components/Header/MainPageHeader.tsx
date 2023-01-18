@@ -1,10 +1,11 @@
 import { Avatar } from '@mui/material'
 import Cookies from 'js-cookie'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import MenuList from './MenuList'
 const MainPageHeader = () => {
-    //  const email=Cookies.get("email")
      const [email,setEmail]=useState<string>()
      const [openProfile,setOpenProfile]=useState(false)
      const OpenMenu=useCallback(()=>{
@@ -19,8 +20,10 @@ const MainPageHeader = () => {
 
       </div>
       <div className='flex items-center justify-center ml-10' >
+    <Link href={"/MainPage"}>
+    <p  className='text-white pl-9 font-serif font-medium cursor-pointer'>Home</p>
 
-      <p  className='text-white pl-9 font-serif font-medium cursor-pointer'>Home</p>
+    </Link>
       <div className='flex items-center cursor-pointer relative' >
           <p className='text-white pl-9 font-serif font-medium'>Games</p>
             <BsChevronDown color='white' className='pl-2 h-6 w-6'/>
@@ -36,17 +39,18 @@ const MainPageHeader = () => {
               openInfo?<InfoBox/>:null
             } */}
           </div>
+          <Link href={"/News"}>
       <p  className='text-white pl-9 font-serif font-medium cursor-pointer'>News</p>
+          </Link>
 
     </div>
       <div>
         <div onClick={OpenMenu} className='flex items-center mr-16 relative cursor-pointer'>
-          {/* <Avatar
-          src='https://epulze.com/static/build/unassigned.png'
-          
-          className='w-6 h-6 '
-          /> */}
-          <p className='text-white font-serif text-sm ml-3'>{email}</p>
+          <div className='flex items-center'>
+          <p className='text-white font-serif text-sm ml-3 mr-1'>{email}</p>
+           <BsChevronDown size={17} color="white"/>
+          </div>
+
           {
             openProfile?<MenuList/>:null
           }
