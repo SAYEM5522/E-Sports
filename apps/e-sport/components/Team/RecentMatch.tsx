@@ -6,11 +6,11 @@ const RecentMatch = () => {
       <table  className="border-collapse w-full bg-[#222225] ">
   <thead>
     <tr className='h-14 '>
-      <th className=" text-white font-serif font-medium text-md ">GAME</th>
-      <th className="  text-white font-serif font-medium text-md">MODE</th>
-      <th className="  text-white font-serif font-medium text-md">FEE</th>
-      <th className="  text-white font-serif font-medium text-md">SERVER REGION</th>
-      <th className="  text-white font-serif font-medium text-md">DATE</th>
+      <th className=" text-white font-serif font-medium text-md italic ">Game</th>
+      <th className="  text-white font-serif font-medium text-md italic">Mode</th>
+      <th className="  text-white font-serif font-medium text-md italic">Fee</th>
+      <th className="  text-white font-serif font-medium text-md italic">Server Region</th>
+      <th className="  text-white font-serif font-medium text-md italic">Date</th>
 
 
     </tr>
@@ -24,8 +24,11 @@ const RecentMatch = () => {
           <p className='pl-3'>item.Teamname</p>
         </div>
       </td>
-      <td className='text-white font-serif font-medium text-lg cursor-pointer  pl-7'>2022-01-01</td>
+      <td className='text-white font-serif font-medium text-lg cursor-pointer  pl-7'>Free to entry</td>
       <td className='text-white font-serif font-medium text-lg cursor-pointer pl-7'>Bangladesh</td>
+      <td className='text-white font-serif font-medium text-lg cursor-pointer pl-7'>Asia</td>
+      <td className='text-white font-serif font-medium text-lg cursor-pointer pl-7'>2022-01-01</td>
+
         </tr>
        
     

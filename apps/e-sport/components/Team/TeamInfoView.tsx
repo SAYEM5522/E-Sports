@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { useWindowSize } from '../Hooks/useWindowSize'
+import RecentMatch from './RecentMatch'
+import TeamMemberList from './TeamMemberList'
 const TeamInfoView = () => {
  const {width,height}= useWindowSize()
  const [info,setInfo]=useState<any>([])
@@ -19,7 +21,7 @@ const TeamInfoView = () => {
   useEffect(()=>{
     getEachTeamInfo(),
     ()=>getEachTeamInfo()
-  },[id])
+  },[])
 
 
   return (
@@ -47,6 +49,15 @@ const TeamInfoView = () => {
           <p className='text-white font-serif text-lg font-bold pl-3' >{info[0]?.Teamname}</p>
           
         </div>
+        
+        <div className='flex items-start flex-row '>
+      <div className='h-96 w-[65%] ml-3 bg-[#222225] '>
+        <RecentMatch/>
+      </div>
+      <div className='bg-[#15141B] h-[300px] w-[35%] ml-2 mr-2 rounded-md'>
+       <TeamMemberList data={info[0]?.Teammember}/>
+      </div>
+    </div>
          </div>
     </div>
   )

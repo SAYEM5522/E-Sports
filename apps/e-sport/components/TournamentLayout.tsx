@@ -13,7 +13,7 @@ const TournamentLayout = ({children}:any) => {
         position: "relative",
         background: `linear-gradient(to bottom, rgba(34,34,37,0.4),#222225), url('https://epulze.com/public/assets/images/mlbb_header_02.png')`,
         backgroundPosition: "center bottom",
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundRepeat:"no-repeat"
       }}
          >

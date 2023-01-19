@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { Formik, Form, Field,ErrorMessage } from 'formik';
-import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
 const validationSchema = Yup.object({
   City: Yup.string().required('City is required'),
   Zipcode: Yup.string().required('Zipcode is required').min(2, 'Zipcode must be at least 5 characters'),
@@ -17,7 +17,7 @@ const ProfileInfo = () => {
   }
  
 
-  const onSubmit = (values:any, { setSubmitting, resetForm }:any) => {
+  const onSubmit = async(values:any, { setSubmitting, resetForm }:any) => {
     const day = Number(values.dob.split("-")[2])
    const month = Number(values.dob.split("-")[1])
    const year =Number(values.dob.split("-")[0])
@@ -32,7 +32,11 @@ const ProfileInfo = () => {
     }
     
    }
-   console.log(updateData)
+  await axios.post("",updateData).then((res)=>{
+     console.log(res.data)
+   }).catch((err)=>{
+    console.log(err)
+   })
    
   }
   
