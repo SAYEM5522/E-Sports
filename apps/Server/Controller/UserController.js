@@ -84,6 +84,32 @@ const verifyToken=async(req,res,next)=>{
   }
 
 }
+
+const updateProfile=async(req,res)=>{
+  const { city, phone, dob, zipcode } = req.body;
+  const email=req.params.email
+  let existingUser
+  // try{
+  //   existingUser=await User.findOne({Email:email})
+  //  }catch(err){
+  //    console.log(err)
+  //  }
+  //  if(!existingUser){
+  //    return res.status(401).send("User Dosen't Exist")
+  //  }
+   try {
+    existingUser= await User.findOneAndUpdate({Email:email},{$set: {city,zipcode, phone, dob: { year:dob.year, month:dob.month,day:dob.day}}}, {new: true})
+   } catch (error) {
+    console.log(error)
+   }
+    if(!existingUser){
+     return res.status(401).send("User Dosen't Exist")
+   }
+   return res.status(201).send(existingUser)
+
+
+
+}
 const getUser=async(req,res,next)=>{
     //  const Userid=req.id
     const id=req.user._id
@@ -99,4 +125,4 @@ const getUser=async(req,res,next)=>{
      return res.status(200).json({user})
 }
 
-export {signup,login,verifyToken,getUser}
+export {signup,login,verifyToken,getUser,updateProfile}

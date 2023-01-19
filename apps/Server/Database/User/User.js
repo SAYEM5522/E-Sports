@@ -15,7 +15,27 @@ const UserSchema=new mongoose.Schema({
   },
   Country:{
     type:String
-  }
+  },
+  city: {
+    type: String,
+},
+zipcode: {
+    type: Number,
+},
+phone: {
+    type: String,
+},
+dob: {
+    year: {
+        type: Number,
+    },
+    month: {
+        type: Number,
+    },
+    day: {
+        type: Number,
+    }
+}
 
 })
 const User=mongoose.model("UserSchema",UserSchema)
