@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 
 const TeamSchema=new mongoose.Schema({
+  // Main Team
   Teamname:{
     type: String,
     // required: true

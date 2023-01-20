@@ -69,7 +69,7 @@ const verifyToken=async(req,res,next)=>{
       // Verify token
       const decoded = jwt.verify(token, secreat_key)
       // Get user from the token
-      req.user = await User.findById(decoded.id).select('-Passward -ConfirmPassward:')
+      req.user = await User.findById(decoded.id).select('-Passward -ConfirmPassward')
       next()
     } catch (error) {
       console.log(error)
@@ -124,5 +124,24 @@ const getUser=async(req,res,next)=>{
      }
      return res.status(200).json({user})
 }
+const getSearchresult=async(req,res)=>{
 
-export {signup,login,verifyToken,getUser,updateProfile}
+const searchTerm = req.query.name;
+  try {
+    const cursor = User.find(
+      {$or:[
+                 { Email:{ $regex: `.*${searchTerm}.*`,$options: 'i' } },
+                 { Username: { $regex: `.*${searchTerm}.*`,$options: 'i' } }
+               ]}
+      ).select('-Passward -ConfirmPassward');
+    const searchResults = await cursor.exec();
+    res.json({ searchResults });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Error searching for items' });
+  }
+ 
+
+}
+
+export {signup,login,verifyToken,getUser,updateProfile,getSearchresult}
