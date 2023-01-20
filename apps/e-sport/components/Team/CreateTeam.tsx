@@ -21,6 +21,7 @@ const CreateTeam = () => {
     const email=Cookies.get("email")
     await axios.get(`http://localhost:8081/getEachMemberTeamList/${email}`).then((res)=>{
       setTeam(res.data)
+      
    }).catch((err)=>{
     console.log(err)
 
@@ -37,7 +38,8 @@ const CreateTeam = () => {
         {
             team.map((item:any,index)=>{
               const GoToTeam=()=>{
-                router.push(`/Team/${item._id}`)
+                router.push(`/Team/${item._id}`),
+                Cookies.set("__tid__",item._id,{expires:1})
               }
               
               return(

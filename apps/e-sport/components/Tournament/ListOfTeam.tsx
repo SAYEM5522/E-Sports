@@ -15,7 +15,6 @@ const ListOfTeam = ({mode}:any) => {
    }).catch((err)=>{
     console.log(err)
    })
-   
   }
   useEffect(()=>{
    getAllMember()

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
@@ -10,8 +11,8 @@ const TeamInfoView = () => {
  const [info,setInfo]=useState<any>([])
 
  const router=useRouter()
- const id=router.query.id
   const getEachTeamInfo=async()=>{
+   const id=Cookies.get("__tid__")
    axios.get(`http://localhost:8081/getEachTeamInfo/${id}`).then((res)=>{
        setInfo(res.data)
    }).catch((err)=>{
@@ -22,8 +23,6 @@ const TeamInfoView = () => {
     getEachTeamInfo(),
     ()=>getEachTeamInfo()
   },[])
-
-
   return (
     <div className=' w-full h-screen    overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden' >
        <div 
@@ -46,7 +45,7 @@ const TeamInfoView = () => {
           className="rounded-[50px] object-cover cursor-pointer"
           />
           </div>
-          <p className='text-white font-serif text-lg font-bold pl-3' >{info[0]?.Teamname}</p>
+          <p className='text-white font-serif text-lg font-bold pl-3' >{info?.Teamname}</p>
           
         </div>
         
@@ -54,8 +53,8 @@ const TeamInfoView = () => {
       <div className='h-96 w-[65%] ml-3 bg-[#222225] '>
         <RecentMatch/>
       </div>
-      <div className='bg-[#15141B] h-[300px] w-[35%] ml-2 mr-2 rounded-md'>
-       <TeamMemberList data={info[0]?.Teammember}/>
+      <div className='bg-[#15141B] h-full mb-2 w-[35%] ml-2 mr-2 rounded-md'>
+       <TeamMemberList data={info?.Info}/>
       </div>
     </div>
          </div>

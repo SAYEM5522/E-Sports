@@ -13,7 +13,7 @@ const buttonVariants = {
 };
 const style = {
   position: 'absolute' as 'absolute',
-  top: '52%',
+  top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 460,
@@ -21,7 +21,7 @@ const style = {
   boxShadow: 24,
   p: 2,
   outline: 0,
-  height:550,
+  height:600,
 };
 const TeamMemberList = ({data}:any) => {
   const [openJoin,setOpenJoin]=useState<boolean>(false)
@@ -32,13 +32,17 @@ const TeamMemberList = ({data}:any) => {
   return (
     <div>
       <p className='font-serif font-bold text-lg text-center border-b border-[rgba(0,0,0,0.4)] text-white py-3'>Team Members</p>
-      <div>
+      <div className='w-full ml-auto mr-auto h-[460px] overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden'>
         {
           data?.map((item:any,index:number)=>{
             return(
-              <div className='pl-7 pt-3 cursor-pointer text-white'>
-                <p>{item.temail}</p>
+              <div key={index} className="flex cursor-pointer  items-center justify-between mx-4 mt-3 px-3 py-2  rounded-md hover:scale-[1.02] hover:ease-in-out hover:duration-300 bg-black w-[90%]">
+              <div className='h-12 '>
+              <p className='text-white' >{item.Username}</p>
+              <p className='text-gray-300 font-serif text-sm'>{item.Email}</p>
               </div>
+          
+            </div>
             )
           })
         }
