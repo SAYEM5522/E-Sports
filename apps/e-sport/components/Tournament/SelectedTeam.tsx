@@ -10,7 +10,8 @@ const SelectedTeam = () => {
   const [teamList,setTeamList]=useState([])
   const {width,height}=useWindowSize()
 const  getTeamList=async()=>{
-  const url=mode==="1v1"?"http://localhost:8081/getOneVOneRoute":"http://localhost:8081/ManyVManyRoute"
+  const eventid=Cookies.get("_t_id")
+  const url="http://localhost:8081/ManyVManyRoute"
   await axios.get(`${url}/${eventid}`).then((res)=>{
     setTeamList(res.data)
  }).catch((err)=>{
@@ -19,10 +20,10 @@ const  getTeamList=async()=>{
  })
   }
   useEffect(()=>{
-    setMode(Cookies.get("_m_id"))
-    setEventId(Cookies.get("_t_id"))
+    // setMode(Cookies.get("_m_id"))
+    // setEventId(Cookies.get("_t_id"))
     getTeamList()
-  },[mode,eventid])
+  },[])
   return (
     <div className='p-3'>
       <table style={{width:width/2}} className="border-collapse bg-[#20395F] ">

@@ -9,6 +9,7 @@ import Event from '../components/Tournament/Event'
 import { selectUser, setUser } from '../feature/userSlice'
 import { HydrationProvider, useHydrated } from 'react-hydration-provider';
 import Cookies from 'js-cookie';
+import Footer from '../components/Footer/Footer'
 // axios.defaults.withCredentials=true
 const MainPage = () => {
   const dispatch=useDispatch()
@@ -38,25 +39,10 @@ async function getId() {
 }
 
 
-function MyComponent() {
-	const hydrated = useHydrated();
-	return hydrated ? <p>Client render</p> : <p>Server render</p>;
-}
+
 
   return (
-    // <Layout>
-    //   {/* 35.55rem  */}
-    //      <div className={` flex-col w-full grid h-screen place-items-center   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
-    //       <Catalog/>
-
-    //    {/* <div> */}
-    //    <Banner/>
-    //    {/* <Event show={true} filter={false} type="Recommended Events"/> */}
-
-
-     
-    //  </div>
-    // </Layout>
+  
 
     <HydrationProvider
      
@@ -70,7 +56,7 @@ function MyComponent() {
         {/* <Event show={true} filter={false} type="Recommended Events"/> */}
 
 
-     
+      <Footer/>
       </div>
         </Layout>
     </HydrationProvider>

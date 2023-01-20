@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../feature/userSlice'
+import Footer from './Footer/Footer'
 import Header from './Header/Header'
 import MainPageHeader from './Header/MainPageHeader'
 import Sidebar from './Sidebar/Sidebar'
@@ -19,8 +20,8 @@ const Layout = ({children}:any) => {
         {
           children
         }
-       
       </div>
+
       </div>
     
     </div>
