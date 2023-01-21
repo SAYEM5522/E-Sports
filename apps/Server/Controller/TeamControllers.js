@@ -2,18 +2,12 @@
 import { gfs } from "../index.js";
 import fs from "gridfs-stream"
 import { Team } from "../Database/Team/Team.js";
+import { User } from "../Database/User/User.js";
 const createTeam = async (req, res) => {
   try {
       const { Teamname, Email,Profile } = req.body;
       const file = req.file;
-      // console.log(req.body.Profile)
-      // let writeStream = gfs.createWriteStream({
-      //     filename: file.originalname,
-      //     mode: 'w',
-      //     content_type: file.mimetype,
-      // });
-      // fs.createReadStream(file.path).pipe(writeStream);
-      // writeStream.on('close', async (file) => {
+
           const item = new Team({
               Teamname: Teamname,
               Email: Email,
@@ -88,14 +82,27 @@ const getMemberList=async(req,res)=>{
    const getEachTeamInfo=async(req,res)=>{
     const teamId=req.params.id
     let teamlinfo
+    let Info
     try {
       teamlinfo=await Team.find({_id:teamId})
     } catch (error) {
       res.status(500).send({message:"Internal Server error"})
     }
+    try {
+     Info= await User.find({Email:teamlinfo[0].Teammember.map((item)=>item.temail)}).select("-Passward -ConfirmPassward -Country")
+    } catch (error) {
+      console.log(error)
+    }
     if(!teamlinfo){
       return res.status(401).send("id dosent match")
     }
-   return res.status(200).send(teamlinfo)
+    const TeamObject={
+      Teamname:teamlinfo[0].Teamname,
+      Profile:teamlinfo[0].Profile,
+      Info,
+      Email:teamlinfo[0].Email,
+      _id:teamlinfo[0]._id
+    }
+   return res.status(200).send(TeamObject)
    }
-export {createTeam,AddMember,getMemberList,getEachMemberTeamList,getEachTeamInfo}
+export {AddMember,getMemberList,getEachMemberTeamList,getEachTeamInfo}

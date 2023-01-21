@@ -4,15 +4,15 @@ const TeamSchema=new mongoose.Schema({
   // Main Team
   Teamname:{
     type: String,
-    // required: true
   },
   Email:{
     type: String,
-    // required: true
   },
   Profile:{
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: 'Upload'
+
+    type:String
+  },
+  Cover:{
     type:String
   },
   Teammember:[

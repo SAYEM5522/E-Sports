@@ -4,6 +4,7 @@ import bodyParser from "body-parser"
 import { router } from "./Route/auth.js"
 import { Homerouter } from "./Route/Home.js"
 import { Teamrouter } from "./Route/Team.js"
+import {InfoRouter} from "./Route/Info.js"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 import Grid   from "gridfs-stream" 
@@ -18,6 +19,8 @@ app.use(bodyParser.json())
 app.use("/",router)
 app.use("/",Homerouter)
 app.use("/",Teamrouter)
+app.use("/",InfoRouter)
+
 
 
 // app.use(cookieParser())
