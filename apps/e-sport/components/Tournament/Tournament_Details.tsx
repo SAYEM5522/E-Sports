@@ -14,6 +14,7 @@ import moment from 'moment';
 
 import { useRouter } from 'next/router'
 import Tournament_Price from './Tournament_Price'
+import Footer from '../Footer/Footer'
 const buttonVariants = {
   idle: {
     scale: 1
@@ -89,6 +90,7 @@ const Tournament_Details = () => {
     setNextPage(true)
   },[nextPage])
   return (
+    <>
     <div className='flex items-start mt-3'>
     <div className=' h-96 w-[65%] ml-3'>
       {
@@ -197,7 +199,10 @@ const Tournament_Details = () => {
 
      </div>
      </div>
+     
     </div>
+    <Footer/>
+    </>
   )
 }
 

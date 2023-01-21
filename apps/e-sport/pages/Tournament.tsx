@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Footer from '../components/Footer/Footer'
 import Layout from '../components/Layout'
 import TournamentList from '../components/Tournament/TournamentList'
 const Tournament = () => {
@@ -19,6 +20,7 @@ const Tournament = () => {
   return (
     <Layout>
       <TournamentList eventList={eventList} />
+      
     </Layout>
   )
 }

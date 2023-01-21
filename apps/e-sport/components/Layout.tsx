@@ -16,13 +16,15 @@ const Layout = ({children}:any) => {
         <Sidebar/>
 
         </div>
-      <div className='flex   bg-[#222225] flex-[0.825]   ' >
+      <div className='   bg-[#222225] flex-[0.825]   ' >
         {
           children
         }
       </div>
+      
 
       </div>
+      
     
     </div>
   )

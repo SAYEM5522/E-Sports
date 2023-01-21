@@ -4,6 +4,7 @@ import {BsFillTrophyFill} from "react-icons/bs"
 import {BsFilterLeft} from "react-icons/bs"
 import { GameList } from '../Sidebar/Sidebar'
 import { useWindowSize } from '../Hooks/useWindowSize'
+import Footer from '../Footer/Footer'
 const Mode=[
   {
     id:1,
