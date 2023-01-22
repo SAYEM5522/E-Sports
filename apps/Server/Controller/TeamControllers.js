@@ -1,27 +1,7 @@
-// import { gfs } from "..";
-import { gfs } from "../index.js";
-import fs from "gridfs-stream"
+
 import { Team } from "../Database/Team/Team.js";
 import { User } from "../Database/User/User.js";
-const createTeam = async (req, res) => {
-  try {
-      const { Teamname, Email,Profile } = req.body;
-      const file = req.file;
 
-          const item = new Team({
-              Teamname: Teamname,
-              Email: Email,
-              Profile: Profile
-          });
-          await item.save();
-          return res.status(200).json({data:item, message: 'Item created successfully' });
-      // });
-  } 
-  catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: 'Internal Server Error' });
-  }
-};
 const AddMember=async(req,res)=>{
   const teamid=req.params.id
   const array=[]

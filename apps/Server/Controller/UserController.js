@@ -143,5 +143,46 @@ const searchTerm = req.query.name;
  
 
 }
+const changePassword=async(req,res)=>{
+  try {
+    const {  oldPassword, newPassword, repeatNewPassword } = req.body;
+    const email=req.params.email
+    // check if new password and repeat new password match
+    if (newPassword !== repeatNewPassword) {
+      return res.status(400).json({ error: 'Passwords do not match' });
+    }
 
-export {signup,login,verifyToken,getUser,updateProfile,getSearchresult}
+    // find the user by email
+    const user = await User.findOne({ Email:email });
+
+    // check if user exists
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // check if old password is correct
+    const isMatch = await bcrypt.compare(oldPassword, user.Passward);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Old password is incorrect' });
+    }
+
+    // hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // update the user's password
+    user.Passward = hashedPassword;
+    user.ConfirmPassward=hashedPassword;
+    await user.save();
+
+    // return success message
+    res.json({ message: 'Password changed successfully' });
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+}
+
+export {signup,login,verifyToken,getUser,
+  updateProfile,getSearchresult,changePassword}

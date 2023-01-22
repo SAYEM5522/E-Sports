@@ -7,7 +7,7 @@ import { Teamrouter } from "./Route/Team.js"
 import {InfoRouter} from "./Route/Info.js"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
-import Grid   from "gridfs-stream" 
+
 
 const PORT=process.env.PORT||8081
 
@@ -30,17 +30,14 @@ mongoose.connect(Connection_Url,{
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-const db = mongoose.connection;
-let gfs;
+
 mongoose.connection.once('open',()=>{
   console.log("Connected Successfully")
-  gfs = Grid(db.db, mongoose.mongo);
-  gfs.collection('uploads');
-  // console.log(gfs)
+
 })
 
 
 app.listen(PORT,()=>{
   console.log(`Server Started At PORT ${PORT}`)
 })
-export {gfs}
+
