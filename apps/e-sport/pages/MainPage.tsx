@@ -30,9 +30,10 @@ async function getId() {
       headers: { 'Authorization': `Bearer ${token}` },
     });
     Cookies.set("email",res.data.user.Email)
-    dispatch(setUser({
-      user:res.data.user.Email
-    }))
+    Cookies.set("__p_id__",res.data.user.Email,{expires:1})
+    // dispatch(setUser({
+    //   user:res.data.user.Email
+    // }))
   } catch (error) {
     console.log(error);
   }

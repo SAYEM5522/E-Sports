@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useRouter } from 'next/router'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import CreateTeam from './CreateTeam';
 import RecentMatch from './RecentMatch';
 
 const Team_Info = () => {
- 
+   
   return (
     <div className='flex items-start flex-row '>
       <div className='h-96 w-[65%] ml-3 bg-[#222225] '>

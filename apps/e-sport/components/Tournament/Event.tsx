@@ -6,6 +6,7 @@ import {IoLocationOutline} from "react-icons/io5"
 import {CiCalendarDate} from "react-icons/ci"
 import moment from 'moment';
 import Cookies from 'js-cookie'
+import { useWindowSize } from '../Hooks/useWindowSize'
 interface IEvent{
   show:boolean,
   type?:string,
@@ -25,6 +26,7 @@ const Event = ({show,type,filter,eventList}:any) => {
   //   getEvent()
   // },[])
   const router=useRouter()
+  const {width,height}=useWindowSize()
   const GotoDetails=(id:number,mode:string)=>{
     Cookies.set("_m_id",mode,{expires:1})
     Cookies.set("_t_id",id as any,{expires:1})
@@ -45,7 +47,7 @@ const Event = ({show,type,filter,eventList}:any) => {
           const formattedDate = moment(item.Date).format("DD MMM YY h:mma");
           return(
             // width length should change
-            <div key={index} onClick={()=>GotoDetails(item._id,item.Mode)}  className={`${filter?'w-[31.5%]':'w-[100%]'}  h-[22rem] bg-[#15141B] ${filter?'mr-4':'ml-4'} mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
+            <div key={index} onClick={()=>GotoDetails(item._id,item.Mode)}  className={`w-[40%] h-[22rem] bg-[#15141B] ml-5 mt-3 mb-4 relative hover:shadow-[5px_5px_10px_rgb(129,226,252)] cursor-pointer rounded-lg   `}>
               <div className='w-full h-[210px] relative'>
               <Image
               src={item.Banner}

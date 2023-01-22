@@ -11,7 +11,6 @@ const TeamInfoView = () => {
  const {width,height}= useWindowSize()
  const [info,setInfo]=useState<any>([])
 
- const router=useRouter()
   const getEachTeamInfo=async()=>{
    const id=Cookies.get("__tid__")
    axios.get(`http://localhost:8081/getEachTeamInfo/${id}`).then((res)=>{

@@ -42,6 +42,20 @@ const Timing=[
   },
 
 ]
+const Reigon=[
+  {
+    id:1,
+    name:"Asia",
+  },
+  {
+    id:2,
+    name:"Europe",
+  },{
+    id:3,
+    name:"America",
+  },
+
+]
 const TournamentList = ({eventList}:any) => {
   const {width,height}=useWindowSize()
   const [selectedFilters, setSelectedFilters] = useState<any>({
@@ -87,13 +101,13 @@ const TournamentList = ({eventList}:any) => {
   };
 
   return (
-    <div className={`flex flex-col ml-3 h-[35.55rem] w-full  overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
+    <div className={`flex flex-col ml-3 h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
      <div className='flex items-center pl-1 pt-6'>
       <BsFillTrophyFill color='white' size={40}/>
       <p className='text-white font-serif font-medium text-3xl ml-4 cursor-pointer'>Tournaments</p>
      </div>
     <div className='mt-4 flex items-start  w-full'>
-      <div style={{height:height-30}} className='w-52  mt-2 bg-[#101820FF] relative rounded-md cursor-pointer '>
+      <div  className='w-52  mt-2 bg-[#101820FF] h-fit relative rounded-md cursor-pointer '>
       <BsFilterLeft color='white' size={30} className="cursor-pointer absolute"/>
         <div  className='mb-1 ml-2'>
           <p className='text-white font-serif font-bold text-xl p-3' >Games</p>
@@ -136,7 +150,22 @@ const TournamentList = ({eventList}:any) => {
             })
           }
         </div>
+        <div className='w-full h-[1px] bg-white'/>
+        <div className='mb-1 ml-2'>
+          <p className='text-white font-serif font-bold text-xl p-3' >Reigon</p>
+          {
+            Reigon.map((item,index)=>{
+              return(
+                <div key={index} className="flex items-center pb-1">
+                  <input value={item.name} onChange={handleCheckboxChange}  name="mode" type={"checkbox"} className=" w-6 h-6 rounded-lg cursor-pointer"/>
+                  <p className='text-white font-serif font-medium ml-2 text-lg italic'>{item.name}</p>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
+      
       <div className='w-full ml-3'>
       <Event show={false} filter={true} eventList={filteredItems} />
 

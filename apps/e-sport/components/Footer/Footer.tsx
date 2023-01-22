@@ -8,7 +8,7 @@ import { useWindowSize } from '../Hooks/useWindowSize'
 const Footer = () => {
   const {width,height}=useWindowSize()
   return (
-    <div  className="bg-[#1C1B22] w-full text-white py-8">
+    <div  className="bg-[#1C1B22] w-full text-white py-8 mt-5">
     <div className="p-6 container w-full mx-auto flex-col flex-wrap">
       <div className="w-full md:w-1/4 text-center md:text-left">
         <div>

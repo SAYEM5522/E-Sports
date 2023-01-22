@@ -3,15 +3,13 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useCallback, useEffect, useState } from 'react'
 import { MdArrowBackIos } from 'react-icons/md'
-import { useSelector } from 'react-redux'
-import { selectSelectedTeam, selectTeamInfo } from '../../feature/userSlice'
-import { data } from '../../TournamentInfo'
+import { useDispatch, useSelector } from 'react-redux'
+import {  selectTeamInfo, selectTournamentModel, setLayoutBanner, setTournamentModel } from '../../feature/userSlice'
 import ListOfTeam from './ListOfTeam'
 import TeamSelection from './TeamSelection'
 import { motion } from 'framer-motion';
 import TimeCountDown from './TimeCountDown'
 import moment from 'moment';
-
 import { useRouter } from 'next/router'
 import Tournament_Price from './Tournament_Price'
 import Footer from '../Footer/Footer'
@@ -25,7 +23,7 @@ const buttonVariants = {
 };
 const style = {
   position: 'absolute' as 'absolute',
-  top: '52%',
+  top: '48%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 460,
@@ -33,7 +31,7 @@ const style = {
   boxShadow: 24,
   p: 2,
   outline: 0,
-  height:550,
+  height:590,
 };
 interface EProps{
   
@@ -49,25 +47,49 @@ interface EProps{
 
 }
 const Tournament_Details = () => {
-  const [openJoin,setOpenJoin]=useState<boolean>(false)
   const [eventData,setEventData]=useState<any>([])
   const [nextPage,setNextPage]=useState(false)
   const [timeInfo,setTimeInfo]=useState(false)
   const teamInfo=useSelector(selectTeamInfo)
+  const TournaMentModelOpen=useSelector(selectTournamentModel)
+  const [check,setCheck]=useState<any>(0)
+  const [teamList,setTeamList]=useState<any>([])
+  const dispatch=useDispatch()
   const router=useRouter()
   const getSpecificEvent=async()=>{
      const  d_id=Cookies.get('_t_id')
      await axios.get(`http://localhost:8081/getSpecificEvent/${d_id}`).then((res)=>{
        setEventData(res.data)
+       dispatch(setLayoutBanner({
+        layoutBanner:res.data[0]?.Banner
+       }))
      }).catch((err)=>{
       console.log(err.response.data.message)
      })
+
+     const eventid=Cookies.get("_t_id")
+     const t=Cookies.get("__s__id__")
+     await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
+      setCheck(res.data.filter((item:any)=>item._id===t)[0]?._id)
+    }).catch((err)=>{
+       console.log(err)
+   
+    })
+
+    
   }
   useEffect(()=>{
-  getSpecificEvent()
-  },[])
+  getSpecificEvent(),
+  ()=>getSpecificEvent()
+  
+  // const d=teamList.filter((item:any)=>item._id===t)
+  // setCheck(d[0]?._id )
+  // console.log(d)
+  },[check])
   const openModel=()=>{
-    setOpenJoin(true)
+    dispatch(setTournamentModel({
+      TournamentModel:true
+    }))
   } 
   const handleDataFromChild =(data:any) => {
     setTimeInfo(data.message)
@@ -75,20 +97,19 @@ const Tournament_Details = () => {
   const MakeTeam=()=>{
     router.push("/Create_Team")
    }
+ 
   const OpenNextPage=useCallback(async()=>{
-    const TeamInformation={
-      EventId:Cookies.get('_t_id'),
-      MainTeam:teamInfo,
-      Profile:""
+
+    // axios.post(`http://localhost:8081/ManyVManyRoute`,TeamInformation).then((res)=>{
+    //  console.log(res.data)
+    // }).catch((err)=>{
+    // console.log(err)
+    // })
+    if(teamInfo){
+      setNextPage(true)
+
     }
-    axios.post(`http://localhost:8081/ManyVManyRoute`,TeamInformation).then((res)=>{
-     console.log(res.data)
-    }).catch((err)=>{
-    console.log(err)
-    })
-    
-    setNextPage(true)
-  },[nextPage])
+  },[nextPage,teamInfo])
   return (
     <>
     <div className='flex items-start mt-3'>
@@ -107,22 +128,27 @@ const Tournament_Details = () => {
          
         
               </div>
-        <motion.button   variants={buttonVariants}
+              {
+                check?<p className='text-white font-serif text-sm w-28'>You have joined the tournament for more details </p>:
+
+                <motion.button   variants={buttonVariants}
       onClick={openModel}
       animate="idle"
       whileHover="hover"
       whileTap="press"
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className='w-44 rounded-md items-center justify-center flex h-9 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Join</motion.button>
+              }
+        
           </div>
-      }
-           
-             
+      }   
            {
             eventData&&
      <Modal
-        open={openJoin}
-        onClose={()=>setOpenJoin(false)}
+        open={TournaMentModelOpen}
+        onClose={()=>  dispatch(setTournamentModel({
+          TournamentModel:false
+        }))}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
      >
@@ -134,7 +160,7 @@ const Tournament_Details = () => {
             nextPage?
             <div className='relative '>
             <MdArrowBackIos onClick={()=>setNextPage(false)} color='white' size={30} className='absolute left-2 top-6 cursor-pointer'/>
-            <ListOfTeam mode={Number(data[0]?.Mode.split("")[0])} />
+            <ListOfTeam mode={Number(eventData[0]?.Mode.split("")[0])} />
           </div>
             :
             <div>
@@ -187,7 +213,7 @@ const Tournament_Details = () => {
   </div>
   <div>
     <p className='font-serif font-medium text-2xl  text-white py-3'>Tournament info</p>
-    <p className='text-white font-serif'>{eventData[0]?.Tournament_Info}</p>
+    <p className='text-white font-serif text-md'>{eventData[0]?.Tournament_Info}</p>
   </div>
 
   </div>

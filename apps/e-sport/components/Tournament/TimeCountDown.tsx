@@ -12,7 +12,7 @@ const TimeCountDown = ({startTime,callback}:any) => {
       const timeRemaining = moment.duration(moment(start).diff(moment()));
       setRemainingTime(timeRemaining)
       if (timeRemaining?.asSeconds() <= 0) {
-        callback({ message:true });
+        callback({ message:false });
         clearInterval(interval);
       }
     }, 1000);

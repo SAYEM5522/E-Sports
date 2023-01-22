@@ -27,12 +27,10 @@ const CreateTeam = () => {
     console.log(err)
 
    })
-   
   }
   useEffect(()=>{
     getTeam()
   },[])
-  console.log(team)
   return (
     <div className='w-full h-full'>
         <p className='text-white font-serif font-medium text-lg text-center p-3  '>Create Team</p>
@@ -48,7 +46,7 @@ const CreateTeam = () => {
                 <div onClick={GoToTeam} key={index} className="mt-2 pt-1 cursor-pointer flex items-center  hover:text-black hover:bg-[#CEFF7F]">
                   <div className='w-[30px] h-[30px] relative ml-3'>
                   <Image 
-                  src={`/../apps/Server/upload/2023-01-21T10-19-40.855Zty.PNG`}
+                  src={`/${item.Profile}`}
                   className="object-cover rounded-lg"
                   fill
                   alt=""

@@ -5,14 +5,11 @@ import React, { useEffect, useState } from 'react'
 import { useWindowSize } from '../Hooks/useWindowSize'
 
 const SelectedTeam = () => {
-  const [mode,setMode]=useState<string>()
-  const [eventid,setEventId]=useState<string>()
   const [teamList,setTeamList]=useState([])
   const {width,height}=useWindowSize()
 const  getTeamList=async()=>{
   const eventid=Cookies.get("_t_id")
-  const url="http://localhost:8081/ManyVManyRoute"
-  await axios.get(`${url}/${eventid}`).then((res)=>{
+  await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
     setTeamList(res.data)
  }).catch((err)=>{
     console.log(err)
@@ -49,7 +46,7 @@ const  getTeamList=async()=>{
           height={40}
           className="rounded-xl"
           />
-          <p className='pl-3'>{item.Teamname}</p>
+          <p className='pl-3'>{item?.MainTeam}</p>
         </div>
       </td>
       <td className='text-white font-serif font-medium text-lg cursor-pointer  pl-7'>2022-01-01</td>
