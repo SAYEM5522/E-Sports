@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
 import { Box, Modal } from '@mui/material';
 import AddTeamMember from './AddTeamMember';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMemberListmodel, selectMemberModelCheck, setMemberListmodel } from '../../feature/userSlice';
 
 const buttonVariants = {
   idle: {
@@ -24,10 +26,22 @@ const style = {
   height:600,
 };
 const TeamMemberList = ({data}:any) => {
-  const [openJoin,setOpenJoin]=useState<boolean>(false)
+  const dispatch=useDispatch()
   const AddMember=()=>{
-    setOpenJoin(true)
+    dispatch(
+      setMemberListmodel(
+        {
+          MemberListmodel:true
+        }
+      )
+    )
   }
+  const memberModel=useSelector(selectMemberListmodel)
+  const memberCheck=useSelector(selectMemberModelCheck)
+  useEffect(()=>{
+
+  },[memberCheck])
+
 
   return (
     <div>
@@ -56,8 +70,9 @@ const TeamMemberList = ({data}:any) => {
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className='w-[90%] ml-5 mt-5  rounded-sm items-center justify-center  h-8 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Add Team Member</motion.button>
        <Modal
-        open={openJoin}
-        onClose={()=>setOpenJoin(false)}
+        open={memberModel}
+        onClose={()=>dispatch(
+          setMemberListmodel({MemberListmodel:false}))}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
      >

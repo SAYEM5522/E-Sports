@@ -88,7 +88,7 @@ const SelectedTeam = () => {
         {
         teaminfo.map((item:any,index:any)=>{
          return(
-          <div key={index} className="h-9 w-[90%] bg-red-200 rounded-sm">
+          <div key={index} className="h-9 w-[90%] bg-red-200 mt-3 rounded-sm">
             <p>{item.TName}</p>
           </div>
          )

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectSelectedTeam, selectTeamInfo, selectTournamentModel, setTournamentModel } from '../../feature/userSlice'
+import { selectSelectedTeam, selectTeamInfo, selectTournamentModel, setTournamentModeCheck, setTournamentModel } from '../../feature/userSlice'
 import {ImCross} from "react-icons/im"
 import {RiCheckboxBlankCircleLine} from "react-icons/ri"
 import Cookies from 'js-cookie'
@@ -63,6 +63,9 @@ import { useRouter } from 'next/router'
      Cookies.set("__s__id__",res.data.ManyTeam._id as any,{expires:12})
      dispatch(setTournamentModel({
       TournamentModel:false
+    }))
+    dispatch(setTournamentModeCheck({
+      TournamentModeCheck:true
     }))
      
    }).catch((err)=>{

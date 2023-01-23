@@ -38,7 +38,7 @@ const CreateTeam = () => {
         {
             team.map((item:any,index)=>{
               const GoToTeam=()=>{
-                router.push(`/Team/${item._id}`),
+                router.push(`/Team/TeamInfo`),
                 Cookies.set("__tid__",item._id,{expires:1})
               }
               

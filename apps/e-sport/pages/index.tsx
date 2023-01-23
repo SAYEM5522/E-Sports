@@ -1,12 +1,7 @@
 import axios from 'axios'
 import type { NextPage } from 'next'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../feature/userSlice'
-import LandingPage from './LandingPage'
-import MainPage from './MainPage'
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react'
-import { useWindowSize } from '../components/Hooks/useWindowSize'
 import Layout from '../components/Layout'
 import Catalog from '../components/Home/Catalog'
 import Banner from '../components/Home/Banner'

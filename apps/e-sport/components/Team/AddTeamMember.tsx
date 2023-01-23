@@ -2,12 +2,17 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
 import { ImCross } from 'react-icons/im';
-import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
+import { setMemberListmodel, setMemberModelCheck } from '../../feature/userSlice';
+
+
 
 const AddTeamMember = () => {
   const [user, setUser] = useState<any>([]);
   const [name, setName] = useState('');
   const [selectedItems, setSelectedItems] = useState<any>([]);
+  const dispatch=useDispatch()
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +43,12 @@ const AddTeamMember = () => {
   const AddMemberToTeam=async()=>{
    const id=Cookies.get("__tid__")
       axios.post(`http://localhost:8081/Addmember/${id}`,data).then((res)=>{
-     console.log(res.data)
+      // console.log(res.data)
+      dispatch(
+        setMemberListmodel({MemberListmodel:false}))
+        dispatch(
+          setMemberModelCheck({MemberModelCheck:true}))
+      
       }).catch((err)=>{
      console.log(err)
       })

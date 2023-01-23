@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import React, { useCallback, useEffect, useState } from 'react'
 import { MdArrowBackIos } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import {  selectTeamInfo, selectTournamentModel, setLayoutBanner, setTournamentModel } from '../../feature/userSlice'
+import {  selectTeamInfo, selectTournamentModeCheck, selectTournamentModel, setLayoutBanner, setTournamentModel } from '../../feature/userSlice'
 import ListOfTeam from './ListOfTeam'
 import TeamSelection from './TeamSelection'
 import { motion } from 'framer-motion';
@@ -52,8 +52,8 @@ const Tournament_Details = () => {
   const [timeInfo,setTimeInfo]=useState(false)
   const teamInfo=useSelector(selectTeamInfo)
   const TournaMentModelOpen=useSelector(selectTournamentModel)
-  const [check,setCheck]=useState<any>(0)
-  const [teamList,setTeamList]=useState<any>([])
+  const TournamentModeCheck=useSelector(selectTournamentModeCheck)
+  const [check,setCheck]=useState<any>(false)
   const dispatch=useDispatch()
   const router=useRouter()
   const getSpecificEvent=async()=>{
@@ -68,9 +68,12 @@ const Tournament_Details = () => {
      })
 
      const eventid=Cookies.get("_t_id")
-     const t=Cookies.get("__s__id__")
+     const em=Cookies.get("email")
      await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
-      setCheck(res.data.filter((item:any)=>item._id===t)[0]?._id)
+     const  team = res.data.filter((t:any) => t.TeamName.some((member:any) => member.TName === em))
+     if(team.length>0){
+      setCheck(true)
+     }
     }).catch((err)=>{
        console.log(err)
    
@@ -81,11 +84,7 @@ const Tournament_Details = () => {
   useEffect(()=>{
   getSpecificEvent(),
   ()=>getSpecificEvent()
-  
-  // const d=teamList.filter((item:any)=>item._id===t)
-  // setCheck(d[0]?._id )
-  // console.log(d)
-  },[check])
+  },[check,TournamentModeCheck])
   const openModel=()=>{
     dispatch(setTournamentModel({
       TournamentModel:true
@@ -99,12 +98,6 @@ const Tournament_Details = () => {
    }
  
   const OpenNextPage=useCallback(async()=>{
-
-    // axios.post(`http://localhost:8081/ManyVManyRoute`,TeamInformation).then((res)=>{
-    //  console.log(res.data)
-    // }).catch((err)=>{
-    // console.log(err)
-    // })
     if(teamInfo){
       setNextPage(true)
 
@@ -129,7 +122,8 @@ const Tournament_Details = () => {
         
               </div>
               {
-                check?<p className='text-white font-serif text-sm w-28'>You have joined the tournament for more details </p>:
+                check?<p className='text-white font-serif text-sm w-28'>You have joined on the tournament for more details
+                <span className='underline font-serif italic text-white font-medium cursor-pointer'> Click</span> </p>:
 
                 <motion.button   variants={buttonVariants}
       onClick={openModel}

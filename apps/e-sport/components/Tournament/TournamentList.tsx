@@ -61,6 +61,7 @@ const TournamentList = ({eventList}:any) => {
   const [selectedFilters, setSelectedFilters] = useState<any>({
     category: [],
     mode: [],
+    region:[]
     // timing: []
   });
   const [filteredItems, setFilteredItems] = useState<any>([]);
@@ -78,6 +79,9 @@ const TournamentList = ({eventList}:any) => {
         // if (selectedFilters.timing.length) {
         //   isValid = isValid && selectedFilters.timing.includes(item.timing);
         // }
+         if (selectedFilters.region.length) {
+          isValid = isValid && selectedFilters.region.includes(item.Server);
+        }
         return isValid;
       })
     );
@@ -145,7 +149,7 @@ const TournamentList = ({eventList}:any) => {
             Timing.map((item,index)=>{
               return(
                 <div key={index} className="flex items-center pb-1">
-                  <input value={item.time} onChange={handleCheckboxChange}  name="mode" type={"checkbox"} className=" w-6 h-6 rounded-lg cursor-pointer"/>
+                  <input value={item.time} onChange={handleCheckboxChange}  name="timing" type={"checkbox"} className=" w-6 h-6 rounded-lg cursor-pointer"/>
                   <p className='text-white font-serif font-medium ml-2 text-lg italic'>{item.time}</p>
                 </div>
               )
@@ -159,7 +163,7 @@ const TournamentList = ({eventList}:any) => {
             Reigon.map((item,index)=>{
               return(
                 <div key={index} className="flex items-center pb-1">
-                  <input value={item.name} onChange={handleCheckboxChange}  name="mode" type={"checkbox"} className=" w-6 h-6 rounded-lg cursor-pointer"/>
+                  <input value={item.name} onChange={handleCheckboxChange}  name="region" type={"checkbox"} className=" w-6 h-6 rounded-lg cursor-pointer"/>
                   <p className='text-white font-serif font-medium ml-2 text-lg italic'>{item.name}</p>
                 </div>
               )

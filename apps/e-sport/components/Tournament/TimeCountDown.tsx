@@ -2,7 +2,7 @@ import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react'
 
 const TimeCountDown = ({startTime,callback}:any) => {
-  const start='2023-01-18T12:19:00.000Z'
+  const start='2023-01-24T12:19:00.000Z'
   
   const [remainingTime, setRemainingTime] = useState<any>();
 

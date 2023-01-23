@@ -6,7 +6,12 @@ const initialState = {
    selectedTeam:null,
    teamInfo:null,
    layoutBanner:null,
-   TournamentModel:false
+   TournamentModel:false,
+   TournamentModeCheck:false,
+   MemberListmodel:false,
+   MemberModelCheck:false,
+
+
 }
 
 const userSlice = createSlice({
@@ -31,6 +36,15 @@ const userSlice = createSlice({
     setTournamentModel:(state,action)=>{
       state.TournamentModel=action.payload.TournamentModel
     },
+    setTournamentModeCheck:(state,action)=>{
+      state.TournamentModeCheck=action.payload.TournamentModeCheck
+    },
+    setMemberListmodel:(state,action)=>{
+      state.MemberListmodel=action.payload.MemberListmodel
+    },
+    setMemberModelCheck:(state,action)=>{
+      state.MemberModelCheck=action.payload.MemberModelCheck
+    },
   }
 });
 
@@ -40,7 +54,10 @@ export const {
   setSelectedTeam,
   setTeamInfo,
   setLayoutBanner,
-  setTournamentModel
+  setTournamentModel,
+  setTournamentModeCheck,
+  setMemberListmodel,
+  setMemberModelCheck
 } = userSlice.actions
 
 export default userSlice.reducer
@@ -50,6 +67,12 @@ export const selectSelectedTeam=(state:any)=>state.user.selectedTeam
 export const selectTeamInfo=(state:any)=>state.user.teamInfo
 export const selectLayoutBanner=(state:any)=>state.user.layoutBanner
 export const selectTournamentModel=(state:any)=>state.user.TournamentModel
+export const selectTournamentModeCheck=(state:any)=>state.user.TournamentModeCheck
+export const selectMemberListmodel=(state:any)=>state.user.MemberListmodel
+export const selectMemberModelCheck=(state:any)=>state.user.MemberModelCheck
+
+
+
 
 
 
