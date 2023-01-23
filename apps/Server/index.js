@@ -6,7 +6,6 @@ import { Homerouter } from "./Route/Home.js"
 import { Teamrouter } from "./Route/Team.js"
 import {InfoRouter} from "./Route/Info.js"
 import mongoose from "mongoose"
-import cookieParser from "cookie-parser";
 
 
 const PORT=process.env.PORT||8081

@@ -98,15 +98,15 @@ const OneVOneRoute=async(req,res)=>{
 
 }
 const ManyVManyRoute=async(req,res)=>{
-  //  const array=[]
-  // req.body.TeamName.map((item)=>{
-  //     array.push(item)
+   const array=[]
+  req.body.TeamName.map((item)=>{
+      array.push(item)
       
-  //  })
+   })
    const data={
       EventId:req.body.EventId,
       MainTeam:req.body.MainTeam,
-      // TeamName:array,
+      TeamName:array,
       Profile:req.body.Profile,
       // Date:req.body.Date
    }
@@ -116,7 +116,7 @@ const ManyVManyRoute=async(req,res)=>{
    } catch (error) {
       return res.status(404).send("Internal problem")
    }
-   return res.status(201).send(ManyTeam)
+   return res.status(201).send({ManyTeam,message:"Successfully join on the Tournament"})
 
 }
 const AddManyvManyMember=async(req,res)=>{
@@ -163,6 +163,8 @@ const getOneVOne=async(req,res)=>{
   const getManyVMany=async(req,res)=>{
    const Eventid=req.params.id
    let eventrulelist
+   
+
    try {
      eventrulelist=await ManyVMany.find({EventId:Eventid})
    } catch (error) {
@@ -172,11 +174,51 @@ const getOneVOne=async(req,res)=>{
      return res.status(401).send("Event id dosent match")
    }
   return res.status(200).send(eventrulelist)
-  
+  }
+  const EachUserTournamentlist=async(req,res)=>{
+    const email=req.params.email
+    let eventList;
+    let info;
+   let MainInfo
+
+    try {
+     eventList=await Event.find()
+    } catch (error) {
+      console.log(error)
+    }
+
+    try {
+      info =await ManyVMany.find({EventId:eventList.map((item)=>item._id)})
+    } catch (error) {
+      return res.status(401).send("email dosen't match")
+    }
+   let information=info.filter((t) => t.TeamName.some((member) => member.TName === email))
+   
+   
+   try {
+    MainInfo=await Event.find({_id:information.map((item)=>item.EventId)})
+   } catch (error) {
+    console.log(error)
+   }
+   const EachData={
+      MainInfo:MainInfo.map((item,index)=>{
+      return{
+        _id:item._id,
+        game:item.GName,
+        server:item.Server,
+        mode:item.Mode,
+        date:item.Date,
+        team:information.map((value)=>value.MainTeam)[index]
+      }
+    }),
+    // Name:information.map((value)=>value.MainTeam)
+   }
+   res.status(201).send(EachData)
+
   }
  
 
 export {EventRoute,getEvent,EventRule,
    getEventRule,OneVOneRoute,getOneVOne,
    ManyVManyRoute,getManyVMany,getSpecificEvent,
-   AddManyvManyMember}
+   AddManyvManyMember,EachUserTournamentlist}
