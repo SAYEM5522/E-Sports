@@ -6,7 +6,7 @@ const Banner = () => {
   const {height,width}=useWindowSize()
 
   return (
-    <div className={`relative h-80 w-[95%]  mb-12`}>
+  <div className={`relative h-80 w-[95%]  mb-12`}>
       <Image
       src={"https://cdn.epulze.com/cms/aa174eef-006b-4a1d-b301-07de99c33251-csgo_tournament_2v2beta07_background-webp"}
       alt="B"
@@ -15,6 +15,7 @@ const Banner = () => {
       
       />
     </div>
+   
   )
 }
 

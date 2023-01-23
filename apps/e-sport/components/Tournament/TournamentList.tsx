@@ -101,7 +101,9 @@ const TournamentList = ({eventList}:any) => {
   };
 
   return (
-    <div className={`flex flex-col ml-3 h-[35.55rem]   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
+    <div className={`flex flex-col ml-3    `}>
+      {/* [35.55rem] */}
+      {/* overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden */}
      <div className='flex items-center pl-1 pt-6'>
       <BsFillTrophyFill color='white' size={40}/>
       <p className='text-white font-serif font-medium text-3xl ml-4 cursor-pointer'>Tournaments</p>

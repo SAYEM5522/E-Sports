@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie'
 import Link from 'next/link'
-import React, { useCallback } from 'react'
+import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useState } from 'react'
+import Logout from './Logout'
 const Menu=[
   {
     id:1,
@@ -42,9 +44,12 @@ const Menu=[
  
 ]
 const MenuList = () => {
-  const Logout=useCallback(()=>{
-    Cookies.remove("token")
-  },[])
+  const [open,setOpen]=useState(false)
+  const router=useRouter()
+  const logoutOpen=()=>{
+    Cookies.remove('token');
+    router.push('/LandingPage');
+  }
   return (
     <div className='h-[430px] w-48 bg-[#15141B] absolute top-14  r-0 rounded-md z-20'>
       {
@@ -59,7 +64,8 @@ const MenuList = () => {
           )
         })
       }
-      <p onClick={Logout} className='text-white font-serif text-md p-2 mb-2 hover:bg-red-400 text-center hover:rounded-sm '>Logout</p>
+      
+      <p onClick={logoutOpen} className='text-white font-serif text-md p-2 mb-2 hover:bg-red-400 text-center hover:rounded-sm '>Logout</p>
     </div>
   )
 }

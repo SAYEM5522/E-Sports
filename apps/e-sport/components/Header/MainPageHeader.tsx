@@ -11,9 +11,14 @@ const MainPageHeader = () => {
      const OpenMenu=useCallback(()=>{
         setOpenProfile(!openProfile)
      },[openProfile])
+
      useEffect(()=>{
-      setEmail(Cookies.get("email"))
+      const currentEmail=Cookies.get("email")
+        if(currentEmail!==email){
+          setEmail(currentEmail)
+        }
      },[email])
+     
   return (
     <div  className=' flex  items-center justify-between    h-14 bg-[#1C1B22]'>
       <div>
@@ -45,9 +50,9 @@ const MainPageHeader = () => {
 
     </div>
       <div>
-        <div onClick={OpenMenu} className='flex items-center mr-16 relative cursor-pointer'>
-          <div className='flex items-center'>
-          <p className='text-white font-serif text-sm ml-3 mr-1'>{email}</p>
+        <div onClick={OpenMenu} className='flex items-center pr-16 relative cursor-pointer'>
+          <div className='flex items-center '>
+          <p className='text-white  font-serif text-sm ml-3 mr-1'>{email}</p>
            <BsChevronDown size={17} color="white"/>
           </div>
 

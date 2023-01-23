@@ -20,7 +20,7 @@ const Tournament = () => {
   return (
     <Layout>
       <TournamentList eventList={eventList} />
-      
+      <Footer/>
     </Layout>
   )
 }

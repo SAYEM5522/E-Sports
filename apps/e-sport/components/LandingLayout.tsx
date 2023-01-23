@@ -3,14 +3,12 @@ import Header from './Header/Header'
 
 const LandingLayout = ({children}:any) => {
   return (
-    <div className='bg-[#222225] '>
+    <div >
       <Header/>
-      <div className='flex flex-row  '>
-      <div >
+      <div className=''>
         {
           children
         }
-      </div>
       </div>
     
     </div>

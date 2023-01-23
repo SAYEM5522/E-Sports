@@ -18,19 +18,17 @@ const catalog=[
 
 const Catalog = () => {
   return (
-    <div className='flex items-center mt-3
+    <div className='flex flex-wrap items-center mt-3
        '>
       {
         catalog.map((item,index)=>{
           return(
-            <div key={index}  className=" hover:rounded-3xl hover:border hover:scale-[1.02]  hover:border-green-500 relative w-[330px] h-[300px] mr-6 pt-4 cursor-pointer ">
+            <div key={index}  className="   relative w-[330px] h-[300px] mr-6 pt-4 cursor-pointer ">
                <Image
                src={item.img}
                alt={""}
-              //  width={340}
-              //  height={370}
               fill
-               className="rounded-3xl absolute object-cover"
+               className="mx-w-[330px] mx-h-[300px] rounded-3xl absolute object-cover hover:ease-in-out hover:scale-[1.02] hover:rounded-3xl hover:border  hover:border-green-500 "
                />
             </div>
           )

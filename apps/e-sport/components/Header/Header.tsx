@@ -138,7 +138,7 @@ const Header = () => {
         Passward:loginPass
       }
         await axios.post("http://localhost:8081/login",loginItem).then((res)=>{
-          router.push("/MainPage") 
+          router.push("/") 
           Cookies.set('token', res.data.token, { expires: 15 });
           // Cookies.set('email', res.data.Email, { expires: 15 });          
 
