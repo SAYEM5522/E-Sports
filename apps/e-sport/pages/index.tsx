@@ -7,6 +7,7 @@ import Catalog from '../components/Home/Catalog'
 import Banner from '../components/Home/Banner'
 import Footer from '../components/Footer/Footer'
 import { useRouter } from 'next/router'
+import VideoPlayer from '../components/Home/VideoPlayer';
 const Home: NextPage = () => {
 
   const [token,setToken]=useState<string>()
@@ -42,6 +43,9 @@ const Home: NextPage = () => {
             <Catalog/>
   
           <Banner/>
+          {/* <div> */}
+             <VideoPlayer/> 
+          {/* </div> */}
           {/* <Event show={true} filter={false} type="Recommended Events"/> */}
   
   
