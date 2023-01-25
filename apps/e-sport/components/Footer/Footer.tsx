@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { BsInstagram, BsLinkedin } from 'react-icons/bs'
@@ -9,7 +10,16 @@ const Footer = () => {
   const {width,height}=useWindowSize()
   return (
     <div  className="bg-[#1C1B22] w-full text-white py-8 mt-5">
-    <div className="p-6 container w-full mx-auto flex-col flex-wrap">
+       <div className='w-[170px] h-9 relative ml-4'>
+        <Image
+        src={"/../public/logo2.png"}
+        alt=""
+        fill
+        className="object-fill cursor-pointer"
+        />
+       </div>
+       <p className='text-white font-serif font-medium text-sm mt-4 ml-5'>Get ready to level up your gaming experience with Vuelve!</p>
+    <div className="p-5 container w-full mx-auto flex-col flex-wrap">
       <div className="w-full md:w-1/4 text-center md:text-left">
         <div>
         <h5 className="text-lg font-medium mb-2">POWERED BY</h5>
@@ -30,22 +40,22 @@ const Footer = () => {
         <h5 className="text-lg font-medium mb-2">SOCIAL</h5>
         <div className="mb-6 flex items-center">
           <Link href="/">
-            <FaFacebookF size={30 } className="mr-5"/>
+            <FaFacebookF size={30 }  className="mr-5 hover:text-[#F3A195]"/>
           </Link>
           <Link href="/">
-            <BsInstagram size={30} className="mr-5"/>
+            <BsInstagram size={30} className="mr-5 hover:text-[#F3A195]"/>
           </Link>
           <Link href="/">
-            <ImTwitter size={30} className="mr-5"/>
+            <ImTwitter size={30} className="mr-5 hover:text-[#F3A195]"/>
           </Link> 
           <Link href="/">
-            <FaYoutube size={30} className="mr-5"/>
+            <FaYoutube size={30} className="mr-5 hover:text-[#F3A195]"/>
           </Link>
           <Link href="/">
-            <FaTelegramPlane size={30} className="mr-5"/>
+            <FaTelegramPlane size={30} className="mr-5 hover:text-[#F3A195]"/>
           </Link>
           <Link href="/">
-            <BsLinkedin size={30}/>
+            <BsLinkedin size={30} className="hover:text-[#F3A195]"/>
           </Link>
         </div>
         </div>
@@ -92,7 +102,7 @@ const Footer = () => {
         </div>
       </div> 
       <div className="text-white text-sm">
-        Copyright &copy; {new Date().getFullYear()} The Vulve
+        Copyright &copy; {new Date().getFullYear()} The Vuelve
       </div>
         </div>
       </div>

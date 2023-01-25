@@ -13,6 +13,7 @@ import moment from 'moment';
 import { useRouter } from 'next/router'
 import Tournament_Price from './Tournament_Price'
 import Footer from '../Footer/Footer'
+import Image from 'next/image'
 const buttonVariants = {
   idle: {
     scale: 1
@@ -131,7 +132,7 @@ const Tournament_Details = () => {
       whileHover="hover"
       whileTap="press"
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className='w-44 rounded-md items-center justify-center flex h-9 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Join</motion.button>
+      className='w-44 rounded-md items-center justify-center flex h-9 bg-[#F69134] font-serif  font-medium cursor-pointer text-lg'>Join</motion.button>
               }
         
           </div>
@@ -158,8 +159,15 @@ const Tournament_Details = () => {
           </div>
             :
             <div>
-            <div className='w-52 h-32 bg-[#15141B] cursor-pointer rounded-md ml-auto mr-auto mt-20 '>
-
+            <div className='w-52 h-32 bg-[#15141B] cursor-pointer grid place-items-center rounded-md ml-auto mr-auto mt-20 '>
+              <div className='w-[170px] h-9 relative'>
+              <Image
+              src={"/../public/logo2.png"}
+              alt=""
+              fill
+              className="object-fill cursor-pointer"
+              />
+            </div>
             </div>
             <div >
               <TeamSelection/>
@@ -171,7 +179,7 @@ const Tournament_Details = () => {
       whileTap="press"
       onClick={MakeTeam}
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className='w-[89%] ml-6 mt-3  rounded-sm items-center justify-center  h-8 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Create Team</motion.button>
+      className='w-[89%] ml-6 mt-3  rounded-sm items-center justify-center  h-8 bg-[#F69134] font-serif text-white font-medium cursor-pointer text-lg'>Create Team</motion.button>
             <div className='w-[90%] h-10 bg-black rounded-md ml-auto mr-auto mt-16'>
              <p onClick={OpenNextPage} className='text-white text-center font-serif font-medium text-md pt-2 cursor-pointer '>Next</p>
             </div>

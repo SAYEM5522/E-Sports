@@ -57,7 +57,7 @@ const TeamSelection = () => {
               
               return(
                 <div key={index} className="pt-1">
-                  <p onClick={()=>setId(item._id,item.Teamname)} className='font-serif text-white font-medium text-lg pl-5 hover:text-black hover:bg-[#CEFF7F]'>{item.Teamname}</p>
+                  <p onClick={()=>setId(item._id,item.Teamname)} className='font-serif text-white font-medium text-lg pl-5 hover:text-black hover:bg-[#F9B271]'>{item.Teamname}</p>
                 </div>
               )
             })

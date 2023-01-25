@@ -94,8 +94,8 @@ const Sidebar = () => {
     )
   ,[router.pathname])
   const getSidebarClasses=(menu:any)=>{
-    return classNames("flex items-center p-3 mt-2 mb-3 hover: w-56  hover:bg-[rgb(152,188,98,0.6)] cursor-pointer rounded-md",{
-      ['bg-[#98BC62]']:activeItem?.id===menu.id
+    return classNames("flex items-center p-3 mt-2 mb-3 hover: w-56  hover:bg-[#F3A195] cursor-pointer rounded-md",{
+      ['bg-[#F26D59]']:activeItem?.id===menu.id
     })
   }
 
