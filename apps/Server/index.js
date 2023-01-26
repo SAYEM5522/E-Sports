@@ -6,6 +6,7 @@ import { Homerouter } from "./Route/Home.js"
 import { Teamrouter } from "./Route/Team.js"
 import {InfoRouter} from "./Route/Info.js"
 import { ConversationRouter } from "./Route/Conversation.js"
+import { GameListRouter } from "./Route/GameList.js"
 import mongoose from "mongoose"
 
 
@@ -20,6 +21,8 @@ app.use("/",Homerouter)
 app.use("/",Teamrouter)
 app.use("/",InfoRouter)
 app.use("/",ConversationRouter)
+app.use("/",GameListRouter)
+
 
 const Connection_Url="mongodb+srv://e-sports:zzgWyKRSASNQOkzY@cluster0.sxukpxt.mongodb.net/?retryWrites=true&w=majority"
 
