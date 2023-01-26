@@ -2,7 +2,6 @@ import express from "express"
 import { AddMember, getEachMemberTeamList, getEachTeamInfo, getMemberList } from "../Controller/TeamControllers.js"
 import multer from "multer";
 import { Team } from "../Database/Team/Team.js";
-import fs from "fs"
 const Teamrouter=express.Router()
 
 const storage = multer.diskStorage({

@@ -5,6 +5,7 @@ import { router } from "./Route/auth.js"
 import { Homerouter } from "./Route/Home.js"
 import { Teamrouter } from "./Route/Team.js"
 import {InfoRouter} from "./Route/Info.js"
+import { ConversationRouter } from "./Route/Conversation.js"
 import mongoose from "mongoose"
 
 
@@ -12,17 +13,14 @@ const PORT=process.env.PORT||8081
 
 const app=express()
 app.use(cors())
-
 app.use(bodyParser.json())
 // Route
 app.use("/",router)
 app.use("/",Homerouter)
 app.use("/",Teamrouter)
 app.use("/",InfoRouter)
+app.use("/",ConversationRouter)
 
-
-
-// app.use(cookieParser())
 const Connection_Url="mongodb+srv://e-sports:zzgWyKRSASNQOkzY@cluster0.sxukpxt.mongodb.net/?retryWrites=true&w=majority"
 
 mongoose.connect(Connection_Url,{
