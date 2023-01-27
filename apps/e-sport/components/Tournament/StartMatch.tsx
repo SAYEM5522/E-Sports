@@ -112,15 +112,6 @@ const StartMatch = () => {
   };
 
 
-  const startBanning = () => {
-    if (players.every((player:any) => player.ready === true)) {
-      console.log('All players are ready, starting map banning process');
-      //TODO: start map banning process
-    } else {
-      console.log('Not all players are ready');
-    }
-  };
-
   return (
     <div>
       {players.map((player:any) => (

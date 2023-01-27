@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import {FiHome} from "react-icons/fi"
 import {IoNewspaperOutline} from "react-icons/io5"
 import {AiOutlineTeam} from "react-icons/ai"
-import {BsTrophy} from "react-icons/bs"
+import {BsPlusSquareDotted, BsTrophy} from "react-icons/bs"
 import IconItem from './IconItem'
 import {FaStreetView} from "react-icons/fa"
 import Image from 'next/image'
@@ -11,8 +11,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import {MdOutlineLeaderboard} from "react-icons/md"
-import {BsWallet2} from "react-icons/bs"
-import { useWindowSize } from '../Hooks/useWindowSize'
+import { Modal } from '@mui/material'
+import { Box } from '@mui/system'
+import AddGameList from './AddGameList'
 const SideBarItem=[
   {
     id:1,
@@ -83,10 +84,22 @@ export const GameList=[
 
   }
 ]
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '52%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 450,
+  bgcolor: '#1C1B22',
+  boxShadow: 24,
+  p: 2,
+  outline: 0,
+  height:590,
+};
 const Sidebar = () => {
   const CurrencyFormat="Taka"
   const router=useRouter()
-  const {width,height}=useWindowSize()
+  const [openModel,setOpenModel]=useState(false)
 
   const activeItem=useMemo(()=>
     SideBarItem.find((menu)=>
@@ -97,6 +110,9 @@ const Sidebar = () => {
     return classNames("flex items-center p-3 mt-2 mb-3 hover: w-56  hover:bg-[#F3A195] cursor-pointer rounded-md",{
       ['bg-[#F26D59]']:activeItem?.id===menu.id
     })
+  }
+  const ModelOpen=()=>{
+    setOpenModel(true)
   }
 
   return (
@@ -138,18 +154,24 @@ const Sidebar = () => {
       <div className='mt-3 ml-3 '>
         <p className='text-white cursor-pointer font-bold font-serif '>My Games</p>
       </div>
-      <div className='flex items-center flex-wrap  ml-3 mb-2 '>
+      <div className='mt-3 ml-3 flex items-center '>
+        <BsPlusSquareDotted onClick={ModelOpen} size={35} className="cursor-pointer" color="#F26D59"/>
+        <p className='pl-3 font-serif text-white cursor-pointer font-bold text-md'>Add Games</p>
+      </div>
+      <div className='flex items-center flex-wrap mt-2  ml-3 mb-2 '>
         {
         GameList.map((item,index)=>{
           return(
-            <div key={index}>
+            <div key={index} className="">
+              <div className='relative w-10 h-10 mr-4 mb-2 mt-2 '>
               <Image
               src={item.img}
               alt={item?.name.charAt(0)}
-              height={47}
-              width={47}
-              className="rounded-lg cursor-pointer mr-4 mt-2"
+              fill
+              className="rounded-lg object-cover cursor-pointer"
               />
+              </div>
+             
             </div>
           )
         })
@@ -158,6 +180,19 @@ const Sidebar = () => {
       </div>
       
     {/* </div> */}
+    {
+      <Modal
+      open={openModel}
+      onClose={()=>setOpenModel(false) }
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+   >
+      <Box sx={{...style,borderRadius:3}}>
+       <AddGameList/>
+      </Box>
+
+   </Modal>
+    }
      </div>
   )
 }

@@ -68,7 +68,7 @@ const Footer = () => {
           <p className="text-white font-medium mb-2">(Mon - Sun 00:00 - 23:59)</p>
           <Link href="/">
             <p className="inline-block text-white font-medium hover:text-gray-500">
-              Mail support: support@epulze.com
+              Mail support: vuelve.gg@gmail.com
             </p>
           </Link>
         </div>
@@ -95,7 +95,7 @@ const Footer = () => {
           <p className="text-white font-medium mb-2">(Mon - Sun 00:00 - 23:59)</p>
           <Link href="/">
             <p className="inline-block text-white font-medium hover:text-gray-500">
-              Mail support: support@epulze.com
+              Mail support: vuelve.gg@gmail.com
             </p>
           </Link>
         </div>

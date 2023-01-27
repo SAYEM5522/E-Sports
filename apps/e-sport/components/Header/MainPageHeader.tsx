@@ -23,6 +23,7 @@ const MainPageHeader = () => {
   return (
     <div  className=' flex  items-center justify-between    h-14 bg-[#1C1B22]'>
       <div>
+        <Link href="/">
        <div className='w-[170px] h-9 relative ml-8'>
         <Image
         src={"/../public/logo2.png"}
@@ -31,6 +32,8 @@ const MainPageHeader = () => {
         className="object-fill cursor-pointer"
         />
        </div>
+       </Link>
+
       </div>
       <div className='flex items-center justify-center ml-10' >
     <Link href={"/MainPage"}>
