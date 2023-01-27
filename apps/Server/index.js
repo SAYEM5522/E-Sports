@@ -8,13 +8,30 @@ import {InfoRouter} from "./Route/Info.js"
 import { ConversationRouter } from "./Route/Conversation.js"
 import { GameListRouter } from "./Route/GameList.js"
 import mongoose from "mongoose"
-
-
+import {Server}  from "socket.io"
 const PORT=process.env.PORT||8081
 
 const app=express()
 app.use(cors())
 app.use(bodyParser.json())
+// const server = http.createServer(app);
+const io = new Server(8080, {
+  cors: {
+    origin: "http://localhost:3000",
+    // methods: ["GET", "POST"],
+  },
+});
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("send_message", (data) => {
+    socket.to(data.conversationId).emit("receive_message", data);
+  });
+  // socket.on("disconnect", () => {
+  //   console.log("User Disconnected", socket.id);
+  // });
+});
+
 // Route
 app.use("/",router)
 app.use("/",Homerouter)
