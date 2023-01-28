@@ -1,61 +1,122 @@
-import {
-  SingleEliminationBracket,
-  Match,
-  SVGViewer,
-  createTheme
-} from "@g-loot/react-tournament-brackets";
-import { simpleSmallBracket } from "../../simpleSmallBracket";
-import { useWindowSize } from "../Hooks/useWindowSize";
 
-const GlootTheme = createTheme({
-  textColor: { main: "#000000", highlighted: "#F4F2FE", dark: "#707582" },
-  matchBackground: { wonColor: "#2D2D59", lostColor: "#1B1D2D" },
-  score: {
-    background: {
-      wonColor: `#10131C`,
-      lostColor: "#10131C"
+import React from 'react';
+import {Bracket,BracketGame, BracketGenerator,} from 'react-tournament-bracket';
+import { simpleSmallBracket } from '../../simpleSmallBracket';
+const game2 = {
+  id: "2",
+  name: "semi-finals",
+  scheduled: Number(new Date()),
+  sides: {
+    home: {
+      team: {
+        id: "12",
+        name: "Team 1"
+      },
+      score: {
+        score: 1
+      }
     },
-    text: { highlightedWonColor: "#7BF59D", highlightedLostColor: "#FB7E94" }
-  },
-  border: {
-    color: "#292B43",
-    highlightedColor: "RGBA(152,82,242,0.4)"
-  },
-  roundHeader: { backgroundColor: "#3B3F73", fontColor: "#F4F2FE" },
-  connectorColor: "#3B3F73",
-  connectorColorHighlight: "RGBA(152,82,242,0.4)",
-  svgBackground: "#0F121C"
-});
+    visitor: {
+      team: {
+        id: "13",
+        name: "Team 4"
+      },
+      score: {
+        score: 0
+      }
+    }
+  }
+};
+const game3 = {
+  id: "3",
+  name: "semi-finals",
+  scheduled: Number(new Date()),
 
- const BracketDetails = () => {
-  const {width,height}=useWindowSize()
+  sides: {
+    home: {
+      team: {
+        id: "11",
+        name: "Team 2"
+      },
+      score: {
+        score: 1
+      }
+    },
+    visitor: {
+      team: {
+        id: "12",
+        name: "Team 3"
+      },
+      score: {
+        score: 0
+      }
+    }
+  }
+};
+const game1 = {
+  id: "1",
+  name: "semi-finals",
+  scheduled: Number(new Date()),
+  sides: {
+    home: {
+      team: {
+        id: "10",
+        name: "Team 1"
+      },
+      score: {
+        score: 2
+      },
+      seed: {
+        displayName: "A1",
+        rank: 1,
+        sourceGame: game2,
+        sourcePool: {}
+      }
+    },
+    visitor: {
+      team: {
+        id: "11",
+        name: "Team 2"
+      },
+      score: {
+        score: 3
+      },
+      seed: {
+        displayName: "A2",
+        rank: 1,
+        sourceGame: game3,
+        sourcePool: {}
+      }
+    }
+  }
+};
 
+
+const MyBracket = () => {
+  const [homeOnTopState, setHomeOnTopState] = React.useState(true);
+  const [hoveredTeamId, setHoveredTeamId] = React.useState(null);
+
+  const GameComponent = React.useCallback((props:any) => {
+      return (
+          <BracketGame
+
+              {...props}
+              onHoveredTeamIdChange={setHoveredTeamId}
+              // onClick={() => alert('clicked game: ' + props.game.name)}
+              hoveredTeamId={hoveredTeamId}
+          />
+      );
+  }, [hoveredTeamId]);
   return(
-    <SingleEliminationBracket
-    theme={GlootTheme}
-    matches={simpleSmallBracket}
-    matchComponent={Match}
-   
-    svgWrapper={({ children, ...props }) => (
-      <SVGViewer
-        width={width}
-        height={height}
-        background="#222225"
-        SVGBackground="#222225"
-
-        {...props}
-      >
-        {children}
-      </SVGViewer>
-    )}
-    onMatchClick={(match) => console.log(match)}
-    onPartyClick={(match) => console.log(match)}
-  />
+    <div>
+    <Bracket game={game1} roundSeparatorWidth={50}  GameComponent={GameComponent}  />
+    </div>
   )
- 
-    };
+};
 
 
 
+export default MyBracket;
 
-export default BracketDetails
+
+

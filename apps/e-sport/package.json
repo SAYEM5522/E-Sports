@@ -10,7 +10,6 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@g-loot/react-tournament-brackets": "^1.0.22",
     "@hookform/resolvers": "^2.9.10",
     "@mui/material": "^5.11.3",
     "@reduxjs/toolkit": "^1.9.1",
@@ -25,12 +24,14 @@
     "next": "latest",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
+    "react-brackets": "^0.4.7",
     "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.5",
     "react-hydration-provider": "^1.0.1",
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
+    "react-tournament-bracket": "^0.2.4",
     "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.6",
     "yup": "^0.32.11"
