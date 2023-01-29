@@ -15,6 +15,7 @@ import Tournament_Price from './Tournament_Price'
 import Footer from '../Footer/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
+import Available_Slots from './Available_Slots'
 const buttonVariants = {
   idle: {
     scale: 1
@@ -274,8 +275,8 @@ const Tournament_Details = () => {
      <div className='bg-[#15141B] h-64 w-[100%] rounded-md '>
       <Tournament_Price/>
      </div>
-     <div className='bg-gray-600 h-52 mt-3 w-[100%] '>
-
+     <div className='bg-[#15141B] h-52 mt-3 w-[100%] rounded-md '>
+      <Available_Slots slot={eventData[0]?.Slot}/>
      </div>
      </div>
      
