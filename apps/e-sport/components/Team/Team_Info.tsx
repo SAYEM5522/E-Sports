@@ -11,7 +11,7 @@ const Team_Info = () => {
       <div className='h-96 w-[65%] ml-3 bg-[#222225] '>
         <RecentMatch/>
       </div>
-      <div className='bg-[#15141B] h-52 w-[35%] ml-2 mr-2 rounded-md'>
+      <div className='bg-[#15141B] h-[400px] w-[35%] ml-2 mr-2 rounded-md'>
        <CreateTeam/>
       </div>
     </div>

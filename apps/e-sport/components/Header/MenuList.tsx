@@ -51,7 +51,7 @@ const MenuList = () => {
     router.push('/LandingPage');
   }
   return (
-    <div className='h-[430px] w-48 bg-[#15141B] absolute top-14  r-0 rounded-md z-20'>
+    <div className='h-[430px] w-48 bg-[#15141B] absolute top-12  right-5 rounded-md z-20'>
       {
         Menu.map((item,index)=>{
           return(

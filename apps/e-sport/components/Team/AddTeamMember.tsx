@@ -11,6 +11,7 @@ const AddTeamMember = () => {
   const [user, setUser] = useState<any>([]);
   const [name, setName] = useState('');
   const [selectedItems, setSelectedItems] = useState<any>([]);
+  const [warning,setWarning]=useState<any>([])
   const dispatch=useDispatch()
 
 
@@ -50,13 +51,32 @@ const AddTeamMember = () => {
           setMemberModelCheck({MemberModelCheck:true}))
       
       }).catch((err)=>{
-     console.log(err)
+        setWarning(err.response.data)
+        
       })
   }
+  console.log(warning)
 
   return (
     <div>
-      <p className='font-serif font-bold text-lg text-center border-b border-[rgba(0,0,0,0.4)] text-white py-3'>Add Your Team Member </p>
+      <p className='font-serif font-bold text-lg text-center border-b border-[rgba(0,0,0,0.4)] text-white py-1'>Add Your Team Member </p>
+      {
+        warning.length>0&&
+         <p className='text-[red] font-serif text-sm flex items-center pr-1'>Duplicate Member : 
+          {warning.map((item:any,index:number)=>{
+            return(
+              <div key={index} className="">
+              <p className='text-[red] font-serif text-sm'>
+                {item.temail} , 
+              </p>
+              </div>
+            )
+          })}
+         </p>
+         
+        }
+      
+     
       <div className='grid place-items-center h-full mt-5'>
         <input  value={name} onChange={(e) => setName(e.target.value)}  type={"text"} placeholder="Enter username or email" className="outline-none w-[90%]  h-8 p-2 rounded-sm placeholder-shown:p-2 text-black" />
 

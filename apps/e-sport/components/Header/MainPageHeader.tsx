@@ -1,4 +1,5 @@
 import { Avatar } from '@mui/material'
+import axios from 'axios'
 import Cookies from 'js-cookie'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,18 +8,29 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import MenuList from './MenuList'
 const MainPageHeader = () => {
-     const [email,setEmail]=useState<string>()
+     const [user,setUser]=useState<string>()
      const [openProfile,setOpenProfile]=useState(false)
+     async function getId() {
+      try {
+        const token=Cookies.get('token')
+        const res = await axios.get('http://localhost:8081/user', {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
+        setUser(res.data.user.Username)
+        
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
      const OpenMenu=useCallback(()=>{
         setOpenProfile(!openProfile)
      },[openProfile])
 
      useEffect(()=>{
-      const currentEmail=Cookies.get("email")
-        if(currentEmail!==email){
-          setEmail(currentEmail)
-        }
-     },[email])
+      getId()
+     
+     },[])
      
   return (
     <div  className=' flex  items-center justify-between    h-14 bg-[#1C1B22]'>
@@ -63,7 +75,7 @@ const MainPageHeader = () => {
       <div>
         <div onClick={OpenMenu} className='flex items-center pr-16 relative cursor-pointer'>
           <div className='flex items-center '>
-          <p className='text-white  font-serif text-sm ml-3 mr-1'>{email}</p>
+          <p className='text-white  font-serif text-sm ml-3 mr-2'>{user}</p>
            <BsChevronDown size={17} color="white"/>
           </div>
 

@@ -43,13 +43,6 @@ import { useRouter } from 'next/router'
   const data = selectedItems.map((currentValue:any, currentIndex:any) => {
     return { "TName": currentValue.temail }
   });
-  // const JoinTournament=async()=>{
-  //  axios.post(`http://localhost:8081/Addmember/${teamid}`,data).then((res)=>{
-  //    console.log(res.data)
-  //  }).catch((err)=>{
-  //    console.log(err)
-  //  })
-  // }
 
    const JoinTournament=async()=>{
     const TeamInformation={
@@ -115,7 +108,7 @@ import { useRouter } from 'next/router'
           ))}
         </ul>
       </div>
-      <div className='grid bg-[#CEFF7F] mt-20 ml-auto mr-auto cursor-pointer w-44 rounded-md place-items-center  h-8'>
+      <div className='grid bg-[#F69134] mt-20 ml-auto mr-auto cursor-pointer w-44 rounded-md place-items-center  h-8'>
         <button onClick={JoinTournament} disabled={selectedItems.length<mode?true:false} className='text-lg font-bold'>Join Tournament</button>
       </div>
     </div>

@@ -10,6 +10,7 @@ const initialState = {
    TournamentModeCheck:false,
    MemberListmodel:false,
    MemberModelCheck:false,
+   ReamingTimeIndicator:false
 
 
 }
@@ -45,6 +46,9 @@ const userSlice = createSlice({
     setMemberModelCheck:(state,action)=>{
       state.MemberModelCheck=action.payload.MemberModelCheck
     },
+    setReamingTimeIndicator:(state,action)=>{
+      state.ReamingTimeIndicator=action.payload.ReamingTimeIndicator
+    },
   }
 });
 
@@ -57,7 +61,8 @@ export const {
   setTournamentModel,
   setTournamentModeCheck,
   setMemberListmodel,
-  setMemberModelCheck
+  setMemberModelCheck,
+  setReamingTimeIndicator
 } = userSlice.actions
 
 export default userSlice.reducer
@@ -70,6 +75,8 @@ export const selectTournamentModel=(state:any)=>state.user.TournamentModel
 export const selectTournamentModeCheck=(state:any)=>state.user.TournamentModeCheck
 export const selectMemberListmodel=(state:any)=>state.user.MemberListmodel
 export const selectMemberModelCheck=(state:any)=>state.user.MemberModelCheck
+export const selectReamingTimeIndicator=(state:any)=>state.user.ReamingTimeIndicator
+
 
 
 

@@ -26,7 +26,6 @@ const Home: NextPage = () => {
   }
     useEffect(()=>{
   const currentToken = Cookies.get('token');
-   // setToken(currentToken);
     getId();
   if (!currentToken) {
     router.push("/LandingPage")
@@ -35,17 +34,14 @@ const Home: NextPage = () => {
     },[])
   return (
     <div className='' >
-        {/* {
-          token? */}
+       
           <Layout>
     
           <div className={` flex-col w-full grid h-screen place-items-center   overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden`}>
             <Catalog/>
   
           <Banner/>
-          {/* <div> */}
              <VideoPlayer/> 
-          {/* </div> */}
           {/* <Event show={true} filter={false} type="Recommended Events"/> */}
   
   

@@ -23,9 +23,9 @@ const style = {
   boxShadow: 24,
   p: 2,
   outline: 0,
-  height:600,
+  height:625,
 };
-const TeamMemberList = ({data}:any) => {
+const TeamMemberList = ({data,admin}:any) => {
   const dispatch=useDispatch()
   const AddMember=()=>{
     dispatch(
@@ -47,6 +47,10 @@ const TeamMemberList = ({data}:any) => {
     <div>
       <p className='font-serif font-bold text-lg text-center border-b border-[rgba(0,0,0,0.4)] text-white py-3'>Team Members</p>
       <div className='w-full ml-auto mr-auto h-[460px] overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden'>
+            <div className='h-12 flex cursor-pointer  items-center justify-between mx-4 mt-3 px-3 py-2  rounded-md hover:scale-[1.02] hover:ease-in-out hover:duration-300 bg-black w-[90%] '>
+              <p className='text-gray-300 font-serif text-sm'>{admin}</p>
+              <p className='text-lg font-serif italic text-[#F69134]'>Admin</p>
+              </div>
         {
           data?.map((item:any,index:number)=>{
             return(
@@ -68,7 +72,7 @@ const TeamMemberList = ({data}:any) => {
       whileHover="hover"
       whileTap="press"
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className='w-[90%] ml-5 mt-5  rounded-sm items-center justify-center  h-8 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Add Team Member</motion.button>
+      className='w-[90%] ml-5   rounded-sm items-center justify-center  h-8 bg-[#F69134] font-serif  font-medium cursor-pointer text-lg'>Add Team Member</motion.button>
        <Modal
         open={memberModel}
         onClose={()=>dispatch(

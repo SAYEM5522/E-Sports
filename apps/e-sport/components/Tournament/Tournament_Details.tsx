@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import React, { useCallback, useEffect, useState } from 'react'
 import { MdArrowBackIos } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import {  selectTeamInfo, selectTournamentModeCheck, selectTournamentModel, setLayoutBanner, setTournamentModel } from '../../feature/userSlice'
+import {  selectReamingTimeIndicator, selectTeamInfo, selectTournamentModeCheck, selectTournamentModel, setLayoutBanner, setReamingTimeIndicator, setTournamentModel } from '../../feature/userSlice'
 import ListOfTeam from './ListOfTeam'
 import TeamSelection from './TeamSelection'
 import { motion } from 'framer-motion';
@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 import Tournament_Price from './Tournament_Price'
 import Footer from '../Footer/Footer'
 import Image from 'next/image'
+import Link from 'next/link'
 const buttonVariants = {
   idle: {
     scale: 1
@@ -33,6 +34,18 @@ const style = {
   p: 2,
   outline: 0,
   height:590,
+};
+const style2 = {
+  position: 'absolute' as 'absolute',
+  top: '48%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: '#F26D59',
+  boxShadow: 24,
+  p: 2,
+  outline: 0,
+  height:100,
 };
 interface EProps{
   
@@ -54,9 +67,11 @@ const Tournament_Details = () => {
   const teamInfo=useSelector(selectTeamInfo)
   const TournaMentModelOpen=useSelector(selectTournamentModel)
   const TournamentModeCheck=useSelector(selectTournamentModeCheck)
+  const [topenmodel,setTopenModel]=useState(false)
   const [check,setCheck]=useState<any>(false)
   const dispatch=useDispatch()
   const router=useRouter()
+
   const getSpecificEvent=async()=>{
      const  d_id=Cookies.get('_t_id')
      await axios.get(`http://localhost:8081/getSpecificEvent/${d_id}`).then((res)=>{
@@ -72,6 +87,7 @@ const Tournament_Details = () => {
      const em=Cookies.get("email")
      await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
      const  team = res.data.filter((t:any) => t.TeamName.some((member:any) => member.TName === em))
+     
      if(team.length>0){
       setCheck(true)
      }
@@ -104,37 +120,57 @@ const Tournament_Details = () => {
 
     }
   },[nextPage,teamInfo])
+  const OpenInfoT=()=>{
+        if(timeInfo){
+          router.push("/Tournament/MapPick")
+        }
+        else{
+      setTopenModel(true)
+        }
+  }
   return (
     <>
     <div className='flex items-start mt-3'>
     <div className=' h-96 w-[65%] ml-3'>
       {
-        timeInfo?
-        <p className='text-white font-serif text-2xl font-medium'>Tournament joining time has finished</p>:
 
         <div className='flex items-center justify-between px-5 pt-2'>
               
                 
         <div className='flex'>
-        <p className='text-white font-serif text-xl font-medium'>Sign up closes in </p>
+        {
+          timeInfo?
+        <p className='text-white font-serif text-xl font-medium'>Tournament joining time has finished</p>:
+        <div className='flex items-center'>
+      <p className='text-white font-serif text-lg font-medium'>Sign up closes in </p>
+        <TimeCountDown 
+        callback={handleDataFromChild}
+         startTime={eventData[0]?.Date}/>
+        </div>
         
-             <TimeCountDown callback={handleDataFromChild} startTime={eventData[0]?.Date}/>
-         
-        
+        }
               </div>
               {
-                check?<p className='text-white font-serif text-sm w-28'>You have joined on the tournament for more details
-                <span className='underline font-serif italic text-white font-medium cursor-pointer'> Click</span> </p>:
-
-                <motion.button   variants={buttonVariants}
+                !check && timeInfo?<p className='text-white font-serif text-sm w-28'>You can't join on the tournament</p>:null
+              }
+              {
+                check && <p className='text-white font-serif text-sm w-28'>You have joined on the tournament for more details
+                {/* <Link href={"/Tournament/MapPick"}> */}
+                <span onClick={OpenInfoT} className='underline font-serif italic text-white font-medium cursor-pointer'> Click</span> 
+                {/* </Link> */}
+                </p>
+                
+              } 
+             {
+              (!timeInfo && !check )&&
+              <motion.button   variants={buttonVariants}
       onClick={openModel}
       animate="idle"
       whileHover="hover"
       whileTap="press"
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className='w-44 rounded-md items-center justify-center flex h-9 bg-[#F69134] font-serif  font-medium cursor-pointer text-lg'>Join</motion.button>
-              }
-        
+             }
           </div>
       }   
            {
@@ -189,6 +225,21 @@ const Tournament_Details = () => {
         </Box>
 
      </Modal>
+           }
+           {
+              <Modal
+              open={topenmodel}
+              onClose={()=>setTopenModel(false)}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+           >
+              <Box sx={{...style2,borderRadius:3}}>
+              <div className='w-[100%] h-20 p-1  grid place-items-center rounded-md mx-auto  cursor-pointer'>
+        <p className='text-lg font-serif font-medium text-white'>Tournament Starting Time Is Reaming.Please Wait for The Reaming Time </p>
+        </div>
+              </Box>
+      
+           </Modal>
            }
   <div className='h-[35%] flex flex-wrap justify-between  mt-2 ml-4 mr-4 border-t border-b border-[rgba(0,0,0,0.4)]'>
     <div>

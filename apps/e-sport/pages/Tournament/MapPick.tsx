@@ -1,11 +1,10 @@
 import React from 'react'
 import Layout from "../../components/Layout"
-import ChatBox from '../../components/Tournament/ChatBox'
-import StartMatch from '../../components/Tournament/StartMatch'
+import MatchInfo from '../../components/Tournament/MatchInfo'
 const MapPick = () => {
   return (
     <Layout>
-      <ChatBox/>
+      <MatchInfo/>
     </Layout>
   )
 }

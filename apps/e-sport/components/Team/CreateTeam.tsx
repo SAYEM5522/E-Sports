@@ -34,7 +34,7 @@ const CreateTeam = () => {
   return (
     <div className='w-full h-full'>
         <p className='text-white font-serif font-medium text-lg text-center p-3  '>Create Team</p>
-        <div className='h-[50%] '>
+        <div className='h-[71%] overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden  '>
         {
             team.map((item:any,index)=>{
               const GoToTeam=()=>{
@@ -43,7 +43,7 @@ const CreateTeam = () => {
               }
               
               return(
-                <div onClick={GoToTeam} key={index} className="mt-2 pt-1 cursor-pointer flex items-center  hover:text-black hover:bg-[#CEFF7F]">
+                <div onClick={GoToTeam} key={index} className="mt-2 pt-1 cursor-pointer flex items-center  hover:text-black hover:bg-[#F3A195]">
                   <div className='w-[30px] h-[30px] relative ml-3'>
                   <Image 
                   src={`/${item.Profile}`}
@@ -66,7 +66,7 @@ const CreateTeam = () => {
       whileHover="hover"
       whileTap="press"
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className='w-[90%] ml-5 mt-2  rounded-sm items-center justify-center  h-8 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-lg'>Create</motion.button>
+      className='w-[90%] ml-5 mt-2  rounded-sm items-center justify-center  h-8 bg-[#F26D59] font-serif  font-medium cursor-pointer text-lg'>Create</motion.button>
     </div>
   )
 }

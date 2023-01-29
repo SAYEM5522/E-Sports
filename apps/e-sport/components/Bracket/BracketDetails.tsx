@@ -1,7 +1,6 @@
 
 import React from 'react';
 import {Bracket,BracketGame, BracketGenerator,} from 'react-tournament-bracket';
-import { simpleSmallBracket } from '../../simpleSmallBracket';
 const game2 = {
   id: "2",
   name: "semi-finals",

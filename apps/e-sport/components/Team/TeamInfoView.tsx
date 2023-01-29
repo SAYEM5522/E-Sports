@@ -54,7 +54,7 @@ const TeamInfoView = () => {
         <RecentMatch/>
       </div>
       <div className='bg-[#15141B] h-full mb-2 w-[35%] ml-2 mr-2 rounded-md'>
-       <TeamMemberList data={info?.Info}/>
+       <TeamMemberList data={info?.Info} admin={info?.Email}/>
       </div>
     </div>
          </div>
