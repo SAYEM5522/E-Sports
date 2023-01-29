@@ -124,6 +124,21 @@ const getUser=async(req,res,next)=>{
      }
      return res.status(200).json({user})
 }
+
+const getSpecificUser=async(req,res,next)=>{
+  const email=req.params.email
+   let user;
+   try {
+    user= await User.find({Email:email},"-Passward -ConfirmPassward")
+   } catch (error) {
+    return new Error(error)
+   }
+   if(!user){
+    return res.status(404).json({message:"User not found"})
+   }
+   return res.status(200).json({user})
+}
+
 const getSearchresult=async(req,res)=>{
 
 const searchTerm = req.query.name;
@@ -185,4 +200,4 @@ const changePassword=async(req,res)=>{
 }
 
 export {signup,login,verifyToken,getUser,
-  updateProfile,getSearchresult,changePassword}
+  updateProfile,getSearchresult,changePassword,getSpecificUser}

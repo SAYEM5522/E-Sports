@@ -211,7 +211,6 @@ const getOneVOne=async(req,res)=>{
         team:information.map((value)=>value.MainTeam)[index]
       }
     }),
-    // Name:information.map((value)=>value.MainTeam)
    }
    res.status(201).send(EachData)
 
