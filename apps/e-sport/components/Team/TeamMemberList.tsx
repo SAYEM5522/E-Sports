@@ -4,6 +4,7 @@ import { Box, Modal } from '@mui/material';
 import AddTeamMember from './AddTeamMember';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMemberListmodel, selectMemberModelCheck, setMemberListmodel } from '../../feature/userSlice';
+import { useRouter } from 'next/router';
 
 const buttonVariants = {
   idle: {
@@ -27,6 +28,7 @@ const style = {
 };
 const TeamMemberList = ({data,admin}:any) => {
   const dispatch=useDispatch()
+  const router=useRouter()
   const AddMember=()=>{
     dispatch(
       setMemberListmodel(
@@ -53,9 +55,13 @@ const TeamMemberList = ({data,admin}:any) => {
               </div>
         {
           data?.map((item:any,index:number)=>{
+            const GotoMember=()=>{
+              sessionStorage.setItem("__p_id__",item.Email)
+              router.push("/Profile")
+            }
             return(
               <div key={index} className="flex cursor-pointer  items-center justify-between mx-4 mt-3 px-3 py-2  rounded-md hover:scale-[1.02] hover:ease-in-out hover:duration-300 bg-black w-[90%]">
-              <div className='h-12 '>
+              <div className='h-12 ' onClick={GotoMember} >
               <p className='text-white' >{item.Username}</p>
               <p className='text-gray-300 font-serif text-sm'>{item.Email}</p>
               </div>
