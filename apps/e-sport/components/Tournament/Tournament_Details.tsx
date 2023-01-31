@@ -89,7 +89,6 @@ const Tournament_Details = () => {
      await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
      const  team =res.data.filter((t:any) => t.Admin=== em) 
     //  res.data.filter((t:any) => t.TeamName.some((member:any) => member.TName === em))
-     console.log(team)
      if(team.length>0){
       setCheck(true)
      }
@@ -123,12 +122,13 @@ const Tournament_Details = () => {
     }
   },[nextPage,teamInfo])
   const OpenInfoT=()=>{
-        if(timeInfo){
+        // if(timeInfo){
+          Cookies.set("_m_t_id_",Cookies.get('_t_id') as any,{expires:3})
           router.push("/Tournament/MapPick")
-        }
-        else{
-      setTopenModel(true)
-        }
+        // }
+        // else{
+        // setTopenModel(true)
+        // }
   }
   return (
     <>
