@@ -22,7 +22,7 @@ const SelectedTeam = () => {
   const [teamList,setTeamList]=useState([])
   const {width,height}=useWindowSize()
   const [openModel,setOpenModel]=useState(false)
-  const [teaminfo,setTeamInfo]=useState<any>([])
+  const [teaminfo,setTeamInfo]=useState<any>({})
   const  getTeamList=async()=>{
   const eventid=Cookies.get("_t_id")
   await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
@@ -34,10 +34,14 @@ const SelectedTeam = () => {
   useEffect(()=>{
     getTeamList()
   },[])
-  const TeamOpen=(team:any)=>{
+  const TeamOpen=(team:any,admin:any)=>{
     setOpenModel(true)
-    setTeamInfo(team)
+    setTeamInfo({
+      admin:admin,
+      team:team
+    })
   }
+  console.log(teaminfo.team)
   return (
     <div className='p-3'>
       <table style={{width:width/2}} className="border-collapse bg-[#20395F] ">
@@ -55,7 +59,7 @@ const SelectedTeam = () => {
         return(
       <tr key={index} className='h-20 bg-[#1C1B22] hover:bg-[#20395F] rounded-2xl border-b border-b-[#081325] '>
       <td className='text-white font-serif font-medium text-lg cursor-pointer  pl-7'>
-        <div onClick={()=>TeamOpen(item.TeamName)} className='flex items-center'>
+        <div onClick={()=>TeamOpen(item.TeamName,item.Admin)} className='flex items-center'>
           <Image
           src={"https://epulze.com/static/build/unassigned.png"}
           alt=""
@@ -85,14 +89,20 @@ const SelectedTeam = () => {
       <Box sx={{...style,borderRadius:3}}>
         <p className='text-white font-serif font-medium text-lg text-center' >Team Members</p>
         <div className='ml-4 mt-5 h-full w-full cursor-pointer'>
+        <div  className="h-9 w-[90%] bg-[black] mt-3 flex items-center justify-between px-4 rounded-sm">
+            <p className='text-white'>{teaminfo?.admin}</p>
+            <p className='text-lg  font-serif italic text-[#F69134]'>Admin</p>
+
+          </div>
         {
-        teaminfo.map((item:any,index:any)=>{
+        teaminfo?.team?.map((item:any,index:any)=>{
          return(
-          <div key={index} className="h-9 w-[90%] bg-red-200 mt-3 rounded-sm">
-            <p>{item.TName}</p>
+          <div key={index} className="h-9 w-[90%] bg-[black] mt-3 flex items-center px-4 rounded-sm">
+            <p className='text-white'>{item.TName}</p>
           </div>
          )
-        })
+        }
+        )
        }
         </div>
       

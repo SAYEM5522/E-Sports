@@ -29,7 +29,7 @@ import { useRouter } from 'next/router'
   },[])
   function handleClick(item:any) {
     
-    if (!selectedItems.includes(item)&&selectedItems.length<mode) {
+    if (!selectedItems.includes(item)&&selectedItems.length<mode-1) {
       setSelectedItems([...selectedItems, item]);
     }
     else{
@@ -48,6 +48,7 @@ import { useRouter } from 'next/router'
     const TeamInformation={
       EventId:Cookies.get('_t_id'),
       MainTeam:teamInfo,
+      Admin:Cookies.get('email'),
       Profile:"",
       TeamName:data
     }
@@ -73,7 +74,11 @@ import { useRouter } from 'next/router'
       {
         warning?<p className='text-[red] text-center w-[70%] font-serif  ml-6 font-medium text-sm  -mt-7 cursor-pointer' >{warning}</p>:null
       }
-      <p className='text-white font-serif mt-2 ml-5 font-bold pl-2 cursor-pointer'> You need to select {mode} member</p>
+      {
+        mode===1?null:
+        
+        <div>
+<p className='text-white font-serif mt-2 ml-5 font-bold pl-2 cursor-pointer'> You need to select {mode-1} more member</p>
       <div className='h-[250px] overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden'>
       {   
       allmember[0]?.Teammember.length===0?
@@ -94,7 +99,7 @@ import { useRouter } from 'next/router'
       }
       </div>
       {
-        allmember[0]?.Teammember.length<mode &&
+        allmember[0]?.Teammember.length<(mode-1) &&
         <div onClick={AddTeamMember}  className='w-[50%] rounded-sm items-center justify-center flex h-7 bg-[#CEFF7F] font-serif  font-medium cursor-pointer text-sm'>
         <p>Add Member To Your Team </p>
       </div>
@@ -108,8 +113,11 @@ import { useRouter } from 'next/router'
           ))}
         </ul>
       </div>
+        </div>
+      }
+      
       <div className='grid bg-[#F69134] mt-20 ml-auto mr-auto cursor-pointer w-44 rounded-md place-items-center  h-8'>
-        <button onClick={JoinTournament} disabled={selectedItems.length<mode?true:false} className='text-lg font-bold'>Join Tournament</button>
+        <button onClick={JoinTournament} disabled={selectedItems.length<(mode-1)?true:false} className='text-lg font-bold'>Join Tournament</button>
       </div>
     </div>
   )

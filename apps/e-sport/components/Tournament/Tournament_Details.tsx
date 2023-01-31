@@ -87,8 +87,9 @@ const Tournament_Details = () => {
      const eventid=Cookies.get("_t_id")
      const em=Cookies.get("email")
      await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
-     const  team = res.data.filter((t:any) => t.TeamName.some((member:any) => member.TName === em))
-     
+     const  team =res.data.filter((t:any) => t.Admin=== em) 
+    //  res.data.filter((t:any) => t.TeamName.some((member:any) => member.TName === em))
+     console.log(team)
      if(team.length>0){
       setCheck(true)
      }
