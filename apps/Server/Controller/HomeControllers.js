@@ -99,6 +99,7 @@ const OneVOneRoute=async(req,res)=>{
 }
 const ManyVManyRoute=async(req,res)=>{
    const array=[]
+   let ExistingTeam;
   req.body.TeamName.map((item)=>{
       array.push(item)
       
@@ -106,9 +107,18 @@ const ManyVManyRoute=async(req,res)=>{
    const data={
       EventId:req.body.EventId,
       MainTeam:req.body.MainTeam,
+      Admin:req.body.Admin,
       TeamName:array,
       Profile:req.body.Profile,
       // Date:req.body.Date
+   }
+   try {
+    ExistingTeam=await ManyVMany.find({Admin:req.body.Admin})
+   } catch (error) {
+    console.log(error)
+   }
+   if(ExistingTeam.length>0){
+    return res.status(401).send("Team with the Same admin already exist")
    }
    const ManyTeam=new ManyVMany(data)
    try {
@@ -173,13 +183,15 @@ const getOneVOne=async(req,res)=>{
    if(!eventrulelist){
      return res.status(401).send("Event id dosent match")
    }
+
   return res.status(200).send(eventrulelist)
+
   }
   const EachUserTournamentlist=async(req,res)=>{
     const email=req.params.email
     let eventList;
     let info;
-   let MainInfo
+    let MainInfo
 
     try {
      eventList=await Event.find()
@@ -193,8 +205,6 @@ const getOneVOne=async(req,res)=>{
       return res.status(401).send("email dosen't match")
     }
    let information=info.filter((t) => t.TeamName.some((member) => member.TName === email))
-   
-   
    try {
     MainInfo=await Event.find({_id:information.map((item)=>item.EventId)})
    } catch (error) {

@@ -45,6 +45,9 @@ const ManyVManySchema=new mongoose.Schema({
   EventId:{
    type:String
  },
+ Admin:{
+  type:String
+ },
   MainTeam:{
     type:String
   },
