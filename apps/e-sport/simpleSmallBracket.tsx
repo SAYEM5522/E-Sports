@@ -29,7 +29,7 @@ export const simpleSmallBracket = [
     nextMatchId: 19754,
     tournamentRoundText: "1",
     startTime: "2021-05-30",
-    // state: "SCORE_DONE",
+    state: "SCORE_DONE",
     participants: [
       {
         id: "14754a1a-932c-4992-8dec-f7f94a339960",
