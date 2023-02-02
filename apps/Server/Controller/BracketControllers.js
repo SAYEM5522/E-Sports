@@ -26,7 +26,20 @@ const CreateBracket=async(req,res)=>{
 }
 
 const upDateBracket=async(req,res)=>{
-  
+  const id=req.body.params;
+  let array=[];
+   req.body.map((item)=>{
+    array.push(item)
+   })
+  let item;
+  try {
+   item= await Bracket.updateOne({id:id},{ $set: { participants: array }})
+   console.log(item)
+    return res.status(201).send(item)
+  } catch (error) {
+    console.log(error)
+    
+  }
 }
 
-export {CreateBracket}
+export {CreateBracket,upDateBracket}
