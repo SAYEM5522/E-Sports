@@ -5,6 +5,7 @@ import { router } from "./Route/auth.js"
 import { Homerouter } from "./Route/Home.js"
 import { Teamrouter } from "./Route/Team.js"
 import {InfoRouter} from "./Route/Info.js"
+import { BracketRoute } from "./Route/Bracket.js"
 import { ConversationRouter } from "./Route/Conversation.js"
 import { GameListRouter } from "./Route/GameList.js"
 import mongoose from "mongoose"
@@ -22,14 +23,14 @@ const io = new Server(8080, {
   },
 });
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+  console.log(`User Connected: `);
 
   socket.on("send_message", (data) => {
     socket.to(data.conversationId).emit("receive_message", data);
   });
-  // socket.on("disconnect", () => {
-  //   console.log("User Disconnected", socket.id);
-  // });
+  socket.on("disconnect", () => {
+    console.log("User Disconnected");
+  });
 });
 
 // Route
@@ -39,6 +40,8 @@ app.use("/",Teamrouter)
 app.use("/",InfoRouter)
 app.use("/",ConversationRouter)
 app.use("/",GameListRouter)
+app.use("/",BracketRoute)
+
 
 
 const Connection_Url="mongodb+srv://e-sports:zzgWyKRSASNQOkzY@cluster0.sxukpxt.mongodb.net/?retryWrites=true&w=majority"
