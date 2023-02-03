@@ -6,6 +6,7 @@ import moment from 'moment'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useWindowSize } from '../Hooks/useWindowSize'
+import Available_Slots from './Available_Slots'
 const style = {
   position: 'absolute' as 'absolute',
   top: '52%',
@@ -41,10 +42,9 @@ const SelectedTeam = () => {
       team:team
     })
   }
-  console.log(teaminfo.team)
   return (
-    <div className='p-3'>
-      <table style={{width:width/2}} className="border-collapse bg-[#20395F] ">
+    <div className='p-3 flex items-start'>
+      <table style={{width:width/2}} className="border-collapse bg-[#20395F]">
   <thead>
     <tr className='h-14 '>
       <th className=" text-white font-serif font-bold text-lg ">TEAM NAME</th>
@@ -79,6 +79,9 @@ const SelectedTeam = () => {
     
   </tbody>
 </table>
+    <div className='bg-[#15141B] h-52 ml-10 w-[30%] rounded-md '>
+      <Available_Slots/>
+    </div>
     {
       <Modal
       open={openModel}

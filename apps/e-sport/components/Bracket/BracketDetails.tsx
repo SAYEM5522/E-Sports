@@ -4,7 +4,10 @@
 //   SVGViewer,
 //   createTheme
 // } from "@g-loot/react-tournament-brackets";
+import axios from "axios";
+import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { simpleSmallBracket } from "../../simpleSmallBracket";
 import { useWindowSize } from "../Hooks/useWindowSize";
 if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
@@ -60,11 +63,25 @@ const SVGViewer = dynamic(
 
  const BracketDetails = () => {
   const {width,height}=useWindowSize()
+  const [BracketList,setBracketList]=useState([])
+
+  const getBracket=async()=>{
+    axios.get(`http://localhost:8081/getBracket/${Cookies.get("_t_id")}`).then((res)=>{
+    setBracketList(res.data)
+   }).catch((err)=>{
+    console.log(err)
+   })
+  }
+  useEffect(()=>{
+   getBracket(),
+   ()=>getBracket()
+  },[])
 
   return(
     <SingleEliminationBracket
     // theme={GlootTheme}
     matches={simpleSmallBracket}
+      // @ts-ignore
     matchComponent={Match}
 
     svgWrapper={({ children, ...props }:any) => (

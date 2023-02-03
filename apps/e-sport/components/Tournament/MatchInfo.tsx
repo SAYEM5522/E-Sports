@@ -22,6 +22,8 @@ const generateMatchSchedule = (teams:any) => {
 
 const Schedule = () => {
     const [teamList,setTeamList]=useState([])
+    const [BracketList,setBracketList]=useState([])
+
     const getTeamlist=async()=>{
     const eventid=Cookies.get("_m_t_id_")
     await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
@@ -30,46 +32,123 @@ const Schedule = () => {
       console.log(err)
    })
   }
-  useEffect(()=>{
-  getTeamlist(),
-  ()=>getTeamlist()
-  },[])
+  const postBracket=async()=>{
+
+   axios.get(`http://localhost:8081/getBracket/${Cookies.get("_t_id")}`).then((res)=>{
+    setBracketList(res.data)
+   }).catch((err)=>{
+    console.log(err)
+   })
+    if(BracketList.length===0){
+      {matches.map((match:any, index:number) =>{
+        const data={
+          EventId:Cookies.get("_t_id"),
+          id:index+1,
+          nextMatchId:match[2].nextMatchId,
+          tournamentRoundText: "1",
+          startTime: "",
+          state: "SCHEDULED",
+          participants: [
+            {
+              pid:match[0].Admin,
+              resultText: null,
+              isWinner: false,
+              status: null,
+              name:match[0].MainTeam,
+            },
+            {
+              pid:match[1].Admin,
+              resultText: null,
+              isWinner: false,
+              status: null,
+              name:match[1].MainTeam,
+            }
+          ]
+        }
+        axios.post("http://localhost:8081/CreateBracket",data).then((res)=>{
+         console.log(res.data)
+        }).catch((err)=>{
+          console.log(err)
+        })
+        
+      })}
+    }
+    
+  }
   const [matches, setMatches] = useState<any>([]);
   const [removedTeam, setRemovedTeam] = useState<any>(null);
-
+useEffect(()=>{
+  getTeamlist(),
+  ()=>getTeamlist()
+},[])
   useEffect(() => {
+   
     if(teamList.length%2===0){
       setMatches(generateMatchSchedule(teamList));
     }
     else{
       const updatedTeams = teamList.slice(0, -1);
+
+      // @ts-ignore
       setRemovedTeam(teamList[teamList.length-1]?.MainTeam );
       setMatches(generateMatchSchedule(updatedTeams));
     }
+    postBracket()
   }, [teamList]);
-  console.log(matches)
 
   return (
     <div>
-      <h2>Match Schedule</h2>
+      {/* <h2>Match Schedule</h2>
       {removedTeam && <p>Removed team: {removedTeam}</p>}
 
       <table>
         <tbody>
-          {matches.map((match:any, index:number) => (
+          {matches.map((match:any, index:number) =>{
+            const data={
+              id:index+1,
+              nextMatchId:match[2].nextMatchId,
+              tournamentRoundText: "1",
+              startTime: "",
+              state: "SCHEDULED",
+              participants: [
+                {
+                  pid:match[0].Admin,
+                  resultText: null,
+                  isWinner: false,
+                  status: null,
+                  name:match[0].MainTeam,
+                },
+                {
+                  pid:match[1].Admin,
+                  resultText: null,
+                  isWinner: false,
+                  status: null,
+                  name:match[1].MainTeam,
+                }
+              ]
+            }
+           
+           return(
             <tr key={index}>
               <td>{match[0]?.MainTeam}</td>
               <td>vs</td>
               <td>{match[1]?.MainTeam}</td>
             </tr>
-          ))}
+          )})}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };
 
 export default Schedule;
+
+
+
+
+
+
+
 
 
 
@@ -114,3 +193,156 @@ export default Schedule;
 // };
 
 // export default Tournament;
+
+
+
+
+
+
+
+// import React from 'react'
+// import { simpleSmallBracket } from '../../simpleSmallBracket';
+// const matches = [
+//   {
+//     id: 19755,
+//     nextMatchId: null,
+//     tournamentRoundText: "1",
+//     startTime: "2021-05-30",
+//     state: "SCORE_DONE",
+//     participants: [
+//       {
+//         id: "14754a1a-932c-4992-8dec-f7f94a339960",
+//         resultText: "Won",
+//         isWinner: true,
+//         status: "PLAYED",
+//         name: "CoKe BoYz",
+//         picture: "teamlogos/client_team_default_logo"
+//       },
+//       {
+//         id: "d16315d4-7f2d-427b-ae75-63a1ae82c0a8",
+//         resultText: "Lost",
+//         isWinner: false,
+//         status: "PLAYED",
+//         name: "Aids Team",
+//         picture: "teamlogos/client_team_default_logo"
+//       }
+//     ]
+//   },
+//   {
+//     id: 19756,
+//     nextMatchId: null,
+//     tournamentRoundText: "1",
+//     startTime: "2021-05-30",
+//     state: "SCORE_DONE",
+//     participants: [
+//       {
+//         id: "14754a1a-932c-4992-8dec-f7f94a339960",
+//         resultText: "Won",
+//         isWinner: true,
+//         status: "PLAYED",
+//         name: "CoKe BoYz",
+//         picture: "teamlogos/client_team_default_logo"
+//       },
+//       {
+//         id: "d16315d4-7f2d-427b-ae75-63a1ae82c0a8",
+//         resultText: "Lost",
+//         isWinner: false,
+//         status: "PLAYED",
+//         name: "Aids Team",
+//         picture: "teamlogos/client_team_default_logo"
+//       }
+//     ]
+//   },{
+//     id: 19757,
+//     nextMatchId: null,
+//     tournamentRoundText: "2",
+//     startTime: "2021-05-30",
+//     state: "SCORE_DONE",
+//     participants: [
+//       {
+//         id: "14754a1a-932c-4992-8dec-f7f94a339960",
+//         resultText: "Won",
+//         isWinner: true,
+//         status: "PLAYED",
+//         name: "CoKe BoYz",
+//         picture: "teamlogos/client_team_default_logo"
+//       },
+//       {
+//         id: "d16315d4-7f2d-427b-ae75-63a1ae82c0a8",
+//         resultText: "Lost",
+//         isWinner: false,
+//         status: "PLAYED",
+//         name: "Aids Team",
+//         picture: "teamlogos/client_team_default_logo"
+//       }
+//     ]
+//   },{
+//     id: 19758,
+//     nextMatchId: null,
+//     tournamentRoundText: "2",
+//     startTime: "2021-05-30",
+//     state: "SCORE_DONE",
+//     participants: [
+//       {
+//         id: "14754a1a-932c-4992-8dec-f7f94a339960",
+//         resultText: "Won",
+//         isWinner: true,
+//         status: "PLAYED",
+//         name: "CoKe BoYz",
+//         picture: "teamlogos/client_team_default_logo"
+//       },
+//       {
+//         id: "d16315d4-7f2d-427b-ae75-63a1ae82c0a8",
+//         resultText: "Lost",
+//         isWinner: false,
+//         status: "PLAYED",
+//         name: "Aids Team",
+//         picture: "teamlogos/client_team_default_logo"
+//       }
+//     ]
+//   },
+  
+//   // other matches
+// ];
+
+// // const numTeams = 4;
+
+// function calculateNumMatches(numTeams:any) {
+//   let numMatches = numTeams / 2;
+//   let round = 1;
+//   let matchesInRound = [];
+
+//   while (numMatches >= 1) {
+//     matchesInRound.push({ round, numMatches });
+//     numMatches = numMatches / 2;
+//     round++;
+//   }
+//   return matchesInRound;
+// }
+
+// const matchesInRounds = calculateNumMatches(matches.length);
+
+// for (let i = 0; i < matches.length; i++) {
+//   let match = matches[i];
+//   let round:any =Number(match.tournamentRoundText);
+//   let numMatchesInRound = matchesInRounds[round - 1].numMatches;
+//   console.log(numMatchesInRound)
+
+//   if (i + numMatchesInRound <matches.length) {
+//     match.nextMatchId = matches[i]?.id;
+//   } else {
+//     match.nextMatchId = null;
+//   }
+// }
+
+// console.log(matches);
+
+
+
+// const MatchInfo = () => {
+//   return (
+//     <div>MatchInfo</div>
+//   )
+// }
+
+// export default MatchInfo
