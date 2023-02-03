@@ -1,5 +1,8 @@
 import mongoose, { Schema } from "mongoose"
 const BracketSchema=new mongoose.Schema({
+  EventId:{
+    type:String
+  },
   id:{
     type:Number
   },
