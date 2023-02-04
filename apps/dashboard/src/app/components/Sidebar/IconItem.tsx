@@ -1,0 +1,16 @@
+import React from 'react'
+import { IconType } from 'react-icons'
+
+interface Props {
+  Icon: IconType
+}
+function IconItem({Icon}:Props) {
+  return (
+    <div   
+    >
+        <Icon className='cursor-pointer text-black dark:text-white ' size={26}  />
+    </div>
+  )
+}
+
+export default IconItem
