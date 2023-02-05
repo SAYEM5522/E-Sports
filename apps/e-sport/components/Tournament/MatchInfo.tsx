@@ -22,8 +22,8 @@ const generateMatchSchedule = (teams:any) => {
 
 const Schedule = () => {
     const [teamList,setTeamList]=useState([])
-    const [BracketList,setBracketList]=useState([])
-
+    const [BracketList,setBracketList]=useState(false)
+    
     const getTeamlist=async()=>{
     const eventid=Cookies.get("_m_t_id_")
     await axios.get(`http://localhost:8081/getManyVManyRoute/${eventid}`).then((res)=>{
@@ -33,13 +33,15 @@ const Schedule = () => {
    })
   }
   const postBracket=async()=>{
-
    axios.get(`http://localhost:8081/getBracket/${Cookies.get("_t_id")}`).then((res)=>{
-    setBracketList(res.data)
+    if(res.data.length>0){
+      setBracketList(true)
+    }
    }).catch((err)=>{
     console.log(err)
    })
-    if(BracketList.length===0){
+    if(!BracketList){
+      let bracketData = {} as any;
       {matches.map((match:any, index:number) =>{
         const data={
           EventId:Cookies.get("_t_id"),
@@ -65,6 +67,13 @@ const Schedule = () => {
             }
           ]
         }
+       
+        if (!bracketData[data.nextMatchId]) {
+          bracketData[data.nextMatchId] = [];
+        }
+      
+        bracketData[data.nextMatchId].push(data);
+        
         axios.post("http://localhost:8081/CreateBracket",data).then((res)=>{
          console.log(res.data)
         }).catch((err)=>{
@@ -72,6 +81,51 @@ const Schedule = () => {
         })
         
       })}
+      let finalbracket={} as any
+      Object.keys(bracketData).map((key, index) => {
+
+        const newData = {
+          EventId: Cookies.get("_t_id"),
+          id: Number(key),
+          nextMatchId:500,
+          tournamentRoundText: "2",
+          startTime: "",
+          state: "SCHEDULED",
+          participants:[]
+        } as any;
+     if (!finalbracket[newData.nextMatchId]) {
+          finalbracket[newData.nextMatchId] = [];
+        }
+        finalbracket[newData.nextMatchId].push(newData);
+
+      axios.post("http://localhost:8081/CreateBracket",newData).then((res)=>{
+            console.log(res.data)
+            }).catch((err)=>{
+              console.log(err)
+            })
+
+      })
+
+       Object.keys(finalbracket).map((key, index) => {
+
+        const finalData = {
+          EventId: Cookies.get("_t_id"),
+          id: Number(key),
+          nextMatchId:null,
+          tournamentRoundText: "3",
+          startTime: "",
+          state: "SCHEDULED",
+          participants:[]
+        };
+
+
+      axios.post("http://localhost:8081/CreateBracket",finalData).then((res)=>{
+            console.log(res.data)
+            }).catch((err)=>{
+              console.log(err)
+            })
+
+      })
     }
     
   }

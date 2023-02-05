@@ -76,11 +76,11 @@ const SVGViewer = dynamic(
    getBracket(),
    ()=>getBracket()
   },[])
-
+console.log(BracketList)
   return(
     <SingleEliminationBracket
     // theme={GlootTheme}
-    matches={simpleSmallBracket}
+    matches={BracketList}
       // @ts-ignore
     matchComponent={Match}
 
