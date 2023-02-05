@@ -19,10 +19,10 @@ const EventRoute=async(req,res)=>{
    )
    try {
       await event.save()
-      return res.status(201).send(event)
+      return res.status(201).send({message:"Event Created Successfully"})
 
    } catch (error) {
-       res.status(401).send({message:"Internal server problem"})
+      return res.status(401).send({message:"Internal server problem"})
    }
    
 }

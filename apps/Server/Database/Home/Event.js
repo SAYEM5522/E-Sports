@@ -68,10 +68,6 @@ const Event=mongoose.model("EventSchema",EventSchema)
 const EventRuleList=mongoose.model("EventRuleSchema",EventRuleSchema)
 const OneVOne=mongoose.model("OneVOneSchema",OneVOneSchema)
 const ManyVMany=mongoose.model("ManyVManySchema",ManyVManySchema)
-// ManyVMany.updateMany({}, { $set: { Admin: '' } }, function(err, res) {
-//   if (err) throw err;
-//   console.log("Admin field added to all documents in the collection");
-// });
 
 
 export {Event,EventRuleList,OneVOne,ManyVMany}

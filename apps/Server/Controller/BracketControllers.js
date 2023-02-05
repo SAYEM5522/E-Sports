@@ -29,7 +29,7 @@ const getBracket=async(req,res)=>{
   const eventid=req.params.id
   let data;
   try {
-    data=await Bracket.find({EventId:eventid})
+    data=await Bracket.find({EventId:eventid}).select("-_id -EventId")
   } catch (error) {
     console.log(error)
   }
