@@ -1,86 +1,58 @@
 "use client";
 import React, { useCallback, useMemo, useState } from 'react'
 import {FiHome} from "react-icons/fi"
-import {IoNewspaperOutline} from "react-icons/io5"
-import {AiOutlineTeam} from "react-icons/ai"
-import {BsPlusSquareDotted, BsTrophy} from "react-icons/bs"
+
 import IconItem from './IconItem'
-import {FaStreetView} from "react-icons/fa"
-import Image from 'next/image'
-import {IoIosArrowForward} from "react-icons/io"
+
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames'
-import {MdOutlineLeaderboard} from "react-icons/md"
 
 const SideBarItem=[
   {
     id:1,
-    name:"Home",
+    name:"Event",
     icon:FiHome,
     link:"/"
 
   },
-  {
-    id:2,
-    name:"Team",
-    icon:AiOutlineTeam,
-    link:"/Team"
+  // {
+  //   id:2,
+  //   name:"Team",
+  //   icon:AiOutlineTeam,
+  //   link:"/Team"
 
-  },{
-    id:3,
-    name:"Tournament",
-    icon:BsTrophy,
-    link:"/Tournament"
+  // },{
+  //   id:3,
+  //   name:"Tournament",
+  //   icon:BsTrophy,
+  //   link:"/Tournament"
 
-  },
-  {
-    id:4,
-    name:"Portals",
-    icon:FaStreetView,
-    link:"/Portals"
+  // },
+  // {
+  //   id:4,
+  //   name:"Portals",
+  //   icon:FaStreetView,
+  //   link:"/Portals"
 
-  },
-  {
-    id:5,
-    name:"News",
-    icon:IoNewspaperOutline,
-    link:"/News"
-
-  },
+  // },
+ 
 
 
 ]
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '52%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 450,
-  bgcolor: '#1C1B22',
-  boxShadow: 24,
-  p: 2,
-  outline: 0,
-  height:590,
-};
 const Sidebar = () => {
-  const CurrencyFormat="Taka"
   const router=useRouter()
-  const [openModel,setOpenModel]=useState(false)
-
   const activeItem=useMemo(()=>
     SideBarItem.find((menu)=>
-      menu.link===router.pathname
+      menu.link==="/"
+      // router.pathname
     )
   ,[router.pathname])
   const getSidebarClasses=(menu:any)=>{
     return classNames("flex items-center p-3 mt-2 mb-3 hover: w-56  hover:bg-[#F3A195] cursor-pointer rounded-md",{
       ['bg-[#F26D59]']:activeItem?.id===menu.id
     })
-  }
-  const ModelOpen=()=>{
-    setOpenModel(true)
   }
 
   return (
@@ -100,7 +72,7 @@ const Sidebar = () => {
             >
               
               <IconItem Icon={item.icon}/>
-              <p className='cursor-pointer ml-2 text-black font-medium dark:text-white'>{item.name}</p>
+              <p className='cursor-pointer ml-2 text-white font-medium dark:text-white'>{item.name}</p>
               
             </div>
             </Link>

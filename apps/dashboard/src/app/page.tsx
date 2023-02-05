@@ -1,12 +1,10 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import RootLayout from './layout'
+import Event from 'components/Event/Event'
 
 
 export default function Home() {
   return (
     <div>
-      
+      <Event/>
     </div>
   )
 }
