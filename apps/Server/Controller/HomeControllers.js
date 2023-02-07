@@ -1,4 +1,4 @@
-import { Event, EventRuleList, ManyVMany, OneVOne } from "../Database/Home/Event.js";
+import { Event, EventRuleList, ManyVMany, MapBan, OneVOne, ServerBan } from "../Database/Home/Event.js";
 import { Banner } from "../Database/Home/Banner.js";
 
 const EventRoute=async(req,res)=>{
@@ -225,9 +225,91 @@ const getOneVOne=async(req,res)=>{
    res.status(201).send(EachData)
 
   }
+
+  // Map Ban Related Controller
+  const createMapBan=async(req,res)=>{
+    let member=[];
+    let map=[];
+    req.body.participant.map((item)=>{
+     member.push(item)
+    })
+    req.body.map.map((item)=>{
+      map.push(item)
+     })
+     let data={
+      EventId:req.body.EventId,
+      participant:member,
+      map:map
+     }
+  let item;
+   try {
+   item= await new MapBan(data).save()
+
+   } catch (error) {
+    console.log(error)
+   }
+   return res.status(201).send(item)
+
+  }
+  const updateSelectedMap=async(req,res)=>{
+   const eventId=req.params.eventId
+   try {
+     await MapBan.updateOne(
+
+       {_id:eventId}
+      ,{ $set: { selected: req.body.selected }})
+       return res.status(201).send("Update Successfully")
+
+   } catch (error) {
+    console.log(error)
+   }
+  }
+  const UpdateMapStatus=async(req,res)=>{
+    const eventId=req.params.eventId
+    try {
+      await MapBan.updateOne(
+        { "map._id": eventId}, 
+        { $set: { "map.$.status": true } }
+      );
+      return res.status(201).send("Map Status update successfully")
+    } catch (error) {
+      console.log(error)
+    }
+  
+  }
+
+  const createServerBan=async(req,res)=>{
+    let member=[];
+    let server=[];
+    req.body.participant.map((item)=>{
+     member.push(item)
+    })
+    req.body.server.map((item)=>{
+      server.push(item)
+     })
+     let data={
+      EventId:req.body.EventId,
+      participant:member,
+      server:server
+     }
+  let item;
+   try {
+   item= await new ServerBan(data).save()
+
+   } catch (error) {
+    console.log(error)
+   }
+   return res.status(201).send(item)
+
+  }
  
 
-export {EventRoute,getEvent,EventRule,
+export {
+  EventRoute,getEvent,EventRule,
    getEventRule,OneVOneRoute,getOneVOne,
    ManyVManyRoute,getManyVMany,getSpecificEvent,
-   AddManyvManyMember,EachUserTournamentlist}
+   AddManyvManyMember,EachUserTournamentlist
+   ,createMapBan,createServerBan,updateSelectedMap,
+   UpdateMapStatus
+  
+  }

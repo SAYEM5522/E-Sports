@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose, { mongo } from "mongoose"
 
 const EventSchema=new mongoose.Schema({
   Logo: {type:String},
@@ -64,10 +64,66 @@ const ManyVManySchema=new mongoose.Schema({
   Date:{ type: Date, default: Date.now }
 
 })
+const MapList=new mongoose.Schema({
+  EventId:{
+   type:String
+   
+  },
+  participant:[
+    {
+      email:{
+        type:String
+      }
+    }
+  ],
+  map:[
+     {
+      name:{
+        type:String
+      },
+      status:{
+        type:Boolean
+      }
+     } 
+  ],
+  selected:{
+    type:String
+  }
+})
+const ServerList=new mongoose.Schema({
+  EventId:{
+    type:{
+     String
+    }
+   },
+  participant:[
+    {
+      email:{
+        type:String
+      }
+    }
+  ],
+  server:[
+     {
+      name:{
+        type:String
+      },
+      status:{
+        type:Boolean
+      }
+     } 
+  ],
+  selected:{
+    type:String
+  }
+})
 const Event=mongoose.model("EventSchema",EventSchema)
+const MapBan=mongoose.model("MapBan",MapList)
+const ServerBan=mongoose.model("ServerBan",ServerList)
 const EventRuleList=mongoose.model("EventRuleSchema",EventRuleSchema)
 const OneVOne=mongoose.model("OneVOneSchema",OneVOneSchema)
 const ManyVMany=mongoose.model("ManyVManySchema",ManyVManySchema)
 
 
-export {Event,EventRuleList,OneVOne,ManyVMany}
+export {Event,EventRuleList,
+  OneVOne,ManyVMany,MapBan,ServerBan}
