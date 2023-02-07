@@ -76,9 +76,11 @@ const SVGViewer = dynamic(
    getBracket(),
    ()=>getBracket()
   },[])
-console.log(BracketList)
   return(
-    <SingleEliminationBracket
+    <div>
+      {
+        BracketList.length>0?
+        <SingleEliminationBracket
     // theme={GlootTheme}
     matches={BracketList}
       // @ts-ignore
@@ -97,7 +99,10 @@ console.log(BracketList)
       </SVGViewer>
     )}
    
-  />
+  />:null
+      }
+    
+  </div>
   )
 
     };

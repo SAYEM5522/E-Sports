@@ -83,28 +83,56 @@
 
 
 
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 
 const StartMatch = () => {
-  const c=2
+  const c=2 
+  const [BracketList,setBracketList]=useState([])
+  const getBracket=async()=>{
+    const d=Cookies.get("_t_id")
+    axios.get(`http://localhost:8081/getBracket/${d}`).then((res)=>{
+    setBracketList(res.data)
+   }).catch((err)=>{
+    console.log(err)
+   })
+  }
+  useEffect(()=>{
+   getBracket(),
+   ()=>getBracket()
+  },[])
 
-  const [players, setPlayers] = useState<any>([
-    { id: 1, name: 'Player 1', ready: false },
-    { id: 2, name: 'Player 2', ready: false },
-  ]);
+  const filteredResult:any = BracketList?.filter((match:any)=> 
+  match.participants.some((participant:any) => participant.pid === Cookies.get("email"))
+);
+
+let updatedParticipants:any;
+if (filteredResult && filteredResult[0]) {
+  updatedParticipants = filteredResult[0].participants.map((participant:any) => ({
+    ...participant,
+    ready: false
+  }));
+}
+console.log(updatedParticipants)
+const [players, setPlayers] = useState<any>([]);
+   //   [
+  //   { id: 1, name: 'Player 1', ready: false },
+  //   { id: 2, name: 'Player 2', ready: false },
+  // ]
+
   const [Ready,setReady]=useState<boolean>(false)
-  
   useEffect(() => {
-    if (players.every((player:any) => player.ready === true)) {
+    if (players?.every((player:any) => player.ready === true)) {
       setReady(true)
     }
-   
-  }, [players]);
+  }, []);
+  console.log(players)
   const handleReadyClick = (id:any) => {
-    if(c===id){
+    if(Cookies.get("email")===id){
       setPlayers(
         players.map((player:any) =>
-          player.id === id ? { ...player, ready: !player.ready } : player
+          player.pid === id ? { ...player, ready: !player.ready } : player
         )
       );
     }
@@ -114,16 +142,16 @@ const StartMatch = () => {
 
   return (
     <div>
-      {players.map((player:any) => (
-        <div key={player.id}>
+      {players?.map((player:any) => (
+        <div key={player.pid}>
           <p>{player.name}</p>
-          <button onClick={() => handleReadyClick(player.id)}>
+          <button onClick={() => handleReadyClick(player.pid)}>
             {player.ready ? 'Not Ready' : 'Ready'}
           </button>
         </div>
       ))}
       {
-        Ready&&<p>Ready</p>
+        Ready?<p>Ready</p>:null
       }
     </div>
   );

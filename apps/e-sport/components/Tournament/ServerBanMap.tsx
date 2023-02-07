@@ -3,26 +3,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
-import ServerBanMap from './ServerBanMap';
-import MapList from './ServerBanMap';
-const MapBanPick = () => {
-  const [BracketList,setBracketList]=useState([])
-  const getBracket=async()=>{
-    const d=Cookies.get("_t_id")
-    axios.get(`http://localhost:8081/getBracket/${d}`).then((res)=>{
-    setBracketList(res.data)
-   }).catch((err)=>{
-    console.log(err)
-   })
-  }
-  useEffect(()=>{
-   getBracket(),
-   ()=>getBracket()
-  },[])
+const ServerBanMap = ({filteredResult}:any) => {
 
-  const filteredResult:any = BracketList?.filter((match:any)=> 
-  match.participants.some((participant:any) => participant.pid === Cookies.get("email"))
-);
   
   const [phase, setPhase] = useState('ban');
   const [maps, setMaps] = useState<any>(['PEARL', 'SPLIT', 'BIND','ASCENT','HEAVEN']);
@@ -91,14 +73,12 @@ const MapBanPick = () => {
       )}
       { phase === 'end' && (
         <div>
-        <div>
-          <h2>Selected Map</h2>
+          <h2>Selected Sercer</h2>
           <div className='w-[170px] m-4 grid flex-row place-items-center h-14 bg-[#73B56A] rounded-sm' >
        <p className='font-serif cursor-pointer  text-white font-bold text-lg'>{selectedMap}</p> 
       </div>
         </div>
-        <ServerBanMap filteredResult={filteredResult}/>
-        </div>
+        
       )}
     </div>
   );
@@ -106,30 +86,4 @@ const MapBanPick = () => {
 
 
 
-export default MapBanPick;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default ServerBanMap;
