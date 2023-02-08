@@ -251,6 +251,19 @@ const getOneVOne=async(req,res)=>{
    return res.status(201).send(item)
 
   }
+  const getMapBan=async(req,res)=>{
+    const id=req.params.id
+    let data;
+    try {
+     data=await MapBan.find({_id:id})
+    } catch (error) {
+      console.log(error)
+    }
+    if(data){
+      return res.status(201).send(data)
+    }
+
+  }
   const updateSelectedMap=async(req,res)=>{
    const eventId=req.params.eventId
    try {
@@ -310,6 +323,6 @@ export {
    ManyVManyRoute,getManyVMany,getSpecificEvent,
    AddManyvManyMember,EachUserTournamentlist
    ,createMapBan,createServerBan,updateSelectedMap,
-   UpdateMapStatus
+   UpdateMapStatus,getMapBan
   
   }

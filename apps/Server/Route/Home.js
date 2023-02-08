@@ -1,7 +1,7 @@
 import express from "express"
 import { EventRoute, EventRule, getEvent, getEventRule, getOneVOne,
    ManyVManyRoute, OneVOneRoute,getManyVMany, getSpecificEvent, AddManyvManyMember,
-    EachUserTournamentlist, createMapBan, createServerBan, updateSelectedMap, UpdateMapStatus } from "../Controller/HomeControllers.js"
+    EachUserTournamentlist, createMapBan, createServerBan, updateSelectedMap, UpdateMapStatus, getMapBan } from "../Controller/HomeControllers.js"
 
 const Homerouter=express.Router()
 Homerouter.post("/Event",EventRoute)
@@ -20,6 +20,8 @@ Homerouter.post("/createMapBan",createMapBan)
 Homerouter.post("/createServerBan",createServerBan)
 Homerouter.post("/updateSelectedMap/:eventId",updateSelectedMap)
 Homerouter.post("/UpdateMapStatus/:eventId",UpdateMapStatus)
+Homerouter.get("/getMapBan/:id",getMapBan)
+
 
 
 export {Homerouter}
