@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Formik } from 'formik'
+import axios from 'axios';
+import Link from 'next/link';
 
 const validationSchema = Yup.object({
   Logo: Yup.string().required('Logo is required'),
@@ -19,7 +21,7 @@ const validationSchema = Yup.object({
 
 })
 const Event = () => {
-  const [message,setMessage]=useState<string>()
+  const [message,setMessage]=useState<any>()
   const initialValues = {
     Logo: '',
     GName: '',
@@ -37,24 +39,29 @@ const Event = () => {
       GName:values.GName,
       Server:values.Server,
       EntryFee:values.EntryFee,
+      Date:values.Date,
       Mode:values.Mode,
       Slot:values.Slot,
       Banner:values.Banner,
       Tournament_Info:values.Tournament_Info
     }
-    console.log(data)
-    // await axios.patch(`http://localhost:8081/changePassword/${email}`,data).then((res)=>{
-    //    setMessage(res.data.message)
-    //  }).catch((err)=>{
-    //    setMessage(err.response.data.error)
-    //  })
+    await axios.post(`http://localhost:8081/Event`,data).then((res)=>{
+       setMessage(res.data.message)
+     }).catch((err)=>{
+       console.log(err)
+     })
      
     }
   return (
-    <div>
+    <div className='relative '>
        {
-      message&&<p className='text-red-100 text-center font-bold  italic text-lg'>{message}</p>
+      message&&<p className='text-black text-center font-bold  italic text-lg'>{message}</p>
      }
+     <Link href={"/EventRule"}>
+     <div className='absolute right-10 top-5 flex items-center justify-center cursor-pointer bg-[#F3A195] h-10 w-44 rounded-md   '>
+     <p className="text-white font-serif font-bold text-lg" >Make Event Rule </p>
+     </div>
+     </Link>
         <Formik 
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -95,7 +102,7 @@ const Event = () => {
               <label className='text-black font-medium font-serif pl-1'>
               Start Time
               </label>
-              <Field className="outline-none bg-transparent border border-black  h-9 p-2 rounded-sm placeholder-shown:p-2 text-black" name="Date" type="date" placeholder="Enter Start Time.." />
+              <Field className="outline-none bg-transparent border border-black  h-9 p-2 rounded-sm placeholder-shown:p-2 text-black" name="Date" type="datetime-local" placeholder="Enter Start Time.." />
               <ErrorMessage className='font-serif text-[#FF0000] font-medium pl-1 pt-1' name="Date" component="div" />
               </div> <div className='flex mr-10 ml-10 w-[370px] flex-col mt-3'>
               <label className='text-black font-medium font-serif pl-1'>
