@@ -230,10 +230,10 @@ const getOneVOne=async(req,res)=>{
   const createMapBan=async(req,res)=>{
     let member=[];
     let map=[];
-    req.body.participant.map((item)=>{
+    req.body.participant?.map((item)=>{
      member.push(item)
     })
-    req.body.map.map((item)=>{
+    req.body.map?.map((item)=>{
       map.push(item)
      })
      let data={
